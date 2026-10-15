@@ -1,0 +1,339 @@
+{
+  "source": "C:\\Users\\ASUS\\Documents\\Smartx Vinland\\3d warehouse model\\warehouse1.blend",
+  "source_objects": 6097,
+  "floor_z": 1.8252131938934326,
+  "robots": {
+    "AMR-01": {
+      "source_object": "robot1",
+      "node": "AMR_ASSET_robot1",
+      "position": [
+        -5.300000190734863,
+        8.100000381469727,
+        1.9040398597717285
+      ],
+      "bounds": [
+        -5.962640762329102,
+        7.0943498611450195,
+        1.6196339130401611,
+        -4.6361260414123535,
+        9.106342315673828,
+        2.2206168174743652
+      ],
+      "rotation_z": -1.5707963705062866
+    },
+    "AMR-02": {
+      "source_object": "robot2",
+      "node": "AMR_ASSET_robot2",
+      "position": [
+        -11.5,
+        7.800000190734863,
+        1.904039978981018
+      ],
+      "bounds": [
+        -12.155847549438477,
+        6.7987165451049805,
+        1.6196339130401611,
+        -10.842913627624512,
+        8.801966667175293,
+        2.2206170558929443
+      ],
+      "rotation_z": -1.5707963705062866
+    },
+    "AMR-03": {
+      "source_object": "robot3",
+      "node": "AMR_ASSET_robot3",
+      "position": [
+        -12.399999618530273,
+        -45.29999923706055,
+        1.9040398597717285
+      ],
+      "bounds": [
+        -13.062640190124512,
+        -46.30564880371094,
+        1.6196339130401611,
+        -11.736124992370605,
+        -44.29365921020508,
+        2.2206168174743652
+      ],
+      "rotation_z": -1.5707963705062866
+    },
+    "AMR-04": {
+      "source_object": "robot4",
+      "node": "AMR_ASSET_robot4",
+      "position": [
+        -4.550000190734863,
+        -45.29999923706055,
+        1.9040398597717285
+      ],
+      "bounds": [
+        -5.212640762329102,
+        -46.30564880371094,
+        1.6196339130401611,
+        -3.8861258029937744,
+        -44.29365921020508,
+        2.2206168174743652
+      ],
+      "rotation_z": -1.5707963705062866
+    },
+    "AMR-05": {
+      "source_object": "robot2.001",
+      "node": "AMR_ASSET_robot2.001",
+      "position": [
+        3.0999999046325684,
+        7.949999809265137,
+        1.904039978981018
+      ],
+      "bounds": [
+        2.4441521167755127,
+        6.948716163635254,
+        1.6196339130401611,
+        3.7570860385894775,
+        8.951966285705566,
+        2.2206170558929443
+      ],
+      "rotation_z": -1.5707963705062866
+    }
+  },
+  "slots": {
+    "AR1-1": {
+      "position": [
+        -12.557119846343994,
+        1.324184089899063,
+        5.852236995697021
+      ],
+      "source_board": "shelving42_particle board_0.001",
+      "validated_vacant": true
+    },
+    "AR1-2": {
+      "position": [
+        -12.557097434997559,
+        -0.23030081391334534,
+        5.852236995697021
+      ],
+      "source_board": "shelving08_particle board_0.001",
+      "validated_vacant": true
+    },
+    "AR2-1": {
+      "position": [
+        -12.557119846343994,
+        -10.846136569976807,
+        5.852236995697021
+      ],
+      "source_board": "shelving425_particle board_0.001",
+      "validated_vacant": true
+    },
+    "AR2-2": {
+      "position": [
+        -12.557097434997559,
+        -12.40062141418457,
+        5.852236995697021
+      ],
+      "source_board": "shelving411_particle board_0.001",
+      "validated_vacant": true
+    },
+    "AR3-1": {
+      "position": [
+        -12.557119846343994,
+        -23.193493843078613,
+        5.852236995697021
+      ],
+      "source_board": "shelving828_particle board_0.001",
+      "validated_vacant": true
+    },
+    "AR3-2": {
+      "position": [
+        -12.557097434997559,
+        -24.747977256774902,
+        5.852236995697021
+      ],
+      "source_board": "shelving814_particle board_0.001",
+      "validated_vacant": true
+    },
+    "AR4-1": {
+      "position": [
+        -12.557097434997559,
+        -37.63694763183594,
+        5.852236995697021
+      ],
+      "source_board": "shelving1217_particle board_0.001",
+      "validated_vacant": true
+    },
+    "AR4-2": {
+      "position": [
+        -12.557118892669678,
+        -36.08246612548828,
+        5.852236995697021
+      ],
+      "source_board": "shelving1231_particle board_0.001",
+      "validated_vacant": true
+    },
+    "BR1-1": {
+      "position": [
+        -4.044509649276733,
+        1.324184089899063,
+        5.852236995697021
+      ],
+      "source_board": "shelving283_particle board_0",
+      "validated_vacant": true
+    },
+    "BR1-2": {
+      "position": [
+        -4.044485807418823,
+        -0.23030081391334534,
+        5.852236995697021
+      ],
+      "source_board": "shelving249_particle board_0",
+      "validated_vacant": true
+    },
+    "BR2-1": {
+      "position": [
+        -4.044509649276733,
+        -10.846136569976807,
+        5.852236995697021
+      ],
+      "source_board": "shelving584_particle board_0",
+      "validated_vacant": true
+    },
+    "BR2-2": {
+      "position": [
+        -4.044485807418823,
+        -12.40062141418457,
+        5.852236995697021
+      ],
+      "source_board": "shelving598_particle board_0",
+      "validated_vacant": true
+    },
+    "BR3-1": {
+      "position": [
+        -4.044511079788208,
+        -23.193493843078613,
+        5.852236995697021
+      ],
+      "source_board": "shelving987_particle board_0",
+      "validated_vacant": true
+    },
+    "BR3-2": {
+      "position": [
+        -4.044485807418823,
+        -24.747977256774902,
+        5.852236995697021
+      ],
+      "source_board": "shelving1001_particle board_0",
+      "validated_vacant": true
+    },
+    "BR4-1": {
+      "position": [
+        -4.330211877822876,
+        -37.63694763183594,
+        5.852236995697021
+      ],
+      "source_board": "shelving1404_particle board_0",
+      "validated_vacant": true
+    },
+    "BR4-2": {
+      "position": [
+        -4.3302366733551025,
+        -36.08246612548828,
+        5.852236995697021
+      ],
+      "source_board": "shelving1390_particle board_0",
+      "validated_vacant": true
+    },
+    "CR1-1": {
+      "position": [
+        4.5404579639434814,
+        1.324184089899063,
+        5.852236995697021
+      ],
+      "source_board": "shelving42_particle board_0",
+      "validated_vacant": true
+    },
+    "CR1-2": {
+      "position": [
+        4.540480375289917,
+        -0.23030081391334534,
+        5.852236995697021
+      ],
+      "source_board": "shelving08_particle board_0",
+      "validated_vacant": true
+    },
+    "CR2-1": {
+      "position": [
+        4.5404579639434814,
+        -10.846136569976807,
+        5.852236995697021
+      ],
+      "source_board": "shelving425_particle board_0",
+      "validated_vacant": true
+    },
+    "CR2-2": {
+      "position": [
+        4.540480375289917,
+        -12.40062141418457,
+        5.852236995697021
+      ],
+      "source_board": "shelving411_particle board_0",
+      "validated_vacant": true
+    },
+    "CR3-1": {
+      "position": [
+        4.540457487106323,
+        -23.193493843078613,
+        5.852236995697021
+      ],
+      "source_board": "shelving828_particle board_0",
+      "validated_vacant": true
+    },
+    "CR3-2": {
+      "position": [
+        4.540480375289917,
+        -24.747977256774902,
+        5.852236995697021
+      ],
+      "source_board": "shelving814_particle board_0",
+      "validated_vacant": true
+    },
+    "CR4-1": {
+      "position": [
+        4.540480375289917,
+        -37.63694763183594,
+        5.852236995697021
+      ],
+      "source_board": "shelving1217_particle board_0",
+      "validated_vacant": true
+    },
+    "CR4-2": {
+      "position": [
+        4.5404579639434814,
+        -36.08246612548828,
+        5.852236995697021
+      ],
+      "source_board": "shelving1231_particle board_0",
+      "validated_vacant": true
+    }
+  },
+  "walls": [
+    {
+      "node": "AMR_WALL_0",
+      "source_object": "Line001_08 - Default_0"
+    },
+    {
+      "node": "AMR_WALL_1",
+      "source_object": "Line001_08 - Default b_0"
+    }
+  ],
+  "export": "warehouse.glb",
+  "bytes": 122367180,
+  "slot_validation": {
+    "package_dimensions": [
+      0.64,
+      0.64,
+      0.48
+    ],
+    "source_boards": 672,
+    "vacant_board_centres": 294,
+    "assigned_slots": 24,
+    "occupied_source_box_meshes": 3304,
+    "method": "Source box bounds and exact neighboring mesh BVH surface checks"
+  }
+}

@@ -1,0 +1,8886 @@
+{
+  "run_id": "963518cb-5768-487b-9ad4-f3a8766bf640",
+  "time": 438.9,
+  "geometry": {
+    "floor": [
+      -18.82,
+      -50.57,
+      10.2,
+      15.04
+    ],
+    "racks": [
+      [
+        -14.48,
+        -39.96,
+        -9.79,
+        -33.76
+      ],
+      [
+        -14.48,
+        -27.07,
+        -9.79,
+        -20.87
+      ],
+      [
+        -14.48,
+        -14.73,
+        -9.79,
+        -8.52
+      ],
+      [
+        -14.48,
+        -2.56,
+        -9.79,
+        3.65
+      ],
+      [
+        -6.99,
+        -39.96,
+        -2.3,
+        -33.76
+      ],
+      [
+        -6.99,
+        -27.07,
+        -2.3,
+        -20.87
+      ],
+      [
+        -6.99,
+        -14.73,
+        -2.3,
+        -8.52
+      ],
+      [
+        -6.99,
+        -2.56,
+        -2.3,
+        3.65
+      ],
+      [
+        0.48,
+        -39.96,
+        5.17,
+        -33.76
+      ],
+      [
+        0.48,
+        -27.07,
+        5.17,
+        -20.87
+      ],
+      [
+        0.48,
+        -14.73,
+        5.17,
+        -8.52
+      ],
+      [
+        0.48,
+        -2.56,
+        5.17,
+        3.65
+      ]
+    ],
+    "zones": {
+      "pickup": [
+        -18.14,
+        8.02,
+        -10.94,
+        13.86
+      ],
+      "delivery": [
+        1.1,
+        8.02,
+        9.0,
+        13.86
+      ],
+      "charging": [
+        -18.14,
+        -49.4,
+        -10.94,
+        -43.57
+      ]
+    },
+    "conveyors": [
+      [
+        -10.79,
+        12.82,
+        -5.02,
+        13.8
+      ],
+      [
+        -4.71,
+        12.82,
+        1.06,
+        13.8
+      ]
+    ],
+    "aisles": {
+      "west": [
+        -9.79,
+        -6.99
+      ],
+      "middle": [
+        -2.3,
+        0.48
+      ],
+      "east": [
+        5.17,
+        9.04
+      ]
+    },
+    "lane_clearances": {
+      "west": 1.17,
+      "middle": 1.15,
+      "east": 2.24
+    },
+    "three_lane_required_width": 4.89,
+    "three_lane_feasible": false,
+    "model": {
+      "source": "warehouse1.blend",
+      "source_meshes": 6097,
+      "floor_z": 1.8252131938934326
+    },
+    "nodes": [
+      {
+        "id": "LN",
+        "x": -16.7,
+        "y": 5.4,
+        "kind": "travel"
+      },
+      {
+        "id": "L1",
+        "x": -16.7,
+        "y": -5.25,
+        "kind": "junction"
+      },
+      {
+        "id": "L2",
+        "x": -16.7,
+        "y": -17.9,
+        "kind": "junction"
+      },
+      {
+        "id": "L3",
+        "x": -16.7,
+        "y": -30.55,
+        "kind": "junction"
+      },
+      {
+        "id": "LS",
+        "x": -16.7,
+        "y": -42.2,
+        "kind": "travel"
+      },
+      {
+        "id": "AN",
+        "x": -8.4,
+        "y": 5.4,
+        "kind": "travel"
+      },
+      {
+        "id": "A1",
+        "x": -8.4,
+        "y": -5.25,
+        "kind": "junction"
+      },
+      {
+        "id": "A2",
+        "x": -8.4,
+        "y": -17.9,
+        "kind": "junction"
+      },
+      {
+        "id": "A3",
+        "x": -8.4,
+        "y": -30.55,
+        "kind": "junction"
+      },
+      {
+        "id": "AS",
+        "x": -8.4,
+        "y": -42.2,
+        "kind": "travel"
+      },
+      {
+        "id": "BN",
+        "x": -0.91,
+        "y": 5.4,
+        "kind": "travel"
+      },
+      {
+        "id": "B1",
+        "x": -0.91,
+        "y": -5.25,
+        "kind": "junction"
+      },
+      {
+        "id": "B2",
+        "x": -0.91,
+        "y": -17.9,
+        "kind": "junction"
+      },
+      {
+        "id": "B3",
+        "x": -0.91,
+        "y": -30.55,
+        "kind": "junction"
+      },
+      {
+        "id": "BS",
+        "x": -0.91,
+        "y": -42.2,
+        "kind": "travel"
+      },
+      {
+        "id": "CN",
+        "x": 7.05,
+        "y": 5.4,
+        "kind": "travel"
+      },
+      {
+        "id": "C1",
+        "x": 7.05,
+        "y": -5.25,
+        "kind": "junction"
+      },
+      {
+        "id": "C2",
+        "x": 7.05,
+        "y": -17.9,
+        "kind": "junction"
+      },
+      {
+        "id": "C3",
+        "x": 7.05,
+        "y": -30.55,
+        "kind": "junction"
+      },
+      {
+        "id": "CS",
+        "x": 7.05,
+        "y": -42.2,
+        "kind": "travel"
+      },
+      {
+        "id": "RN",
+        "x": 8.15,
+        "y": 5.4,
+        "kind": "travel"
+      },
+      {
+        "id": "R1",
+        "x": 8.15,
+        "y": -5.25,
+        "kind": "junction"
+      },
+      {
+        "id": "R2",
+        "x": 8.15,
+        "y": -17.9,
+        "kind": "junction"
+      },
+      {
+        "id": "R3",
+        "x": 8.15,
+        "y": -30.55,
+        "kind": "junction"
+      },
+      {
+        "id": "RS",
+        "x": 8.15,
+        "y": -42.2,
+        "kind": "travel"
+      },
+      {
+        "id": "AR1",
+        "x": -8.4,
+        "y": 0.55,
+        "kind": "shelf"
+      },
+      {
+        "id": "AR2",
+        "x": -8.4,
+        "y": -11.62,
+        "kind": "shelf"
+      },
+      {
+        "id": "AR3",
+        "x": -8.4,
+        "y": -23.97,
+        "kind": "shelf"
+      },
+      {
+        "id": "AR4",
+        "x": -8.4,
+        "y": -36.86,
+        "kind": "shelf"
+      },
+      {
+        "id": "BR1",
+        "x": -0.91,
+        "y": 0.55,
+        "kind": "shelf"
+      },
+      {
+        "id": "BR2",
+        "x": -0.91,
+        "y": -11.62,
+        "kind": "shelf"
+      },
+      {
+        "id": "BR3",
+        "x": -0.91,
+        "y": -23.97,
+        "kind": "shelf"
+      },
+      {
+        "id": "BR4",
+        "x": -0.91,
+        "y": -36.86,
+        "kind": "shelf"
+      },
+      {
+        "id": "CR1",
+        "x": 7.05,
+        "y": 0.55,
+        "kind": "shelf"
+      },
+      {
+        "id": "CR2",
+        "x": 7.05,
+        "y": -11.62,
+        "kind": "shelf"
+      },
+      {
+        "id": "CR3",
+        "x": 7.05,
+        "y": -23.97,
+        "kind": "shelf"
+      },
+      {
+        "id": "CR4",
+        "x": 7.05,
+        "y": -36.86,
+        "kind": "shelf"
+      },
+      {
+        "id": "WAIT_W",
+        "x": -12.4,
+        "y": -5.25,
+        "kind": "waiting"
+      },
+      {
+        "id": "WAIT_M",
+        "x": -4.6,
+        "y": -17.9,
+        "kind": "waiting"
+      },
+      {
+        "id": "WAIT_E",
+        "x": 3.0,
+        "y": -30.55,
+        "kind": "waiting"
+      },
+      {
+        "id": "PICKUP",
+        "x": -14.5,
+        "y": 10.25,
+        "kind": "pickup"
+      },
+      {
+        "id": "PACKING",
+        "x": -2.7,
+        "y": 10.4,
+        "kind": "packing"
+      },
+      {
+        "id": "DELIVERY",
+        "x": 5.25,
+        "y": 10.25,
+        "kind": "delivery"
+      },
+      {
+        "id": "CHARGE_1",
+        "x": -15.55,
+        "y": -46.35,
+        "kind": "charging"
+      },
+      {
+        "id": "CHARGE_2",
+        "x": -12.9,
+        "y": -46.35,
+        "kind": "charging"
+      },
+      {
+        "id": "CHARGE_WAIT",
+        "x": -9.9,
+        "y": -46.35,
+        "kind": "waiting"
+      },
+      {
+        "id": "CHARGE_EXIT_1",
+        "x": -16.0,
+        "y": -49.0,
+        "kind": "parking"
+      },
+      {
+        "id": "CHARGE_EXIT_2",
+        "x": -10.0,
+        "y": -49.05,
+        "kind": "parking"
+      },
+      {
+        "id": "CONV_1",
+        "x": -8.0,
+        "y": 11.6,
+        "kind": "conveyor"
+      },
+      {
+        "id": "CONV_2",
+        "x": -3.8,
+        "y": 11.6,
+        "kind": "conveyor"
+      },
+      {
+        "id": "CONV_3",
+        "x": -0.3,
+        "y": 11.6,
+        "kind": "conveyor"
+      },
+      {
+        "id": "PARK_A",
+        "x": -11.5,
+        "y": 7.8,
+        "kind": "parking"
+      },
+      {
+        "id": "PARK_A2",
+        "x": -5.3,
+        "y": 8.1,
+        "kind": "parking"
+      },
+      {
+        "id": "PARK_B",
+        "x": 3.1,
+        "y": 7.95,
+        "kind": "parking"
+      },
+      {
+        "id": "PARK_C",
+        "x": 7.05,
+        "y": -45.2,
+        "kind": "parking"
+      },
+      {
+        "id": "PARK_D",
+        "x": -12.4,
+        "y": -45.3,
+        "kind": "parking"
+      },
+      {
+        "id": "PARK_E",
+        "x": -4.55,
+        "y": -45.3,
+        "kind": "parking"
+      }
+    ],
+    "edges": [
+      [
+        "LN",
+        "PICKUP"
+      ],
+      [
+        "L1",
+        "LN"
+      ],
+      [
+        "L1",
+        "L2"
+      ],
+      [
+        "L1",
+        "WAIT_W"
+      ],
+      [
+        "L2",
+        "L3"
+      ],
+      [
+        "L3",
+        "LS"
+      ],
+      [
+        "LS",
+        "PARK_D"
+      ],
+      [
+        "AN",
+        "LN"
+      ],
+      [
+        "AN",
+        "BN"
+      ],
+      [
+        "AN",
+        "AR1"
+      ],
+      [
+        "AN",
+        "CONV_1"
+      ],
+      [
+        "AN",
+        "PARK_A"
+      ],
+      [
+        "AN",
+        "PARK_A2"
+      ],
+      [
+        "A1",
+        "B1"
+      ],
+      [
+        "A1",
+        "AR1"
+      ],
+      [
+        "A1",
+        "AR2"
+      ],
+      [
+        "A1",
+        "WAIT_W"
+      ],
+      [
+        "A2",
+        "L2"
+      ],
+      [
+        "A2",
+        "AR2"
+      ],
+      [
+        "A2",
+        "AR3"
+      ],
+      [
+        "A2",
+        "WAIT_M"
+      ],
+      [
+        "A3",
+        "L3"
+      ],
+      [
+        "A3",
+        "B3"
+      ],
+      [
+        "A3",
+        "AR3"
+      ],
+      [
+        "A3",
+        "AR4"
+      ],
+      [
+        "AS",
+        "LS"
+      ],
+      [
+        "AS",
+        "BS"
+      ],
+      [
+        "AS",
+        "CHARGE_WAIT"
+      ],
+      [
+        "BN",
+        "CN"
+      ],
+      [
+        "BN",
+        "BR1"
+      ],
+      [
+        "BN",
+        "PACKING"
+      ],
+      [
+        "BN",
+        "CONV_2"
+      ],
+      [
+        "BN",
+        "CONV_3"
+      ],
+      [
+        "BN",
+        "PARK_B"
+      ],
+      [
+        "B1",
+        "C1"
+      ],
+      [
+        "B1",
+        "BR1"
+      ],
+      [
+        "B1",
+        "BR2"
+      ],
+      [
+        "B2",
+        "C2"
+      ],
+      [
+        "B2",
+        "BR2"
+      ],
+      [
+        "B2",
+        "BR3"
+      ],
+      [
+        "B2",
+        "WAIT_M"
+      ],
+      [
+        "B3",
+        "BR3"
+      ],
+      [
+        "B3",
+        "BR4"
+      ],
+      [
+        "B3",
+        "WAIT_E"
+      ],
+      [
+        "BS",
+        "CS"
+      ],
+      [
+        "BS",
+        "PARK_E"
+      ],
+      [
+        "CN",
+        "RN"
+      ],
+      [
+        "CN",
+        "CR1"
+      ],
+      [
+        "CN",
+        "DELIVERY"
+      ],
+      [
+        "C1",
+        "R1"
+      ],
+      [
+        "C1",
+        "CR1"
+      ],
+      [
+        "C1",
+        "CR2"
+      ],
+      [
+        "C2",
+        "R2"
+      ],
+      [
+        "C2",
+        "CR2"
+      ],
+      [
+        "C2",
+        "CR3"
+      ],
+      [
+        "C3",
+        "R3"
+      ],
+      [
+        "C3",
+        "CR3"
+      ],
+      [
+        "C3",
+        "CR4"
+      ],
+      [
+        "C3",
+        "WAIT_E"
+      ],
+      [
+        "CS",
+        "RS"
+      ],
+      [
+        "CS",
+        "PARK_C"
+      ],
+      [
+        "R1",
+        "RN"
+      ],
+      [
+        "R1",
+        "R2"
+      ],
+      [
+        "R2",
+        "R3"
+      ],
+      [
+        "R3",
+        "RS"
+      ],
+      [
+        "AR4",
+        "AS"
+      ],
+      [
+        "BR4",
+        "BS"
+      ],
+      [
+        "CR4",
+        "CS"
+      ],
+      [
+        "CHARGE_1",
+        "LS"
+      ],
+      [
+        "CHARGE_1",
+        "CHARGE_EXIT_1"
+      ],
+      [
+        "CHARGE_2",
+        "CHARGE_EXIT_2"
+      ],
+      [
+        "CHARGE_2",
+        "PARK_D"
+      ]
+    ]
+  },
+  "robots": [
+    {
+      "id": "AMR-01",
+      "source_object": "robot1",
+      "x": 7.05,
+      "y": -45.2,
+      "heading": -1.571,
+      "node": "PARK_C",
+      "lane": "station",
+      "battery": 81.36,
+      "status": "IDLE",
+      "task": null,
+      "task_type": null,
+      "assigned": null,
+      "carrying": false,
+      "target": "PARK_C",
+      "route": [],
+      "block_reason": "",
+      "near_robots": [],
+      "detected_obstacles": [],
+      "reservation": null,
+      "charge_bay": null,
+      "distance_m": 787.61,
+      "velocity": 2.5,
+      "waiting_seconds": 38.4,
+      "slot": null,
+      "conveyor": null,
+      "package_id": null,
+      "action_progress": 1,
+      "priority": [
+        1,
+        1
+      ],
+      "coordination": []
+    },
+    {
+      "id": "AMR-02",
+      "source_object": "robot2",
+      "x": -11.5,
+      "y": 7.8,
+      "heading": 2.483,
+      "node": "PARK_A",
+      "lane": "station",
+      "battery": 49.56,
+      "status": "IDLE",
+      "task": null,
+      "task_type": null,
+      "assigned": null,
+      "carrying": false,
+      "target": "PARK_A",
+      "route": [],
+      "block_reason": "",
+      "near_robots": [],
+      "detected_obstacles": [],
+      "reservation": null,
+      "charge_bay": null,
+      "distance_m": 447.62,
+      "velocity": 0,
+      "waiting_seconds": 62.1,
+      "slot": null,
+      "conveyor": null,
+      "package_id": null,
+      "action_progress": 1,
+      "priority": [
+        1,
+        1
+      ],
+      "coordination": []
+    },
+    {
+      "id": "AMR-03",
+      "source_object": "robot3",
+      "x": -4.55,
+      "y": -45.3,
+      "heading": -2.436,
+      "node": "PARK_E",
+      "lane": "station",
+      "battery": 25.82,
+      "status": "IDLE",
+      "task": null,
+      "task_type": null,
+      "assigned": null,
+      "carrying": false,
+      "target": "PARK_E",
+      "route": [],
+      "block_reason": "",
+      "near_robots": [],
+      "detected_obstacles": [],
+      "reservation": null,
+      "charge_bay": null,
+      "distance_m": 667.06,
+      "velocity": 0,
+      "waiting_seconds": 68.5,
+      "slot": null,
+      "conveyor": null,
+      "package_id": null,
+      "action_progress": 1,
+      "priority": [
+        1,
+        1
+      ],
+      "coordination": []
+    },
+    {
+      "id": "AMR-04",
+      "source_object": "robot4",
+      "x": 3.1,
+      "y": 7.95,
+      "heading": 0.566,
+      "node": "PARK_B",
+      "lane": "station",
+      "battery": 52.32,
+      "status": "IDLE",
+      "task": null,
+      "task_type": null,
+      "assigned": null,
+      "carrying": false,
+      "target": "PARK_B",
+      "route": [],
+      "block_reason": "",
+      "near_robots": [],
+      "detected_obstacles": [],
+      "reservation": null,
+      "charge_bay": null,
+      "distance_m": 429.79,
+      "velocity": 0,
+      "waiting_seconds": 37.2,
+      "slot": null,
+      "conveyor": null,
+      "package_id": null,
+      "action_progress": 1,
+      "priority": [
+        1,
+        1
+      ],
+      "coordination": []
+    },
+    {
+      "id": "AMR-05",
+      "source_object": "robot2.001",
+      "x": -5.3,
+      "y": 8.1,
+      "heading": 0.717,
+      "node": "PARK_A2",
+      "lane": "station",
+      "battery": 53.18,
+      "status": "IDLE",
+      "task": null,
+      "task_type": null,
+      "assigned": null,
+      "carrying": false,
+      "target": "PARK_A2",
+      "route": [],
+      "block_reason": "",
+      "near_robots": [],
+      "detected_obstacles": [],
+      "reservation": null,
+      "charge_bay": null,
+      "distance_m": 418.36,
+      "velocity": 0,
+      "waiting_seconds": 96.8,
+      "slot": null,
+      "conveyor": null,
+      "package_id": null,
+      "action_progress": 1,
+      "priority": [
+        1,
+        1
+      ],
+      "coordination": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "TASK-0001",
+      "kind": "INBOUND",
+      "sku": "VALIDATION-01",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 0.1,
+      "completed": 90.5,
+      "robot": "AMR-02",
+      "slot": "AR1-1",
+      "reason": "",
+      "package_id": "PKG-0002",
+      "conveyor": null,
+      "packed": null,
+      "deposited": null,
+      "final_battery": 87.4,
+      "final_location": "AN"
+    },
+    {
+      "id": "TASK-0002",
+      "kind": "OUTBOUND",
+      "sku": "VALIDATION-01",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 92.3,
+      "completed": 135.9,
+      "robot": "AMR-02",
+      "slot": "AR1-1",
+      "reason": "",
+      "package_id": "PKG-0002",
+      "conveyor": "CONV_1",
+      "packed": 108.1,
+      "deposited": 117.8,
+      "final_battery": 80.85,
+      "final_location": "AN"
+    },
+    {
+      "id": "TASK-0003",
+      "kind": "INBOUND",
+      "sku": "VALIDATION-02",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 0.1,
+      "completed": 54.3,
+      "robot": "AMR-01",
+      "slot": "AR2-1",
+      "reason": "",
+      "package_id": "PKG-0001",
+      "conveyor": null,
+      "packed": null,
+      "deposited": null,
+      "final_battery": 90.18,
+      "final_location": "A1"
+    },
+    {
+      "id": "TASK-0004",
+      "kind": "OUTBOUND",
+      "sku": "VALIDATION-02",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 128.0,
+      "completed": 274.6,
+      "robot": "AMR-02",
+      "slot": "AR2-1",
+      "reason": "",
+      "package_id": "PKG-0001",
+      "conveyor": "CONV_1",
+      "packed": 244.8,
+      "deposited": 256.5,
+      "final_battery": 49.99,
+      "final_location": "AN"
+    },
+    {
+      "id": "TASK-0005",
+      "kind": "INBOUND",
+      "sku": "VALIDATION-03",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 0.1,
+      "completed": 115.5,
+      "robot": "AMR-05",
+      "slot": "AR3-1",
+      "reason": "",
+      "package_id": "PKG-0003",
+      "conveyor": null,
+      "packed": null,
+      "deposited": null,
+      "final_battery": 86.82,
+      "final_location": "A2"
+    },
+    {
+      "id": "TASK-0006",
+      "kind": "OUTBOUND",
+      "sku": "VALIDATION-03",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 169.7,
+      "completed": 352.6,
+      "robot": "AMR-01",
+      "slot": "AR3-1",
+      "reason": "",
+      "package_id": "PKG-0003",
+      "conveyor": "CONV_2",
+      "packed": 323.6,
+      "deposited": 334.5,
+      "final_battery": 26.31,
+      "final_location": "BN"
+    },
+    {
+      "id": "TASK-0007",
+      "kind": "INBOUND",
+      "sku": "VALIDATION-04",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 0.1,
+      "completed": 191.1,
+      "robot": "AMR-03",
+      "slot": "AR4-1",
+      "reason": "",
+      "package_id": "PKG-0004",
+      "conveyor": null,
+      "packed": null,
+      "deposited": null,
+      "final_battery": 57.63,
+      "final_location": "A3"
+    },
+    {
+      "id": "TASK-0008",
+      "kind": "OUTBOUND",
+      "sku": "VALIDATION-04",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 191.2,
+      "completed": 305.6,
+      "robot": "AMR-05",
+      "slot": "AR4-1",
+      "reason": "",
+      "package_id": "PKG-0004",
+      "conveyor": "CONV_3",
+      "packed": 277.8,
+      "deposited": 287.5,
+      "final_battery": 54.46,
+      "final_location": "BN"
+    },
+    {
+      "id": "TASK-0009",
+      "kind": "INBOUND",
+      "sku": "VALIDATION-05",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 0.1,
+      "completed": 263.3,
+      "robot": "AMR-04",
+      "slot": "BR1-1",
+      "reason": "",
+      "package_id": "PKG-0005",
+      "conveyor": null,
+      "packed": null,
+      "deposited": null,
+      "final_battery": 52.85,
+      "final_location": "BN"
+    },
+    {
+      "id": "TASK-0010",
+      "kind": "OUTBOUND",
+      "sku": "VALIDATION-05",
+      "created": 0.0,
+      "state": "COMPLETED",
+      "assigned": 263.4,
+      "completed": 384.9,
+      "robot": "AMR-03",
+      "slot": "BR1-1",
+      "reason": "",
+      "package_id": "PKG-0005",
+      "conveyor": "CONV_3",
+      "packed": 356.3,
+      "deposited": 366.8,
+      "final_battery": 31.59,
+      "final_location": "BN"
+    }
+  ],
+  "slots": [
+    {
+      "id": "AR1-1",
+      "shelf": "AR1",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.999895811080933,
+        1.324183613061905,
+        2.8047454452514646
+      ]
+    },
+    {
+      "id": "AR1-2",
+      "shelf": "AR1",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.999895811080933,
+        1.324183851480484,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "AR2-1",
+      "shelf": "AR2",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.999894857406616,
+        -10.846136569976807,
+        4.328495750427246
+      ]
+    },
+    {
+      "id": "AR2-2",
+      "shelf": "AR2",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.999894857406616,
+        -10.846136569976807,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "AR3-1",
+      "shelf": "AR3",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.999896287918091,
+        -23.193493843078613,
+        4.328495750427246
+      ]
+    },
+    {
+      "id": "AR3-2",
+      "shelf": "AR3",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.999896287918091,
+        -23.193493843078613,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "AR4-1",
+      "shelf": "AR4",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -5.285599946975708,
+        -37.63694763183594,
+        2.8047454452514646
+      ]
+    },
+    {
+      "id": "AR4-2",
+      "shelf": "AR4",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -5.285599946975708,
+        -37.63694763183594,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "BR1-1",
+      "shelf": "BR1",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.044509649276733,
+        1.324183613061905,
+        2.8047454452514646
+      ]
+    },
+    {
+      "id": "BR1-2",
+      "shelf": "BR1",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.044509649276733,
+        1.324183851480484,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "BR2-1",
+      "shelf": "BR2",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.044509649276733,
+        -10.846136569976807,
+        4.328495750427246
+      ]
+    },
+    {
+      "id": "BR2-2",
+      "shelf": "BR2",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.044509649276733,
+        -10.846136569976807,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "BR3-1",
+      "shelf": "BR3",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.044511079788208,
+        -23.193493843078613,
+        4.328495750427246
+      ]
+    },
+    {
+      "id": "BR3-2",
+      "shelf": "BR3",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.044511079788208,
+        -23.193493843078613,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "BR4-1",
+      "shelf": "BR4",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.330211877822876,
+        -37.63694763183594,
+        4.328495750427246
+      ]
+    },
+    {
+      "id": "BR4-2",
+      "shelf": "BR4",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        -4.330211877822876,
+        -37.63694763183594,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "CR1-1",
+      "shelf": "CR1",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.5404579639434814,
+        1.324183613061905,
+        2.8047454452514646
+      ]
+    },
+    {
+      "id": "CR1-2",
+      "shelf": "CR1",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.5404579639434814,
+        1.324183851480484,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "CR2-1",
+      "shelf": "CR2",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.5404579639434814,
+        -10.846136569976807,
+        2.8047454452514646
+      ]
+    },
+    {
+      "id": "CR2-2",
+      "shelf": "CR2",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.5404579639434814,
+        -10.846136569976807,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "CR3-1",
+      "shelf": "CR3",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.540457487106323,
+        -23.193493843078613,
+        2.8047454452514646
+      ]
+    },
+    {
+      "id": "CR3-2",
+      "shelf": "CR3",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.540457487106323,
+        -23.193493843078613,
+        3.566624412536621
+      ]
+    },
+    {
+      "id": "CR4-1",
+      "shelf": "CR4",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.540480375289917,
+        -37.63694763183594,
+        2.8047454452514646
+      ]
+    },
+    {
+      "id": "CR4-2",
+      "shelf": "CR4",
+      "sku": null,
+      "package_id": null,
+      "reserved_by": null,
+      "position": [
+        4.540480375289917,
+        -37.63694763183594,
+        3.566624412536621
+      ]
+    }
+  ],
+  "locks": {
+    "shelves": {},
+    "conveyors": {},
+    "charging": {},
+    "junctions": {},
+    "waiting": {},
+    "edges": [],
+    "forecourt": null,
+    "charging_entry": null
+  },
+  "obstacles": [],
+  "conveyor_packages": [],
+  "packages": [
+    {
+      "id": "PKG-0001",
+      "sku": "VALIDATION-02",
+      "stage": "DELIVERED",
+      "robot": null,
+      "created": 13.8,
+      "task": "TASK-0004",
+      "slot": null,
+      "stored": 51.3,
+      "retrieved": 185.1,
+      "packed": 244.8,
+      "deposited": 256.5,
+      "lane": "CONV_1",
+      "delivered": 274.6,
+      "position": [
+        2.5,
+        11.5,
+        2.0752131938934326
+      ]
+    },
+    {
+      "id": "PKG-0002",
+      "sku": "VALIDATION-01",
+      "stage": "DELIVERED",
+      "robot": null,
+      "created": 46.9,
+      "task": "TASK-0002",
+      "slot": null,
+      "stored": 57.2,
+      "retrieved": 97.9,
+      "packed": 108.1,
+      "deposited": 117.8,
+      "lane": "CONV_1",
+      "delivered": 135.9,
+      "position": [
+        3.3,
+        11.5,
+        2.0752131938934326
+      ]
+    },
+    {
+      "id": "PKG-0003",
+      "sku": "VALIDATION-03",
+      "stage": "DELIVERED",
+      "robot": null,
+      "created": 70.2,
+      "task": "TASK-0006",
+      "slot": null,
+      "stored": 108.5,
+      "retrieved": 235.4,
+      "packed": 323.6,
+      "deposited": 334.5,
+      "lane": "CONV_2",
+      "delivered": 352.6,
+      "position": [
+        4.1,
+        11.5,
+        2.0752131938934326
+      ]
+    },
+    {
+      "id": "PKG-0004",
+      "sku": "VALIDATION-04",
+      "stage": "DELIVERED",
+      "robot": null,
+      "created": 160.8,
+      "task": "TASK-0008",
+      "slot": null,
+      "stored": 188.5,
+      "retrieved": 250.3,
+      "packed": 277.8,
+      "deposited": 287.5,
+      "lane": "CONV_3",
+      "delivered": 305.6,
+      "position": [
+        4.9,
+        11.5,
+        2.0752131938934326
+      ]
+    },
+    {
+      "id": "PKG-0005",
+      "sku": "VALIDATION-05",
+      "stage": "DELIVERED",
+      "robot": null,
+      "created": 219.0,
+      "task": "TASK-0010",
+      "slot": null,
+      "stored": 232.6,
+      "retrieved": 329.5,
+      "packed": 356.3,
+      "deposited": 366.8,
+      "lane": "CONV_3",
+      "delivered": 384.9,
+      "position": [
+        5.7,
+        11.5,
+        2.0752131938934326
+      ]
+    }
+  ],
+  "metrics": {
+    "completed": 10,
+    "distance_m": 2750.44,
+    "mean_task_seconds": 216.83,
+    "throughput_per_hour": 82.02,
+    "minimum_clearance_m": 2.35,
+    "delivered": 5,
+    "waiting_seconds": 303.0
+  },
+  "history": [
+    {
+      "time": 0.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 0.75,
+      "battery": [
+        99.97,
+        100.0,
+        99.97,
+        99.97,
+        100.0
+      ]
+    },
+    {
+      "time": 1.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 7.8,
+      "battery": [
+        99.75,
+        100.0,
+        99.7,
+        99.7,
+        100.0
+      ]
+    },
+    {
+      "time": 2.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 13.96,
+      "battery": [
+        99.6,
+        100.0,
+        99.42,
+        99.45,
+        100.0
+      ]
+    },
+    {
+      "time": 3.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 20.02,
+      "battery": [
+        99.46,
+        100.0,
+        99.17,
+        99.17,
+        100.0
+      ]
+    },
+    {
+      "time": 4.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 26.39,
+      "battery": [
+        99.31,
+        100.0,
+        98.89,
+        98.9,
+        100.0
+      ]
+    },
+    {
+      "time": 5.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 32.61,
+      "battery": [
+        99.15,
+        100.0,
+        98.62,
+        98.64,
+        100.0
+      ]
+    },
+    {
+      "time": 6.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 38.98,
+      "battery": [
+        99.0,
+        100.0,
+        98.34,
+        98.36,
+        100.0
+      ]
+    },
+    {
+      "time": 7.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 45.07,
+      "battery": [
+        98.85,
+        100.0,
+        98.08,
+        98.11,
+        100.0
+      ]
+    },
+    {
+      "time": 8.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 51.56,
+      "battery": [
+        98.69,
+        100.0,
+        97.81,
+        97.84,
+        100.0
+      ]
+    },
+    {
+      "time": 9.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 58.71,
+      "battery": [
+        98.45,
+        100.0,
+        97.53,
+        97.56,
+        100.0
+      ]
+    },
+    {
+      "time": 10.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 64.91,
+      "battery": [
+        98.3,
+        100.0,
+        97.26,
+        97.3,
+        100.0
+      ]
+    },
+    {
+      "time": 11.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 71.29,
+      "battery": [
+        98.15,
+        100.0,
+        96.98,
+        97.03,
+        100.0
+      ]
+    },
+    {
+      "time": 12.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 76.92,
+      "battery": [
+        98.05,
+        100.0,
+        96.72,
+        96.77,
+        100.0
+      ]
+    },
+    {
+      "time": 13.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 81.92,
+      "battery": [
+        98.05,
+        100.0,
+        96.44,
+        96.5,
+        100.0
+      ]
+    },
+    {
+      "time": 14.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 87.33,
+      "battery": [
+        97.8,
+        100.0,
+        96.17,
+        96.22,
+        100.0
+      ]
+    },
+    {
+      "time": 15.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 93.49,
+      "battery": [
+        97.65,
+        100.0,
+        95.89,
+        95.97,
+        100.0
+      ]
+    },
+    {
+      "time": 16.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 99.86,
+      "battery": [
+        97.5,
+        100.0,
+        95.62,
+        95.7,
+        100.0
+      ]
+    },
+    {
+      "time": 17.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 106.25,
+      "battery": [
+        97.34,
+        100.0,
+        95.35,
+        95.42,
+        100.0
+      ]
+    },
+    {
+      "time": 18.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 111.79,
+      "battery": [
+        97.26,
+        100.0,
+        95.08,
+        95.16,
+        100.0
+      ]
+    },
+    {
+      "time": 19.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 116.79,
+      "battery": [
+        97.26,
+        100.0,
+        94.8,
+        94.89,
+        100.0
+      ]
+    },
+    {
+      "time": 20.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 120.81,
+      "battery": [
+        97.26,
+        100.0,
+        94.61,
+        94.63,
+        100.0
+      ]
+    },
+    {
+      "time": 21.1,
+      "active": 5,
+      "blocked": 4,
+      "completed": 0,
+      "stored": 0,
+      "distance": 125.73,
+      "battery": [
+        97.17,
+        100.0,
+        94.44,
+        94.36,
+        100.0
+      ]
+    },
+    {
+      "time": 22.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 131.86,
+      "battery": [
+        97.02,
+        100.0,
+        94.16,
+        94.11,
+        100.0
+      ]
+    },
+    {
+      "time": 23.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 138.23,
+      "battery": [
+        96.87,
+        100.0,
+        93.89,
+        93.84,
+        100.0
+      ]
+    },
+    {
+      "time": 24.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 144.22,
+      "battery": [
+        96.72,
+        100.0,
+        93.63,
+        93.58,
+        100.0
+      ]
+    },
+    {
+      "time": 25.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 150.34,
+      "battery": [
+        96.57,
+        100.0,
+        93.39,
+        93.31,
+        100.0
+      ]
+    },
+    {
+      "time": 26.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 156.72,
+      "battery": [
+        96.42,
+        100.0,
+        93.11,
+        93.03,
+        100.0
+      ]
+    },
+    {
+      "time": 27.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 163.0,
+      "battery": [
+        96.27,
+        100.0,
+        92.84,
+        92.76,
+        100.0
+      ]
+    },
+    {
+      "time": 28.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 169.93,
+      "battery": [
+        96.06,
+        100.0,
+        92.56,
+        92.48,
+        100.0
+      ]
+    },
+    {
+      "time": 29.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 177.1,
+      "battery": [
+        95.79,
+        100.0,
+        92.29,
+        92.25,
+        100.0
+      ]
+    },
+    {
+      "time": 30.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 182.64,
+      "battery": [
+        95.53,
+        100.0,
+        92.09,
+        92.1,
+        100.0
+      ]
+    },
+    {
+      "time": 31.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 186.65,
+      "battery": [
+        95.38,
+        100.0,
+        91.94,
+        91.96,
+        100.0
+      ]
+    },
+    {
+      "time": 32.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 191.2,
+      "battery": [
+        95.22,
+        100.0,
+        91.76,
+        91.78,
+        100.0
+      ]
+    },
+    {
+      "time": 33.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 197.57,
+      "battery": [
+        95.07,
+        100.0,
+        91.49,
+        91.51,
+        100.0
+      ]
+    },
+    {
+      "time": 34.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 201.67,
+      "battery": [
+        94.92,
+        100.0,
+        91.21,
+        91.48,
+        100.0
+      ]
+    },
+    {
+      "time": 35.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 205.55,
+      "battery": [
+        94.77,
+        100.0,
+        90.94,
+        91.48,
+        100.0
+      ]
+    },
+    {
+      "time": 36.1,
+      "active": 5,
+      "blocked": 3,
+      "completed": 0,
+      "stored": 0,
+      "distance": 209.41,
+      "battery": [
+        94.62,
+        100.0,
+        90.66,
+        91.48,
+        100.0
+      ]
+    },
+    {
+      "time": 37.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 214.05,
+      "battery": [
+        94.37,
+        100.0,
+        90.54,
+        91.35,
+        100.0
+      ]
+    },
+    {
+      "time": 38.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 221.6,
+      "battery": [
+        94.12,
+        99.72,
+        90.39,
+        91.2,
+        100.0
+      ]
+    },
+    {
+      "time": 39.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 229.27,
+      "battery": [
+        93.84,
+        99.46,
+        90.23,
+        91.05,
+        100.0
+      ]
+    },
+    {
+      "time": 40.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 237.12,
+      "battery": [
+        93.57,
+        99.18,
+        90.07,
+        90.9,
+        100.0
+      ]
+    },
+    {
+      "time": 41.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 246.13,
+      "battery": [
+        93.31,
+        98.95,
+        89.85,
+        90.62,
+        100.0
+      ]
+    },
+    {
+      "time": 42.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 252.92,
+      "battery": [
+        93.04,
+        98.79,
+        89.61,
+        90.54,
+        100.0
+      ]
+    },
+    {
+      "time": 43.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 260.18,
+      "battery": [
+        92.76,
+        98.55,
+        89.33,
+        90.54,
+        100.0
+      ]
+    },
+    {
+      "time": 44.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 267.64,
+      "battery": [
+        92.49,
+        98.27,
+        89.06,
+        90.54,
+        100.0
+      ]
+    },
+    {
+      "time": 45.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 274.25,
+      "battery": [
+        92.22,
+        98.07,
+        88.88,
+        90.46,
+        100.0
+      ]
+    },
+    {
+      "time": 46.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 279.5,
+      "battery": [
+        91.94,
+        98.07,
+        88.73,
+        90.31,
+        100.0
+      ]
+    },
+    {
+      "time": 47.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 285.24,
+      "battery": [
+        91.67,
+        97.81,
+        88.58,
+        90.16,
+        100.0
+      ]
+    },
+    {
+      "time": 48.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 292.76,
+      "battery": [
+        91.39,
+        97.54,
+        88.43,
+        90.03,
+        100.0
+      ]
+    },
+    {
+      "time": 49.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 0,
+      "distance": 301.63,
+      "battery": [
+        91.12,
+        97.29,
+        88.23,
+        89.78,
+        100.0
+      ]
+    },
+    {
+      "time": 50.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 306.53,
+      "battery": [
+        91.08,
+        97.15,
+        88.06,
+        89.59,
+        100.0
+      ]
+    },
+    {
+      "time": 51.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 0,
+      "distance": 310.85,
+      "battery": [
+        91.08,
+        96.95,
+        87.79,
+        89.59,
+        100.0
+      ]
+    },
+    {
+      "time": 52.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 1,
+      "distance": 317.85,
+      "battery": [
+        90.66,
+        96.67,
+        87.51,
+        89.59,
+        100.0
+      ]
+    },
+    {
+      "time": 53.1,
+      "active": 5,
+      "blocked": 2,
+      "completed": 0,
+      "stored": 1,
+      "distance": 324.89,
+      "battery": [
+        90.43,
+        96.4,
+        87.24,
+        89.59,
+        100.0
+      ]
+    },
+    {
+      "time": 54.1,
+      "active": 5,
+      "blocked": 1,
+      "completed": 0,
+      "stored": 1,
+      "distance": 331.81,
+      "battery": [
+        90.23,
+        96.12,
+        87.1,
+        89.44,
+        100.0
+      ]
+    },
+    {
+      "time": 55.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 1,
+      "distance": 341.45,
+      "battery": [
+        89.97,
+        95.85,
+        86.95,
+        89.29,
+        99.78
+      ]
+    },
+    {
+      "time": 56.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 1,
+      "distance": 348.17,
+      "battery": [
+        89.82,
+        95.84,
+        86.8,
+        89.14,
+        99.5
+      ]
+    },
+    {
+      "time": 57.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 1,
+      "distance": 354.31,
+      "battery": [
+        89.69,
+        95.84,
+        86.63,
+        89.01,
+        99.26
+      ]
+    },
+    {
+      "time": 58.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 363.75,
+      "battery": [
+        89.54,
+        95.41,
+        86.35,
+        88.86,
+        99.02
+      ]
+    },
+    {
+      "time": 59.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 372.2,
+      "battery": [
+        89.39,
+        95.21,
+        86.08,
+        88.71,
+        98.87
+      ]
+    },
+    {
+      "time": 60.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 379.74,
+      "battery": [
+        89.25,
+        95.01,
+        85.8,
+        88.65,
+        98.72
+      ]
+    },
+    {
+      "time": 61.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 386.59,
+      "battery": [
+        89.1,
+        94.82,
+        85.53,
+        88.65,
+        98.58
+      ]
+    },
+    {
+      "time": 62.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 394.26,
+      "battery": [
+        88.88,
+        94.62,
+        85.39,
+        88.51,
+        98.43
+      ]
+    },
+    {
+      "time": 63.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 2,
+      "distance": 402.6,
+      "battery": [
+        88.6,
+        94.44,
+        85.24,
+        88.36,
+        98.28
+      ]
+    },
+    {
+      "time": 64.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 411.85,
+      "battery": [
+        88.35,
+        94.19,
+        85.09,
+        88.21,
+        98.06
+      ]
+    },
+    {
+      "time": 65.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 422.2,
+      "battery": [
+        88.08,
+        93.91,
+        84.93,
+        88.06,
+        97.79
+      ]
+    },
+    {
+      "time": 66.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 432.46,
+      "battery": [
+        87.82,
+        93.64,
+        84.75,
+        87.78,
+        97.63
+      ]
+    },
+    {
+      "time": 67.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 441.75,
+      "battery": [
+        87.55,
+        93.36,
+        84.55,
+        87.7,
+        97.45
+      ]
+    },
+    {
+      "time": 68.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 451.55,
+      "battery": [
+        87.3,
+        93.09,
+        84.28,
+        87.7,
+        97.17
+      ]
+    },
+    {
+      "time": 69.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 459.0,
+      "battery": [
+        87.04,
+        92.81,
+        84.0,
+        87.7,
+        97.15
+      ]
+    },
+    {
+      "time": 70.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 466.18,
+      "battery": [
+        86.77,
+        92.54,
+        83.79,
+        87.67,
+        97.15
+      ]
+    },
+    {
+      "time": 71.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 476.18,
+      "battery": [
+        86.49,
+        92.26,
+        83.64,
+        87.52,
+        96.71
+      ]
+    },
+    {
+      "time": 72.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 486.21,
+      "battery": [
+        86.24,
+        91.99,
+        83.49,
+        87.37,
+        96.43
+      ]
+    },
+    {
+      "time": 73.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 494.43,
+      "battery": [
+        85.97,
+        91.71,
+        83.34,
+        87.23,
+        96.37
+      ]
+    },
+    {
+      "time": 74.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 502.94,
+      "battery": [
+        85.69,
+        91.44,
+        83.15,
+        87.03,
+        96.37
+      ]
+    },
+    {
+      "time": 75.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 510.34,
+      "battery": [
+        85.51,
+        91.16,
+        83.0,
+        86.83,
+        96.37
+      ]
+    },
+    {
+      "time": 76.1,
+      "active": 4,
+      "blocked": 3,
+      "completed": 1,
+      "stored": 2,
+      "distance": 518.63,
+      "battery": [
+        85.27,
+        90.89,
+        82.76,
+        86.75,
+        96.28
+      ]
+    },
+    {
+      "time": 77.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 527.25,
+      "battery": [
+        85.12,
+        90.61,
+        82.49,
+        86.75,
+        96.03
+      ]
+    },
+    {
+      "time": 78.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 536.35,
+      "battery": [
+        84.85,
+        90.37,
+        82.21,
+        86.75,
+        95.81
+      ]
+    },
+    {
+      "time": 79.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 544.3,
+      "battery": [
+        84.57,
+        90.17,
+        82.04,
+        86.68,
+        95.66
+      ]
+    },
+    {
+      "time": 80.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 2,
+      "distance": 552.53,
+      "battery": [
+        84.31,
+        89.98,
+        81.89,
+        86.53,
+        95.51
+      ]
+    },
+    {
+      "time": 81.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 560.94,
+      "battery": [
+        84.04,
+        89.78,
+        81.74,
+        86.38,
+        95.36
+      ]
+    },
+    {
+      "time": 82.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 2,
+      "distance": 569.04,
+      "battery": [
+        83.76,
+        89.59,
+        81.59,
+        86.25,
+        95.21
+      ]
+    },
+    {
+      "time": 83.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 579.14,
+      "battery": [
+        83.49,
+        89.39,
+        81.35,
+        86.0,
+        95.06
+      ]
+    },
+    {
+      "time": 84.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 590.33,
+      "battery": [
+        83.22,
+        89.14,
+        81.07,
+        85.81,
+        94.82
+      ]
+    },
+    {
+      "time": 85.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 1,
+      "stored": 2,
+      "distance": 600.08,
+      "battery": [
+        82.94,
+        88.87,
+        80.8,
+        85.81,
+        94.58
+      ]
+    },
+    {
+      "time": 86.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 1,
+      "stored": 2,
+      "distance": 609.88,
+      "battery": [
+        82.69,
+        88.59,
+        80.52,
+        85.81,
+        94.3
+      ]
+    },
+    {
+      "time": 87.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 2,
+      "distance": 619.43,
+      "battery": [
+        82.44,
+        88.32,
+        80.33,
+        85.75,
+        94.03
+      ]
+    },
+    {
+      "time": 88.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 2,
+      "distance": 629.64,
+      "battery": [
+        82.16,
+        88.04,
+        80.18,
+        85.6,
+        93.76
+      ]
+    },
+    {
+      "time": 89.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 2,
+      "distance": 639.89,
+      "battery": [
+        81.89,
+        87.77,
+        80.03,
+        85.44,
+        93.48
+      ]
+    },
+    {
+      "time": 90.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 1,
+      "stored": 2,
+      "distance": 649.55,
+      "battery": [
+        81.64,
+        87.49,
+        79.88,
+        85.32,
+        93.22
+      ]
+    },
+    {
+      "time": 91.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 2,
+      "distance": 661.08,
+      "battery": [
+        81.36,
+        87.24,
+        79.65,
+        85.08,
+        92.95
+      ]
+    },
+    {
+      "time": 92.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 2,
+      "distance": 673.08,
+      "battery": [
+        81.09,
+        86.96,
+        79.38,
+        84.86,
+        92.67
+      ]
+    },
+    {
+      "time": 93.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 2,
+      "distance": 682.7,
+      "battery": [
+        80.82,
+        86.7,
+        79.1,
+        84.86,
+        92.42
+      ]
+    },
+    {
+      "time": 94.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 2,
+      "distance": 692.56,
+      "battery": [
+        80.54,
+        86.44,
+        78.83,
+        84.86,
+        92.14
+      ]
+    },
+    {
+      "time": 95.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 2,
+      "distance": 702.33,
+      "battery": [
+        80.27,
+        86.17,
+        78.62,
+        84.82,
+        91.87
+      ]
+    },
+    {
+      "time": 96.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 2,
+      "distance": 711.32,
+      "battery": [
+        80.05,
+        85.97,
+        78.47,
+        84.67,
+        91.6
+      ]
+    },
+    {
+      "time": 97.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 2,
+      "distance": 717.95,
+      "battery": [
+        79.9,
+        85.97,
+        78.32,
+        84.51,
+        91.32
+      ]
+    },
+    {
+      "time": 98.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 1,
+      "distance": 724.83,
+      "battery": [
+        79.75,
+        85.71,
+        78.17,
+        84.39,
+        91.05
+      ]
+    },
+    {
+      "time": 99.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 1,
+      "distance": 734.15,
+      "battery": [
+        79.63,
+        85.44,
+        77.95,
+        84.24,
+        90.79
+      ]
+    },
+    {
+      "time": 100.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 1,
+      "distance": 744.25,
+      "battery": [
+        79.48,
+        85.18,
+        77.68,
+        84.09,
+        90.51
+      ]
+    },
+    {
+      "time": 101.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 1,
+      "distance": 754.28,
+      "battery": [
+        79.32,
+        84.9,
+        77.4,
+        83.93,
+        90.26
+      ]
+    },
+    {
+      "time": 102.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 1,
+      "distance": 763.21,
+      "battery": [
+        79.19,
+        84.63,
+        77.13,
+        83.92,
+        89.99
+      ]
+    },
+    {
+      "time": 103.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 1,
+      "distance": 771.76,
+      "battery": [
+        79.04,
+        84.35,
+        76.91,
+        83.89,
+        89.72
+      ]
+    },
+    {
+      "time": 104.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 1,
+      "distance": 781.7,
+      "battery": [
+        78.77,
+        84.08,
+        76.76,
+        83.73,
+        89.47
+      ]
+    },
+    {
+      "time": 105.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 1,
+      "distance": 791.54,
+      "battery": [
+        78.52,
+        83.82,
+        76.61,
+        83.58,
+        89.19
+      ]
+    },
+    {
+      "time": 106.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 1,
+      "distance": 799.19,
+      "battery": [
+        78.25,
+        83.82,
+        76.46,
+        83.44,
+        88.92
+      ]
+    },
+    {
+      "time": 107.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 1,
+      "distance": 806.14,
+      "battery": [
+        77.97,
+        83.82,
+        76.26,
+        83.24,
+        88.83
+      ]
+    },
+    {
+      "time": 108.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 1,
+      "distance": 813.42,
+      "battery": [
+        77.72,
+        83.82,
+        75.98,
+        82.97,
+        88.83
+      ]
+    },
+    {
+      "time": 109.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 2,
+      "distance": 822.22,
+      "battery": [
+        77.47,
+        83.55,
+        75.71,
+        82.97,
+        88.46
+      ]
+    },
+    {
+      "time": 110.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 2,
+      "stored": 2,
+      "distance": 831.09,
+      "battery": [
+        77.28,
+        83.27,
+        75.43,
+        82.97,
+        88.22
+      ]
+    },
+    {
+      "time": 111.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 2,
+      "distance": 840.13,
+      "battery": [
+        77.02,
+        83.02,
+        75.2,
+        82.95,
+        87.99
+      ]
+    },
+    {
+      "time": 112.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 2,
+      "stored": 2,
+      "distance": 850.38,
+      "battery": [
+        76.75,
+        82.75,
+        75.05,
+        82.8,
+        87.71
+      ]
+    },
+    {
+      "time": 113.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 2,
+      "distance": 860.38,
+      "battery": [
+        76.47,
+        82.47,
+        74.9,
+        82.65,
+        87.46
+      ]
+    },
+    {
+      "time": 114.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 2,
+      "distance": 870.4,
+      "battery": [
+        76.22,
+        82.2,
+        74.75,
+        82.5,
+        87.19
+      ]
+    },
+    {
+      "time": 115.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 2,
+      "stored": 2,
+      "distance": 881.2,
+      "battery": [
+        75.95,
+        81.92,
+        74.56,
+        82.33,
+        86.91
+      ]
+    },
+    {
+      "time": 116.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 892.17,
+      "battery": [
+        75.71,
+        81.73,
+        74.29,
+        82.08,
+        86.66
+      ]
+    },
+    {
+      "time": 117.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 898.93,
+      "battery": [
+        75.57,
+        81.73,
+        74.01,
+        82.02,
+        86.38
+      ]
+    },
+    {
+      "time": 118.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 905.83,
+      "battery": [
+        75.42,
+        81.45,
+        73.74,
+        82.02,
+        86.13
+      ]
+    },
+    {
+      "time": 119.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 915.0,
+      "battery": [
+        75.22,
+        81.18,
+        73.48,
+        82.02,
+        85.86
+      ]
+    },
+    {
+      "time": 120.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 3,
+      "stored": 2,
+      "distance": 924.88,
+      "battery": [
+        74.97,
+        80.9,
+        73.34,
+        81.87,
+        85.58
+      ]
+    },
+    {
+      "time": 121.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 3,
+      "stored": 2,
+      "distance": 931.84,
+      "battery": [
+        74.81,
+        80.85,
+        73.19,
+        81.72,
+        85.32
+      ]
+    },
+    {
+      "time": 122.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 939.12,
+      "battery": [
+        74.58,
+        80.79,
+        73.04,
+        81.57,
+        85.12
+      ]
+    },
+    {
+      "time": 123.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 3,
+      "stored": 2,
+      "distance": 946.18,
+      "battery": [
+        74.44,
+        80.64,
+        72.86,
+        81.41,
+        84.97
+      ]
+    },
+    {
+      "time": 124.1,
+      "active": 2,
+      "blocked": 3,
+      "completed": 3,
+      "stored": 2,
+      "distance": 955.84,
+      "battery": [
+        74.28,
+        80.49,
+        72.59,
+        81.13,
+        84.77
+      ]
+    },
+    {
+      "time": 125.1,
+      "active": 2,
+      "blocked": 2,
+      "completed": 3,
+      "stored": 2,
+      "distance": 965.7,
+      "battery": [
+        74.06,
+        80.22,
+        72.31,
+        81.08,
+        84.49
+      ]
+    },
+    {
+      "time": 126.1,
+      "active": 2,
+      "blocked": 2,
+      "completed": 3,
+      "stored": 2,
+      "distance": 974.58,
+      "battery": [
+        73.81,
+        79.97,
+        72.04,
+        81.08,
+        84.3
+      ]
+    },
+    {
+      "time": 127.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 983.01,
+      "battery": [
+        73.59,
+        79.7,
+        71.76,
+        81.08,
+        84.14
+      ]
+    },
+    {
+      "time": 128.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 992.33,
+      "battery": [
+        73.31,
+        79.45,
+        71.63,
+        80.94,
+        83.91
+      ]
+    },
+    {
+      "time": 129.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 3,
+      "stored": 2,
+      "distance": 1000.98,
+      "battery": [
+        73.13,
+        79.17,
+        71.48,
+        80.79,
+        83.72
+      ]
+    },
+    {
+      "time": 130.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 1008.85,
+      "battery": [
+        72.96,
+        78.93,
+        71.33,
+        80.64,
+        83.57
+      ]
+    },
+    {
+      "time": 131.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 3,
+      "stored": 2,
+      "distance": 1018.31,
+      "battery": [
+        72.75,
+        78.65,
+        71.17,
+        80.49,
+        83.33
+      ]
+    },
+    {
+      "time": 132.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 3,
+      "stored": 2,
+      "distance": 1028.99,
+      "battery": [
+        72.59,
+        78.44,
+        70.89,
+        80.21,
+        83.08
+      ]
+    },
+    {
+      "time": 133.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 3,
+      "stored": 2,
+      "distance": 1037.26,
+      "battery": [
+        72.33,
+        78.29,
+        70.62,
+        80.13,
+        82.93
+      ]
+    },
+    {
+      "time": 134.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 3,
+      "stored": 2,
+      "distance": 1044.0,
+      "battery": [
+        72.21,
+        78.16,
+        70.34,
+        80.13,
+        82.72
+      ]
+    },
+    {
+      "time": 135.1,
+      "active": 3,
+      "blocked": 3,
+      "completed": 3,
+      "stored": 2,
+      "distance": 1049.7,
+      "battery": [
+        72.01,
+        78.16,
+        70.07,
+        80.13,
+        82.57
+      ]
+    },
+    {
+      "time": 136.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1055.23,
+      "battery": [
+        71.91,
+        78.07,
+        69.92,
+        80.01,
+        82.42
+      ]
+    },
+    {
+      "time": 137.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1061.29,
+      "battery": [
+        71.91,
+        77.91,
+        69.77,
+        79.86,
+        82.2
+      ]
+    },
+    {
+      "time": 138.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1068.5,
+      "battery": [
+        71.91,
+        77.66,
+        69.62,
+        79.71,
+        81.96
+      ]
+    },
+    {
+      "time": 139.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1076.3,
+      "battery": [
+        71.77,
+        77.51,
+        69.47,
+        79.57,
+        81.69
+      ]
+    },
+    {
+      "time": 140.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1085.09,
+      "battery": [
+        71.56,
+        77.35,
+        69.2,
+        79.39,
+        81.54
+      ]
+    },
+    {
+      "time": 141.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1095.75,
+      "battery": [
+        71.32,
+        77.09,
+        68.92,
+        79.16,
+        81.38
+      ]
+    },
+    {
+      "time": 142.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1107.35,
+      "battery": [
+        71.04,
+        76.82,
+        68.65,
+        78.98,
+        81.1
+      ]
+    },
+    {
+      "time": 143.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1117.98,
+      "battery": [
+        70.8,
+        76.59,
+        68.37,
+        78.83,
+        80.84
+      ]
+    },
+    {
+      "time": 144.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1127.71,
+      "battery": [
+        70.55,
+        76.31,
+        68.22,
+        78.71,
+        80.56
+      ]
+    },
+    {
+      "time": 145.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1135.69,
+      "battery": [
+        70.31,
+        76.1,
+        68.06,
+        78.71,
+        80.29
+      ]
+    },
+    {
+      "time": 146.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1143.99,
+      "battery": [
+        70.11,
+        75.9,
+        67.83,
+        78.71,
+        80.01
+      ]
+    },
+    {
+      "time": 147.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1151.68,
+      "battery": [
+        69.96,
+        75.76,
+        67.55,
+        78.71,
+        79.74
+      ]
+    },
+    {
+      "time": 148.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1160.19,
+      "battery": [
+        69.73,
+        75.58,
+        67.28,
+        78.71,
+        79.48
+      ]
+    },
+    {
+      "time": 149.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1168.5,
+      "battery": [
+        69.55,
+        75.4,
+        67.0,
+        78.71,
+        79.2
+      ]
+    },
+    {
+      "time": 150.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1177.81,
+      "battery": [
+        69.3,
+        75.18,
+        66.73,
+        78.71,
+        78.93
+      ]
+    },
+    {
+      "time": 151.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1187.18,
+      "battery": [
+        69.05,
+        74.91,
+        66.56,
+        78.62,
+        78.68
+      ]
+    },
+    {
+      "time": 152.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1196.62,
+      "battery": [
+        68.8,
+        74.63,
+        66.4,
+        78.47,
+        78.46
+      ]
+    },
+    {
+      "time": 153.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1204.37,
+      "battery": [
+        68.53,
+        74.36,
+        66.25,
+        78.32,
+        78.46
+      ]
+    },
+    {
+      "time": 154.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1212.59,
+      "battery": [
+        68.28,
+        74.09,
+        66.1,
+        78.19,
+        78.35
+      ]
+    },
+    {
+      "time": 155.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1224.76,
+      "battery": [
+        68.01,
+        73.81,
+        65.85,
+        77.93,
+        78.08
+      ]
+    },
+    {
+      "time": 156.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1235.8,
+      "battery": [
+        67.76,
+        73.55,
+        65.58,
+        77.77,
+        77.81
+      ]
+    },
+    {
+      "time": 157.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1246.61,
+      "battery": [
+        67.51,
+        73.28,
+        65.32,
+        77.63,
+        77.53
+      ]
+    },
+    {
+      "time": 158.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1258.89,
+      "battery": [
+        67.24,
+        73.0,
+        65.05,
+        77.35,
+        77.28
+      ]
+    },
+    {
+      "time": 159.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1269.81,
+      "battery": [
+        66.99,
+        72.75,
+        64.87,
+        77.1,
+        77.01
+      ]
+    },
+    {
+      "time": 160.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1279.81,
+      "battery": [
+        66.71,
+        72.47,
+        64.87,
+        76.83,
+        76.73
+      ]
+    },
+    {
+      "time": 161.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1290.05,
+      "battery": [
+        66.47,
+        72.21,
+        64.59,
+        76.55,
+        76.47
+      ]
+    },
+    {
+      "time": 162.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1302.3,
+      "battery": [
+        66.22,
+        71.94,
+        64.32,
+        76.28,
+        76.2
+      ]
+    },
+    {
+      "time": 163.1,
+      "active": 3,
+      "blocked": 3,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1314.38,
+      "battery": [
+        65.94,
+        71.66,
+        64.09,
+        76.0,
+        75.92
+      ]
+    },
+    {
+      "time": 164.1,
+      "active": 3,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1323.22,
+      "battery": [
+        65.73,
+        71.41,
+        64.09,
+        75.73,
+        75.69
+      ]
+    },
+    {
+      "time": 165.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1331.72,
+      "battery": [
+        65.58,
+        71.14,
+        63.95,
+        75.51,
+        75.53
+      ]
+    },
+    {
+      "time": 166.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1342.85,
+      "battery": [
+        65.37,
+        70.86,
+        63.68,
+        75.23,
+        75.35
+      ]
+    },
+    {
+      "time": 167.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1353.27,
+      "battery": [
+        65.15,
+        70.61,
+        63.4,
+        75.12,
+        75.07
+      ]
+    },
+    {
+      "time": 168.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1361.86,
+      "battery": [
+        64.89,
+        70.33,
+        63.15,
+        75.12,
+        74.91
+      ]
+    },
+    {
+      "time": 169.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1370.0,
+      "battery": [
+        64.61,
+        70.08,
+        63.0,
+        75.12,
+        74.7
+      ]
+    },
+    {
+      "time": 170.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1378.13,
+      "battery": [
+        64.35,
+        69.8,
+        62.86,
+        75.06,
+        74.55
+      ]
+    },
+    {
+      "time": 171.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1387.19,
+      "battery": [
+        64.07,
+        69.55,
+        62.71,
+        74.89,
+        74.4
+      ]
+    },
+    {
+      "time": 172.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1397.37,
+      "battery": [
+        63.8,
+        69.27,
+        62.43,
+        74.74,
+        74.24
+      ]
+    },
+    {
+      "time": 173.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1406.74,
+      "battery": [
+        63.63,
+        69.01,
+        62.16,
+        74.57,
+        74.09
+      ]
+    },
+    {
+      "time": 174.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1416.68,
+      "battery": [
+        63.35,
+        68.73,
+        61.88,
+        74.38,
+        74.01
+      ]
+    },
+    {
+      "time": 175.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1425.43,
+      "battery": [
+        63.21,
+        68.48,
+        61.61,
+        74.23,
+        73.88
+      ]
+    },
+    {
+      "time": 176.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1435.09,
+      "battery": [
+        63.06,
+        68.2,
+        61.33,
+        74.08,
+        73.67
+      ]
+    },
+    {
+      "time": 177.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1444.08,
+      "battery": [
+        62.91,
+        67.93,
+        61.06,
+        73.93,
+        73.53
+      ]
+    },
+    {
+      "time": 178.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1455.48,
+      "battery": [
+        62.66,
+        67.67,
+        60.78,
+        73.67,
+        73.32
+      ]
+    },
+    {
+      "time": 179.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1467.05,
+      "battery": [
+        62.4,
+        67.4,
+        60.51,
+        73.39,
+        73.12
+      ]
+    },
+    {
+      "time": 180.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1478.64,
+      "battery": [
+        62.13,
+        67.13,
+        60.23,
+        73.17,
+        72.89
+      ]
+    },
+    {
+      "time": 181.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1490.84,
+      "battery": [
+        61.85,
+        66.88,
+        59.97,
+        72.9,
+        72.61
+      ]
+    },
+    {
+      "time": 182.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1502.4,
+      "battery": [
+        61.63,
+        66.6,
+        59.69,
+        72.66,
+        72.36
+      ]
+    },
+    {
+      "time": 183.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1513.78,
+      "battery": [
+        61.36,
+        66.35,
+        59.42,
+        72.47,
+        72.08
+      ]
+    },
+    {
+      "time": 184.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1520.37,
+      "battery": [
+        61.09,
+        66.35,
+        59.17,
+        72.42,
+        71.93
+      ]
+    },
+    {
+      "time": 185.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 4,
+      "stored": 1,
+      "distance": 1525.31,
+      "battery": [
+        60.82,
+        66.15,
+        58.89,
+        72.42,
+        71.93
+      ]
+    },
+    {
+      "time": 186.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 1,
+      "distance": 1535.06,
+      "battery": [
+        60.57,
+        65.88,
+        58.62,
+        72.15,
+        71.93
+      ]
+    },
+    {
+      "time": 187.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 1,
+      "distance": 1543.37,
+      "battery": [
+        60.3,
+        65.6,
+        58.53,
+        71.87,
+        71.93
+      ]
+    },
+    {
+      "time": 188.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 4,
+      "stored": 1,
+      "distance": 1550.74,
+      "battery": [
+        60.02,
+        65.34,
+        58.53,
+        71.6,
+        71.93
+      ]
+    },
+    {
+      "time": 189.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1558.56,
+      "battery": [
+        59.88,
+        65.06,
+        58.16,
+        71.32,
+        71.93
+      ]
+    },
+    {
+      "time": 190.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 4,
+      "stored": 2,
+      "distance": 1566.87,
+      "battery": [
+        59.73,
+        64.85,
+        57.89,
+        71.05,
+        71.93
+      ]
+    },
+    {
+      "time": 191.1,
+      "active": 3,
+      "blocked": 3,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1573.87,
+      "battery": [
+        59.53,
+        64.81,
+        57.63,
+        70.77,
+        71.93
+      ]
+    },
+    {
+      "time": 192.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1581.06,
+      "battery": [
+        59.32,
+        64.75,
+        57.36,
+        70.53,
+        71.93
+      ]
+    },
+    {
+      "time": 193.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1588.81,
+      "battery": [
+        59.17,
+        64.6,
+        57.08,
+        70.25,
+        71.93
+      ]
+    },
+    {
+      "time": 194.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1597.73,
+      "battery": [
+        58.95,
+        64.36,
+        56.83,
+        69.98,
+        71.93
+      ]
+    },
+    {
+      "time": 195.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1606.83,
+      "battery": [
+        58.75,
+        64.09,
+        56.55,
+        69.73,
+        71.93
+      ]
+    },
+    {
+      "time": 196.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1616.67,
+      "battery": [
+        58.48,
+        63.81,
+        56.3,
+        69.45,
+        71.93
+      ]
+    },
+    {
+      "time": 197.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1626.22,
+      "battery": [
+        58.23,
+        63.56,
+        56.02,
+        69.18,
+        71.93
+      ]
+    },
+    {
+      "time": 198.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1635.75,
+      "battery": [
+        57.95,
+        63.28,
+        55.75,
+        68.95,
+        71.93
+      ]
+    },
+    {
+      "time": 199.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1645.74,
+      "battery": [
+        57.68,
+        63.01,
+        55.47,
+        68.68,
+        71.93
+      ]
+    },
+    {
+      "time": 200.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1654.66,
+      "battery": [
+        57.52,
+        62.73,
+        55.2,
+        68.4,
+        71.93
+      ]
+    },
+    {
+      "time": 201.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1662.82,
+      "battery": [
+        57.37,
+        62.46,
+        55.0,
+        68.13,
+        71.93
+      ]
+    },
+    {
+      "time": 202.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1669.19,
+      "battery": [
+        57.22,
+        62.18,
+        55.0,
+        67.85,
+        71.93
+      ]
+    },
+    {
+      "time": 203.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1675.53,
+      "battery": [
+        57.07,
+        61.91,
+        55.0,
+        67.58,
+        71.93
+      ]
+    },
+    {
+      "time": 204.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1681.9,
+      "battery": [
+        56.92,
+        61.64,
+        55.0,
+        67.3,
+        71.93
+      ]
+    },
+    {
+      "time": 205.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1687.83,
+      "battery": [
+        56.77,
+        61.38,
+        55.0,
+        67.06,
+        71.93
+      ]
+    },
+    {
+      "time": 206.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1694.81,
+      "battery": [
+        56.55,
+        61.11,
+        55.0,
+        66.78,
+        71.93
+      ]
+    },
+    {
+      "time": 207.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1702.06,
+      "battery": [
+        56.27,
+        60.86,
+        55.0,
+        66.51,
+        71.93
+      ]
+    },
+    {
+      "time": 208.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1709.56,
+      "battery": [
+        56.0,
+        60.59,
+        55.0,
+        66.23,
+        71.93
+      ]
+    },
+    {
+      "time": 209.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1716.82,
+      "battery": [
+        55.73,
+        60.33,
+        55.0,
+        65.96,
+        71.93
+      ]
+    },
+    {
+      "time": 210.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1725.07,
+      "battery": [
+        55.45,
+        60.06,
+        55.0,
+        65.68,
+        71.85
+      ]
+    },
+    {
+      "time": 211.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1734.67,
+      "battery": [
+        55.19,
+        59.78,
+        55.0,
+        65.43,
+        71.57
+      ]
+    },
+    {
+      "time": 212.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1744.53,
+      "battery": [
+        54.92,
+        59.51,
+        55.0,
+        65.16,
+        71.31
+      ]
+    },
+    {
+      "time": 213.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1754.29,
+      "battery": [
+        54.67,
+        59.24,
+        55.0,
+        64.88,
+        71.04
+      ]
+    },
+    {
+      "time": 214.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1764.14,
+      "battery": [
+        54.39,
+        58.96,
+        55.0,
+        64.61,
+        70.78
+      ]
+    },
+    {
+      "time": 215.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1772.58,
+      "battery": [
+        54.12,
+        58.8,
+        55.0,
+        64.34,
+        70.56
+      ]
+    },
+    {
+      "time": 216.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1781.88,
+      "battery": [
+        53.84,
+        58.55,
+        55.0,
+        64.07,
+        70.33
+      ]
+    },
+    {
+      "time": 217.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1791.08,
+      "battery": [
+        53.57,
+        58.31,
+        55.0,
+        63.84,
+        70.06
+      ]
+    },
+    {
+      "time": 218.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1796.28,
+      "battery": [
+        53.3,
+        58.18,
+        55.0,
+        63.84,
+        69.89
+      ]
+    },
+    {
+      "time": 219.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1801.98,
+      "battery": [
+        53.03,
+        58.0,
+        55.0,
+        63.61,
+        69.73
+      ]
+    },
+    {
+      "time": 220.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1809.44,
+      "battery": [
+        52.89,
+        57.75,
+        55.0,
+        63.34,
+        69.58
+      ]
+    },
+    {
+      "time": 221.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1815.14,
+      "battery": [
+        52.74,
+        57.55,
+        55.0,
+        63.06,
+        69.58
+      ]
+    },
+    {
+      "time": 222.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1821.42,
+      "battery": [
+        52.59,
+        57.3,
+        55.0,
+        62.81,
+        69.55
+      ]
+    },
+    {
+      "time": 223.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1828.12,
+      "battery": [
+        52.45,
+        57.16,
+        55.0,
+        62.53,
+        69.36
+      ]
+    },
+    {
+      "time": 224.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1835.53,
+      "battery": [
+        52.3,
+        57.01,
+        55.0,
+        62.26,
+        69.12
+      ]
+    },
+    {
+      "time": 225.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1841.33,
+      "battery": [
+        52.15,
+        56.86,
+        55.0,
+        62.08,
+        68.96
+      ]
+    },
+    {
+      "time": 226.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1847.49,
+      "battery": [
+        51.97,
+        56.68,
+        55.0,
+        61.93,
+        68.79
+      ]
+    },
+    {
+      "time": 227.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1856.62,
+      "battery": [
+        51.7,
+        56.42,
+        55.0,
+        61.7,
+        68.55
+      ]
+    },
+    {
+      "time": 228.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1866.62,
+      "battery": [
+        51.42,
+        56.14,
+        55.0,
+        61.43,
+        68.27
+      ]
+    },
+    {
+      "time": 229.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1876.23,
+      "battery": [
+        51.17,
+        55.87,
+        55.0,
+        61.18,
+        68.0
+      ]
+    },
+    {
+      "time": 230.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1885.99,
+      "battery": [
+        50.89,
+        55.6,
+        55.0,
+        60.91,
+        67.75
+      ]
+    },
+    {
+      "time": 231.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1894.37,
+      "battery": [
+        50.64,
+        55.32,
+        55.0,
+        60.78,
+        67.47
+      ]
+    },
+    {
+      "time": 232.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1901.74,
+      "battery": [
+        50.36,
+        55.05,
+        55.0,
+        60.78,
+        67.21
+      ]
+    },
+    {
+      "time": 233.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 3,
+      "distance": 1910.29,
+      "battery": [
+        50.09,
+        54.8,
+        55.0,
+        60.45,
+        66.93
+      ]
+    },
+    {
+      "time": 234.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 3,
+      "distance": 1918.36,
+      "battery": [
+        50.03,
+        54.52,
+        55.0,
+        60.17,
+        66.66
+      ]
+    },
+    {
+      "time": 235.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 3,
+      "distance": 1925.49,
+      "battery": [
+        50.03,
+        54.26,
+        55.0,
+        59.9,
+        66.41
+      ]
+    },
+    {
+      "time": 236.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1934.54,
+      "battery": [
+        49.63,
+        53.99,
+        55.0,
+        59.62,
+        66.16
+      ]
+    },
+    {
+      "time": 237.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1942.74,
+      "battery": [
+        49.36,
+        53.82,
+        55.0,
+        59.43,
+        65.88
+      ]
+    },
+    {
+      "time": 238.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1950.7,
+      "battery": [
+        49.1,
+        53.67,
+        55.0,
+        59.23,
+        65.61
+      ]
+    },
+    {
+      "time": 239.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1958.78,
+      "battery": [
+        48.83,
+        53.52,
+        55.0,
+        59.04,
+        65.34
+      ]
+    },
+    {
+      "time": 240.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1966.8,
+      "battery": [
+        48.55,
+        53.37,
+        55.0,
+        58.84,
+        65.08
+      ]
+    },
+    {
+      "time": 241.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1976.02,
+      "battery": [
+        48.3,
+        53.14,
+        55.0,
+        58.58,
+        64.81
+      ]
+    },
+    {
+      "time": 242.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1985.13,
+      "battery": [
+        48.03,
+        52.97,
+        55.0,
+        58.31,
+        64.53
+      ]
+    },
+    {
+      "time": 243.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1992.33,
+      "battery": [
+        47.77,
+        52.97,
+        55.0,
+        58.03,
+        64.28
+      ]
+    },
+    {
+      "time": 244.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 1999.83,
+      "battery": [
+        47.49,
+        52.97,
+        55.0,
+        57.76,
+        64.0
+      ]
+    },
+    {
+      "time": 245.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 2008.08,
+      "battery": [
+        47.22,
+        52.89,
+        55.0,
+        57.48,
+        63.73
+      ]
+    },
+    {
+      "time": 246.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 2017.87,
+      "battery": [
+        46.96,
+        52.61,
+        55.0,
+        57.21,
+        63.45
+      ]
+    },
+    {
+      "time": 247.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 2026.07,
+      "battery": [
+        46.69,
+        52.45,
+        55.0,
+        57.02,
+        63.18
+      ]
+    },
+    {
+      "time": 248.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 2033.91,
+      "battery": [
+        46.44,
+        52.31,
+        55.0,
+        56.82,
+        62.9
+      ]
+    },
+    {
+      "time": 249.1,
+      "active": 4,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 2,
+      "distance": 2039.81,
+      "battery": [
+        46.17,
+        52.16,
+        55.0,
+        56.63,
+        62.87
+      ]
+    },
+    {
+      "time": 250.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 2,
+      "distance": 2045.31,
+      "battery": [
+        45.91,
+        52.01,
+        55.0,
+        56.43,
+        62.87
+      ]
+    },
+    {
+      "time": 251.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2054.13,
+      "battery": [
+        45.64,
+        51.78,
+        55.0,
+        56.18,
+        62.45
+      ]
+    },
+    {
+      "time": 252.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2063.88,
+      "battery": [
+        45.36,
+        51.53,
+        55.0,
+        55.9,
+        62.17
+      ]
+    },
+    {
+      "time": 253.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2073.68,
+      "battery": [
+        45.09,
+        51.26,
+        55.0,
+        55.63,
+        61.92
+      ]
+    },
+    {
+      "time": 254.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2083.68,
+      "battery": [
+        44.82,
+        50.98,
+        55.0,
+        55.35,
+        61.64
+      ]
+    },
+    {
+      "time": 255.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2092.15,
+      "battery": [
+        44.54,
+        50.88,
+        55.0,
+        55.08,
+        61.37
+      ]
+    },
+    {
+      "time": 256.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2099.44,
+      "battery": [
+        44.27,
+        50.88,
+        55.0,
+        54.8,
+        61.11
+      ]
+    },
+    {
+      "time": 257.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2108.44,
+      "battery": [
+        43.99,
+        50.51,
+        55.0,
+        54.53,
+        60.84
+      ]
+    },
+    {
+      "time": 258.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2118.26,
+      "battery": [
+        43.72,
+        50.24,
+        55.0,
+        54.25,
+        60.58
+      ]
+    },
+    {
+      "time": 259.1,
+      "active": 4,
+      "blocked": 2,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2127.77,
+      "battery": [
+        43.47,
+        49.99,
+        55.0,
+        53.98,
+        60.31
+      ]
+    },
+    {
+      "time": 260.1,
+      "active": 4,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2135.02,
+      "battery": [
+        43.22,
+        49.99,
+        55.0,
+        53.7,
+        60.03
+      ]
+    },
+    {
+      "time": 261.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2144.05,
+      "battery": [
+        42.94,
+        49.8,
+        55.0,
+        53.43,
+        59.78
+      ]
+    },
+    {
+      "time": 262.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2153.72,
+      "battery": [
+        42.67,
+        49.56,
+        55.0,
+        53.15,
+        59.51
+      ]
+    },
+    {
+      "time": 263.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 5,
+      "stored": 1,
+      "distance": 2161.02,
+      "battery": [
+        42.42,
+        49.56,
+        55.0,
+        52.88,
+        59.23
+      ]
+    },
+    {
+      "time": 264.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2170.18,
+      "battery": [
+        42.14,
+        49.56,
+        54.78,
+        52.63,
+        58.97
+      ]
+    },
+    {
+      "time": 265.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2180.18,
+      "battery": [
+        41.87,
+        49.56,
+        54.51,
+        52.35,
+        58.7
+      ]
+    },
+    {
+      "time": 266.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2187.47,
+      "battery": [
+        41.6,
+        49.56,
+        54.26,
+        52.32,
+        58.44
+      ]
+    },
+    {
+      "time": 267.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2194.97,
+      "battery": [
+        41.32,
+        49.56,
+        53.98,
+        52.32,
+        58.17
+      ]
+    },
+    {
+      "time": 268.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2201.16,
+      "battery": [
+        41.05,
+        49.56,
+        53.72,
+        52.32,
+        58.02
+      ]
+    },
+    {
+      "time": 269.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2207.53,
+      "battery": [
+        40.77,
+        49.56,
+        53.45,
+        52.32,
+        57.87
+      ]
+    },
+    {
+      "time": 270.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2214.84,
+      "battery": [
+        40.5,
+        49.56,
+        53.19,
+        52.32,
+        57.59
+      ]
+    },
+    {
+      "time": 271.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2222.14,
+      "battery": [
+        40.24,
+        49.56,
+        52.92,
+        52.32,
+        57.32
+      ]
+    },
+    {
+      "time": 272.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2228.94,
+      "battery": [
+        39.97,
+        49.56,
+        52.64,
+        52.32,
+        57.12
+      ]
+    },
+    {
+      "time": 273.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2234.89,
+      "battery": [
+        39.72,
+        49.56,
+        52.39,
+        52.32,
+        56.97
+      ]
+    },
+    {
+      "time": 274.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 6,
+      "stored": 1,
+      "distance": 2241.61,
+      "battery": [
+        39.45,
+        49.56,
+        52.11,
+        52.32,
+        56.78
+      ]
+    },
+    {
+      "time": 275.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2247.94,
+      "battery": [
+        39.19,
+        49.56,
+        51.84,
+        52.32,
+        56.61
+      ]
+    },
+    {
+      "time": 276.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2252.76,
+      "battery": [
+        38.92,
+        49.56,
+        51.58,
+        52.32,
+        56.61
+      ]
+    },
+    {
+      "time": 277.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2257.76,
+      "battery": [
+        38.64,
+        49.56,
+        51.31,
+        52.32,
+        56.61
+      ]
+    },
+    {
+      "time": 278.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2263.28,
+      "battery": [
+        38.37,
+        49.56,
+        51.06,
+        52.32,
+        56.53
+      ]
+    },
+    {
+      "time": 279.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2269.32,
+      "battery": [
+        38.16,
+        49.56,
+        50.84,
+        52.32,
+        56.29
+      ]
+    },
+    {
+      "time": 280.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2274.68,
+      "battery": [
+        37.96,
+        49.56,
+        50.61,
+        52.32,
+        56.14
+      ]
+    },
+    {
+      "time": 281.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2280.58,
+      "battery": [
+        37.68,
+        49.56,
+        50.37,
+        52.32,
+        56.0
+      ]
+    },
+    {
+      "time": 282.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2286.9,
+      "battery": [
+        37.41,
+        49.56,
+        50.1,
+        52.32,
+        55.85
+      ]
+    },
+    {
+      "time": 283.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2293.28,
+      "battery": [
+        37.14,
+        49.56,
+        49.82,
+        52.32,
+        55.69
+      ]
+    },
+    {
+      "time": 284.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2299.23,
+      "battery": [
+        36.88,
+        49.56,
+        49.57,
+        52.32,
+        55.54
+      ]
+    },
+    {
+      "time": 285.1,
+      "active": 3,
+      "blocked": 1,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2305.55,
+      "battery": [
+        36.61,
+        49.56,
+        49.31,
+        52.32,
+        55.39
+      ]
+    },
+    {
+      "time": 286.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2310.75,
+      "battery": [
+        36.36,
+        49.56,
+        49.03,
+        52.32,
+        55.34
+      ]
+    },
+    {
+      "time": 287.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2315.55,
+      "battery": [
+        36.09,
+        49.56,
+        48.78,
+        52.32,
+        55.34
+      ]
+    },
+    {
+      "time": 288.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2321.38,
+      "battery": [
+        35.81,
+        49.56,
+        48.5,
+        52.32,
+        55.05
+      ]
+    },
+    {
+      "time": 289.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2327.33,
+      "battery": [
+        35.56,
+        49.56,
+        48.25,
+        52.32,
+        54.9
+      ]
+    },
+    {
+      "time": 290.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2333.71,
+      "battery": [
+        35.28,
+        49.56,
+        47.98,
+        52.32,
+        54.75
+      ]
+    },
+    {
+      "time": 291.1,
+      "active": 3,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2340.08,
+      "battery": [
+        35.01,
+        49.56,
+        47.7,
+        52.32,
+        54.6
+      ]
+    },
+    {
+      "time": 292.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2346.19,
+      "battery": [
+        34.74,
+        49.56,
+        47.44,
+        52.32,
+        54.46
+      ]
+    },
+    {
+      "time": 293.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2352.34,
+      "battery": [
+        34.51,
+        49.56,
+        47.23,
+        52.32,
+        54.22
+      ]
+    },
+    {
+      "time": 294.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2357.82,
+      "battery": [
+        34.34,
+        49.56,
+        47.08,
+        52.32,
+        53.94
+      ]
+    },
+    {
+      "time": 295.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2364.11,
+      "battery": [
+        34.08,
+        49.56,
+        46.87,
+        52.32,
+        53.72
+      ]
+    },
+    {
+      "time": 296.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2369.31,
+      "battery": [
+        33.8,
+        49.56,
+        46.72,
+        52.32,
+        53.57
+      ]
+    },
+    {
+      "time": 297.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2374.08,
+      "battery": [
+        33.64,
+        49.56,
+        46.51,
+        52.32,
+        53.42
+      ]
+    },
+    {
+      "time": 298.1,
+      "active": 2,
+      "blocked": 2,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2379.2,
+      "battery": [
+        33.46,
+        49.56,
+        46.34,
+        52.32,
+        53.2
+      ]
+    },
+    {
+      "time": 299.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2383.52,
+      "battery": [
+        33.19,
+        49.56,
+        46.16,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 300.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2388.02,
+      "battery": [
+        32.93,
+        49.56,
+        45.92,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 301.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2392.1,
+      "battery": [
+        32.68,
+        49.56,
+        45.72,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 302.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2395.87,
+      "battery": [
+        32.41,
+        49.56,
+        45.58,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 303.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2399.75,
+      "battery": [
+        32.13,
+        49.56,
+        45.43,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 304.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2403.61,
+      "battery": [
+        31.86,
+        49.56,
+        45.28,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 305.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 7,
+      "stored": 1,
+      "distance": 2407.49,
+      "battery": [
+        31.59,
+        49.56,
+        45.13,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 306.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2411.36,
+      "battery": [
+        31.31,
+        49.56,
+        44.98,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 307.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2415.12,
+      "battery": [
+        31.04,
+        49.56,
+        44.83,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 308.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2419.67,
+      "battery": [
+        30.76,
+        49.56,
+        44.61,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 309.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2424.47,
+      "battery": [
+        30.51,
+        49.56,
+        44.33,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 310.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2429.27,
+      "battery": [
+        30.24,
+        49.56,
+        44.08,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 311.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2433.65,
+      "battery": [
+        30.03,
+        49.56,
+        43.8,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 312.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2437.32,
+      "battery": [
+        29.88,
+        49.56,
+        43.55,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 313.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2441.2,
+      "battery": [
+        29.73,
+        49.56,
+        43.28,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 314.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2445.07,
+      "battery": [
+        29.58,
+        49.56,
+        43.0,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 315.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2448.82,
+      "battery": [
+        29.43,
+        49.56,
+        42.74,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 316.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2452.69,
+      "battery": [
+        29.27,
+        49.56,
+        42.46,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 317.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2456.33,
+      "battery": [
+        29.12,
+        49.56,
+        42.21,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 318.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2460.21,
+      "battery": [
+        28.97,
+        49.56,
+        41.94,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 319.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2464.02,
+      "battery": [
+        28.82,
+        49.56,
+        41.67,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 320.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2467.84,
+      "battery": [
+        28.67,
+        49.56,
+        41.4,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 321.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2470.97,
+      "battery": [
+        28.6,
+        49.56,
+        41.13,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 322.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2473.47,
+      "battery": [
+        28.6,
+        49.56,
+        40.85,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 323.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2475.75,
+      "battery": [
+        28.6,
+        49.56,
+        40.6,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 324.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2478.94,
+      "battery": [
+        28.53,
+        49.56,
+        40.33,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 325.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2482.69,
+      "battery": [
+        28.37,
+        49.56,
+        40.07,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 326.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2486.56,
+      "battery": [
+        28.22,
+        49.56,
+        39.79,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 327.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2490.44,
+      "battery": [
+        28.07,
+        49.56,
+        39.52,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 328.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2492.56,
+      "battery": [
+        27.93,
+        49.56,
+        39.43,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 329.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 1,
+      "distance": 2493.93,
+      "battery": [
+        27.77,
+        49.56,
+        39.43,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 330.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2496.81,
+      "battery": [
+        27.62,
+        49.56,
+        39.06,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 331.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2500.68,
+      "battery": [
+        27.47,
+        49.56,
+        38.79,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 332.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2504.31,
+      "battery": [
+        27.32,
+        49.56,
+        38.54,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 333.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2507.07,
+      "battery": [
+        27.26,
+        49.56,
+        38.29,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 334.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2509.57,
+      "battery": [
+        27.26,
+        49.56,
+        38.02,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 335.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2512.65,
+      "battery": [
+        26.97,
+        49.56,
+        37.77,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 336.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2516.52,
+      "battery": [
+        26.82,
+        49.56,
+        37.5,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 337.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2520.15,
+      "battery": [
+        26.67,
+        49.56,
+        37.25,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 338.1,
+      "active": 2,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2523.77,
+      "battery": [
+        26.52,
+        49.56,
+        37.0,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 339.1,
+      "active": 2,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2527.09,
+      "battery": [
+        26.37,
+        49.56,
+        36.79,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 340.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2530.39,
+      "battery": [
+        26.22,
+        49.56,
+        36.57,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 341.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2533.14,
+      "battery": [
+        26.07,
+        49.56,
+        36.42,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 342.1,
+      "active": 1,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2536.72,
+      "battery": [
+        25.92,
+        49.56,
+        36.18,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 343.1,
+      "active": 1,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2540.34,
+      "battery": [
+        25.77,
+        49.56,
+        35.93,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 344.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2543.97,
+      "battery": [
+        25.62,
+        49.56,
+        35.68,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 345.1,
+      "active": 1,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2547.84,
+      "battery": [
+        25.46,
+        49.56,
+        35.41,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 346.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2551.9,
+      "battery": [
+        25.27,
+        49.56,
+        35.16,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 347.1,
+      "active": 1,
+      "blocked": 1,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2556.9,
+      "battery": [
+        24.99,
+        49.56,
+        34.89,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 348.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2561.45,
+      "battery": [
+        24.74,
+        49.56,
+        34.64,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 349.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2566.45,
+      "battery": [
+        24.46,
+        49.56,
+        34.36,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 350.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2570.06,
+      "battery": [
+        24.21,
+        49.56,
+        34.22,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 351.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2573.94,
+      "battery": [
+        23.93,
+        49.56,
+        34.07,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 352.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 8,
+      "stored": 0,
+      "distance": 2577.81,
+      "battery": [
+        23.66,
+        49.56,
+        33.92,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 353.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2581.56,
+      "battery": [
+        23.4,
+        49.56,
+        33.76,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 354.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2584.28,
+      "battery": [
+        23.12,
+        49.56,
+        33.74,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 355.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2586.56,
+      "battery": [
+        22.87,
+        49.56,
+        33.74,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 356.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2589.06,
+      "battery": [
+        22.6,
+        49.56,
+        33.74,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 357.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2592.66,
+      "battery": [
+        22.32,
+        49.56,
+        33.62,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 358.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2596.36,
+      "battery": [
+        22.07,
+        49.56,
+        33.47,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 359.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2600.23,
+      "battery": [
+        21.79,
+        49.56,
+        33.32,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 360.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2604.11,
+      "battery": [
+        21.52,
+        49.56,
+        33.17,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 361.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2607.76,
+      "battery": [
+        21.26,
+        49.56,
+        33.02,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 362.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2611.63,
+      "battery": [
+        20.99,
+        49.56,
+        32.87,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 363.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2615.32,
+      "battery": [
+        20.73,
+        49.56,
+        32.72,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 364.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2619.19,
+      "battery": [
+        20.46,
+        49.56,
+        32.57,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 365.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2622.4,
+      "battery": [
+        20.2,
+        49.56,
+        32.47,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 366.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2624.9,
+      "battery": [
+        19.93,
+        49.56,
+        32.47,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 367.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2627.81,
+      "battery": [
+        19.65,
+        49.56,
+        32.23,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 368.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2631.69,
+      "battery": [
+        19.38,
+        49.56,
+        32.07,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 369.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2635.56,
+      "battery": [
+        19.1,
+        49.56,
+        31.92,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 370.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2639.44,
+      "battery": [
+        18.83,
+        49.56,
+        31.77,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 371.1,
+      "active": 1,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2643.27,
+      "battery": [
+        18.55,
+        49.56,
+        31.62,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 372.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2647.39,
+      "battery": [
+        18.28,
+        49.56,
+        31.44,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 373.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2652.39,
+      "battery": [
+        18.0,
+        49.56,
+        31.17,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 374.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2657.18,
+      "battery": [
+        17.73,
+        49.56,
+        30.91,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 375.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2662.18,
+      "battery": [
+        17.46,
+        49.56,
+        30.64,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 376.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2666.98,
+      "battery": [
+        17.18,
+        49.56,
+        30.39,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 377.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2671.78,
+      "battery": [
+        16.93,
+        49.56,
+        30.11,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 378.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2676.78,
+      "battery": [
+        16.65,
+        49.56,
+        29.84,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 379.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2681.65,
+      "battery": [
+        16.38,
+        49.56,
+        29.58,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 380.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2685.62,
+      "battery": [
+        16.7,
+        49.56,
+        29.3,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 381.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2688.12,
+      "battery": [
+        18.3,
+        49.56,
+        29.03,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 382.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2690.4,
+      "battery": [
+        19.9,
+        49.56,
+        28.78,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 383.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2692.9,
+      "battery": [
+        21.5,
+        49.56,
+        28.5,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 384.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 9,
+      "stored": 0,
+      "distance": 2695.22,
+      "battery": [
+        23.1,
+        49.56,
+        28.24,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 385.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2697.72,
+      "battery": [
+        24.7,
+        49.56,
+        27.97,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 386.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2700.22,
+      "battery": [
+        26.3,
+        49.56,
+        27.69,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 387.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2702.55,
+      "battery": [
+        27.9,
+        49.56,
+        27.44,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 388.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2705.05,
+      "battery": [
+        29.5,
+        49.56,
+        27.16,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 389.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2707.36,
+      "battery": [
+        31.1,
+        49.56,
+        26.91,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 390.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2709.86,
+      "battery": [
+        32.7,
+        49.56,
+        26.63,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 391.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2712.36,
+      "battery": [
+        34.3,
+        49.56,
+        26.36,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 392.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2714.7,
+      "battery": [
+        35.9,
+        49.56,
+        26.1,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 393.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.2,
+      "battery": [
+        37.5,
+        49.56,
+        25.83,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 394.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        39.1,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 395.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        40.7,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 396.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        42.3,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 397.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        43.9,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 398.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        45.5,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 399.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        47.1,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 400.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        48.7,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 401.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        50.3,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 402.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        51.9,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 403.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        53.5,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 404.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        55.1,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 405.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        56.7,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 406.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        58.3,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 407.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        59.9,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 408.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        61.5,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 409.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        63.1,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 410.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        64.7,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 411.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        66.3,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 412.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        67.9,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 413.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        69.5,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 414.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        71.1,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 415.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        72.7,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 416.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        74.3,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 417.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        75.9,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 418.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        77.5,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 419.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        79.1,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 420.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        80.7,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 421.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        82.3,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 422.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2717.23,
+      "battery": [
+        83.9,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 423.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2718.23,
+      "battery": [
+        84.91,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 424.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2720.64,
+      "battery": [
+        84.64,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 425.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2723.14,
+      "battery": [
+        84.37,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 426.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2725.44,
+      "battery": [
+        84.11,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 427.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2727.94,
+      "battery": [
+        83.84,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 428.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2730.44,
+      "battery": [
+        83.56,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 429.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2732.4,
+      "battery": [
+        83.35,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 430.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2733.78,
+      "battery": [
+        83.2,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 431.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2735.15,
+      "battery": [
+        83.04,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 432.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2736.53,
+      "battery": [
+        82.89,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 433.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2737.9,
+      "battery": [
+        82.74,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 434.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2739.28,
+      "battery": [
+        82.59,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 435.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2741.14,
+      "battery": [
+        82.39,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 436.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2743.64,
+      "battery": [
+        82.11,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 437.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2746.14,
+      "battery": [
+        81.84,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    },
+    {
+      "time": 438.1,
+      "active": 0,
+      "blocked": 0,
+      "completed": 10,
+      "stored": 0,
+      "distance": 2748.44,
+      "battery": [
+        81.58,
+        49.56,
+        25.82,
+        52.32,
+        53.18
+      ]
+    }
+  ],
+  "events": [
+    {
+      "time": 0.0,
+      "message": "Simulation ready: five existing AMRs and measured warehouse layout",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0001 queued: inbound VALIDATION-01",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0002 queued: outbound VALIDATION-01",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0003 queued: inbound VALIDATION-02",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0004 queued: outbound VALIDATION-02",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0005 queued: inbound VALIDATION-03",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0006 queued: outbound VALIDATION-03",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0007 queued: inbound VALIDATION-04",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0008 queued: outbound VALIDATION-04",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0009 queued: inbound VALIDATION-05",
+      "level": "info"
+    },
+    {
+      "time": 0.0,
+      "message": "TASK-0010 queued: outbound VALIDATION-05",
+      "level": "info"
+    },
+    {
+      "time": 0.1,
+      "message": "TASK-0001 assigned to AMR-02; locked AR1",
+      "level": "info"
+    },
+    {
+      "time": 0.1,
+      "message": "TASK-0003 assigned to AMR-01; locked AR2",
+      "level": "info"
+    },
+    {
+      "time": 0.1,
+      "message": "TASK-0005 assigned to AMR-05; locked AR3",
+      "level": "info"
+    },
+    {
+      "time": 0.1,
+      "message": "TASK-0007 assigned to AMR-03; locked AR4",
+      "level": "info"
+    },
+    {
+      "time": 0.1,
+      "message": "TASK-0009 assigned to AMR-04; locked BR1",
+      "level": "info"
+    },
+    {
+      "time": 13.8,
+      "message": "AMR-01 picked PKG-0001; visible pickup stack unchanged",
+      "level": "info"
+    },
+    {
+      "time": 20.5,
+      "message": "AMR-01 bypassed reserved passage toward L1",
+      "level": "info"
+    },
+    {
+      "time": 21.3,
+      "message": "AMR-04 bypassed reserved junction BN",
+      "level": "info"
+    },
+    {
+      "time": 31.2,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 39.5,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 46.9,
+      "message": "AMR-02 picked PKG-0002; visible pickup stack unchanged",
+      "level": "info"
+    },
+    {
+      "time": 47.9,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 51.3,
+      "message": "AMR-01 stored PKG-0001 in AR2-1",
+      "level": "info"
+    },
+    {
+      "time": 54.3,
+      "message": "TASK-0003 released shelf AR2",
+      "level": "info"
+    },
+    {
+      "time": 54.3,
+      "message": "TASK-0003 completed by AMR-01 at 90% battery",
+      "level": "info"
+    },
+    {
+      "time": 56.4,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 56.8,
+      "message": "AMR-01 reserved WAIT_M; yielding to AMR-04",
+      "level": "warning"
+    },
+    {
+      "time": 57.2,
+      "message": "AMR-02 stored PKG-0002 in AR1-1",
+      "level": "info"
+    },
+    {
+      "time": 64.5,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 70.2,
+      "message": "AMR-05 picked PKG-0003; visible pickup stack unchanged",
+      "level": "info"
+    },
+    {
+      "time": 73.2,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 75.5,
+      "message": "AMR-05 bypassed reserved passage toward L1",
+      "level": "info"
+    },
+    {
+      "time": 76.2,
+      "message": "AMR-01 bypassed reserved junction L1",
+      "level": "info"
+    },
+    {
+      "time": 81.9,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 86.9,
+      "message": "AMR-01 bypassed reserved junction CN",
+      "level": "info"
+    },
+    {
+      "time": 90.0,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 90.5,
+      "message": "TASK-0001 released shelf AR1",
+      "level": "info"
+    },
+    {
+      "time": 90.5,
+      "message": "TASK-0001 completed by AMR-02 at 87% battery",
+      "level": "info"
+    },
+    {
+      "time": 92.3,
+      "message": "TASK-0002 assigned to AMR-02; locked AR1",
+      "level": "info"
+    },
+    {
+      "time": 97.9,
+      "message": "AMR-02 retrieved PKG-0002 from AR1-1",
+      "level": "info"
+    },
+    {
+      "time": 97.9,
+      "message": "TASK-0002 reserved CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 98.1,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 98.5,
+      "message": "AMR-01 reserved WAIT_M; yielding to AMR-04",
+      "level": "warning"
+    },
+    {
+      "time": 99.9,
+      "message": "TASK-0002 released shelf AR1",
+      "level": "info"
+    },
+    {
+      "time": 105.1,
+      "message": "AMR-02 packing PKG-0002 at PACKING",
+      "level": "info"
+    },
+    {
+      "time": 106.2,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 108.1,
+      "message": "PKG-0002 packed; AMR-02 approaching CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 108.5,
+      "message": "AMR-05 stored PKG-0003 in AR3-1",
+      "level": "info"
+    },
+    {
+      "time": 114.3,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 115.5,
+      "message": "TASK-0005 released shelf AR3",
+      "level": "info"
+    },
+    {
+      "time": 115.5,
+      "message": "TASK-0005 completed by AMR-05 at 87% battery",
+      "level": "info"
+    },
+    {
+      "time": 117.8,
+      "message": "AMR-02 deposited PKG-0002 on CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 121.8,
+      "message": "TASK-0002 released CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 121.8,
+      "message": "TASK-0002 robot clear; package travelling to delivery",
+      "level": "info"
+    },
+    {
+      "time": 122.4,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 125.9,
+      "message": "AMR-05 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 127.9,
+      "message": "AMR-05 bypassed reserved junction WAIT_W",
+      "level": "info"
+    },
+    {
+      "time": 128.0,
+      "message": "TASK-0004 assigned to AMR-02; locked AR2",
+      "level": "info"
+    },
+    {
+      "time": 130.5,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 132.1,
+      "message": "AMR-05 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 134.1,
+      "message": "AMR-05 bypassed reserved junction WAIT_W",
+      "level": "info"
+    },
+    {
+      "time": 135.9,
+      "message": "PKG-0002 reached delivery; TASK-0002 transport complete",
+      "level": "info"
+    },
+    {
+      "time": 138.1,
+      "message": "AMR-05 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 138.4,
+      "message": "AMR-02 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 138.6,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 140.3,
+      "message": "AMR-05 reserved WAIT_M; yielding to AMR-04",
+      "level": "warning"
+    },
+    {
+      "time": 141.0,
+      "message": "AMR-04 bypassed reserved junction A1",
+      "level": "info"
+    },
+    {
+      "time": 142.7,
+      "message": "AMR-02 reserved WAIT_E; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 153.8,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 160.8,
+      "message": "AMR-03 picked PKG-0004; visible pickup stack unchanged",
+      "level": "info"
+    },
+    {
+      "time": 164.8,
+      "message": "AMR-04 reserved WAIT_W; yielding to AMR-03",
+      "level": "warning"
+    },
+    {
+      "time": 167.4,
+      "message": "AMR-05 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 169.4,
+      "message": "AMR-05 bypassed reserved junction WAIT_W",
+      "level": "info"
+    },
+    {
+      "time": 169.7,
+      "message": "TASK-0006 assigned to AMR-01; locked AR3",
+      "level": "info"
+    },
+    {
+      "time": 170.8,
+      "message": "AMR-04 bypassed reserved junction L1",
+      "level": "info"
+    },
+    {
+      "time": 174.4,
+      "message": "AMR-01 bypassed reserved junction A1",
+      "level": "info"
+    },
+    {
+      "time": 179.5,
+      "message": "AMR-04 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 185.1,
+      "message": "AMR-02 retrieved PKG-0001 from AR2-1",
+      "level": "info"
+    },
+    {
+      "time": 185.1,
+      "message": "TASK-0004 reserved CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 185.2,
+      "message": "AMR-01 bypassed reserved junction L1",
+      "level": "info"
+    },
+    {
+      "time": 187.7,
+      "message": "TASK-0004 released shelf AR2",
+      "level": "info"
+    },
+    {
+      "time": 188.5,
+      "message": "AMR-03 stored PKG-0004 in AR4-1",
+      "level": "info"
+    },
+    {
+      "time": 191.1,
+      "message": "TASK-0007 released shelf AR4",
+      "level": "info"
+    },
+    {
+      "time": 191.1,
+      "message": "TASK-0007 completed by AMR-03 at 58% battery",
+      "level": "info"
+    },
+    {
+      "time": 191.2,
+      "message": "TASK-0008 assigned to AMR-05; locked AR4",
+      "level": "info"
+    },
+    {
+      "time": 191.8,
+      "message": "AMR-01 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 194.0,
+      "message": "AMR-02 bypassed reserved junction AN",
+      "level": "info"
+    },
+    {
+      "time": 196.3,
+      "message": "AMR-01 reserved WAIT_W; yielding to AMR-04",
+      "level": "warning"
+    },
+    {
+      "time": 206.7,
+      "message": "AMR-02 bypassed reserved junction CN",
+      "level": "info"
+    },
+    {
+      "time": 215.7,
+      "message": "AMR-05 bypassed reserved junction A1",
+      "level": "info"
+    },
+    {
+      "time": 217.4,
+      "message": "AMR-05 bypassed reserved junction AN",
+      "level": "info"
+    },
+    {
+      "time": 217.5,
+      "message": "AMR-05 reserved WAIT_M; yielding to AMR-02",
+      "level": "warning"
+    },
+    {
+      "time": 219.0,
+      "message": "AMR-04 picked PKG-0005; visible pickup stack unchanged",
+      "level": "info"
+    },
+    {
+      "time": 219.8,
+      "message": "AMR-05 bypassed reserved junction AN",
+      "level": "info"
+    },
+    {
+      "time": 222.2,
+      "message": "AMR-02 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 224.5,
+      "message": "AMR-05 bypassed reserved junction A1",
+      "level": "info"
+    },
+    {
+      "time": 226.8,
+      "message": "AMR-05 bypassed reserved junction AN",
+      "level": "info"
+    },
+    {
+      "time": 232.6,
+      "message": "AMR-04 stored PKG-0005 in BR1-1",
+      "level": "info"
+    },
+    {
+      "time": 235.4,
+      "message": "AMR-01 retrieved PKG-0003 from AR3-1",
+      "level": "info"
+    },
+    {
+      "time": 235.4,
+      "message": "TASK-0006 reserved CONV_2",
+      "level": "info"
+    },
+    {
+      "time": 237.9,
+      "message": "TASK-0006 released shelf AR3",
+      "level": "info"
+    },
+    {
+      "time": 241.8,
+      "message": "AMR-02 packing PKG-0001 at PACKING",
+      "level": "info"
+    },
+    {
+      "time": 244.8,
+      "message": "PKG-0001 packed; AMR-02 approaching CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 247.2,
+      "message": "AMR-01 bypassed reserved junction AN",
+      "level": "info"
+    },
+    {
+      "time": 250.3,
+      "message": "AMR-05 retrieved PKG-0004 from AR4-1",
+      "level": "info"
+    },
+    {
+      "time": 250.3,
+      "message": "TASK-0008 reserved CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 252.9,
+      "message": "TASK-0008 released shelf AR4",
+      "level": "info"
+    },
+    {
+      "time": 256.5,
+      "message": "AMR-02 deposited PKG-0001 on CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 259.9,
+      "message": "AMR-01 bypassed reserved junction CN",
+      "level": "info"
+    },
+    {
+      "time": 260.5,
+      "message": "TASK-0004 released CONV_1",
+      "level": "info"
+    },
+    {
+      "time": 260.5,
+      "message": "TASK-0004 robot clear; package travelling to delivery",
+      "level": "info"
+    },
+    {
+      "time": 263.3,
+      "message": "TASK-0009 released shelf BR1",
+      "level": "info"
+    },
+    {
+      "time": 263.3,
+      "message": "TASK-0009 completed by AMR-04 at 53% battery",
+      "level": "info"
+    },
+    {
+      "time": 263.4,
+      "message": "TASK-0010 assigned to AMR-03; locked BR1",
+      "level": "info"
+    },
+    {
+      "time": 272.6,
+      "message": "AMR-01 bypassed reserved junction AN",
+      "level": "info"
+    },
+    {
+      "time": 274.6,
+      "message": "PKG-0001 reached delivery; TASK-0004 transport complete",
+      "level": "info"
+    },
+    {
+      "time": 274.8,
+      "message": "AMR-05 packing PKG-0004 at PACKING",
+      "level": "info"
+    },
+    {
+      "time": 277.8,
+      "message": "PKG-0004 packed; AMR-05 approaching CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 280.7,
+      "message": "AMR-03 bypassed reserved junction B1",
+      "level": "info"
+    },
+    {
+      "time": 285.8,
+      "message": "AMR-01 bypassed reserved junction CN",
+      "level": "info"
+    },
+    {
+      "time": 287.5,
+      "message": "AMR-05 deposited PKG-0004 on CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 291.5,
+      "message": "TASK-0008 released CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 292.1,
+      "message": "TASK-0008 robot clear; package travelling to delivery",
+      "level": "info"
+    },
+    {
+      "time": 298.8,
+      "message": "AMR-03 bypassed reserved junction AN",
+      "level": "info"
+    },
+    {
+      "time": 298.9,
+      "message": "AMR-03 reserved WAIT_M; yielding to AMR-01",
+      "level": "warning"
+    },
+    {
+      "time": 300.2,
+      "message": "AMR-01 bypassed reserved junction AR1",
+      "level": "info"
+    },
+    {
+      "time": 305.6,
+      "message": "PKG-0004 reached delivery; TASK-0008 transport complete",
+      "level": "info"
+    },
+    {
+      "time": 320.6,
+      "message": "AMR-01 packing PKG-0003 at PACKING",
+      "level": "info"
+    },
+    {
+      "time": 323.6,
+      "message": "PKG-0003 packed; AMR-01 approaching CONV_2",
+      "level": "info"
+    },
+    {
+      "time": 329.5,
+      "message": "AMR-03 retrieved PKG-0005 from BR1-1",
+      "level": "info"
+    },
+    {
+      "time": 329.5,
+      "message": "TASK-0010 reserved CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 334.5,
+      "message": "AMR-01 deposited PKG-0003 on CONV_2",
+      "level": "info"
+    },
+    {
+      "time": 338.5,
+      "message": "TASK-0006 released CONV_2",
+      "level": "info"
+    },
+    {
+      "time": 339.5,
+      "message": "TASK-0006 robot clear; package travelling to delivery",
+      "level": "info"
+    },
+    {
+      "time": 349.4,
+      "message": "TASK-0010 released shelf BR1",
+      "level": "info"
+    },
+    {
+      "time": 352.6,
+      "message": "PKG-0003 reached delivery; TASK-0006 transport complete",
+      "level": "info"
+    },
+    {
+      "time": 353.3,
+      "message": "AMR-03 packing PKG-0005 at PACKING",
+      "level": "info"
+    },
+    {
+      "time": 356.3,
+      "message": "PKG-0005 packed; AMR-03 approaching CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 366.4,
+      "message": "AMR-01 routed to CHARGE_2 on outer boundary",
+      "level": "info"
+    },
+    {
+      "time": 366.8,
+      "message": "AMR-03 deposited PKG-0005 on CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 370.8,
+      "message": "TASK-0010 released CONV_3",
+      "level": "info"
+    },
+    {
+      "time": 371.4,
+      "message": "TASK-0010 robot clear; package travelling to delivery",
+      "level": "info"
+    },
+    {
+      "time": 379.8,
+      "message": "AMR-01 charging at CHARGE_2",
+      "level": "info"
+    },
+    {
+      "time": 384.9,
+      "message": "PKG-0005 reached delivery; TASK-0010 transport complete",
+      "level": "info"
+    },
+    {
+      "time": 422.8,
+      "message": "AMR-01 charged to 85%; clearing charging region",
+      "level": "info"
+    },
+    {
+      "time": 438.9,
+      "message": "Run settled: fleet idle and all requests terminal",
+      "level": "info"
+    }
+  ],
+  "config": {
+    "robot_width": 1.33,
+    "robot_length": 2.01,
+    "detection_radius": 5.0,
+    "minimum_separation": 2.35,
+    "max_speed": 2.5,
+    "charge_trigger": 25.0,
+    "initial_battery": 100.0,
+    "recharge_target": 85.0,
+    "conveyor_seconds": 18.0,
+    "operation_seconds": 2.0,
+    "packing_seconds": 3.0
+  },
+  "paused": true,
+  "speed": 12.0
+}

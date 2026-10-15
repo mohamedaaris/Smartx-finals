@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+node_modules/
+.npm-cache/
+validation/browser-*.png
+# Blender projects, numbered backups, and oversized model assets
+*.blend
+*.blend[0-9]*
+*.glb
+*.gltf

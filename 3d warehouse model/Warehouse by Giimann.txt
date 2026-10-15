@@ -1,0 +1,25 @@
+Title: Warehouse
+URL: http://sketchfab.com/3d-models/warehouse-4de2a92a40d74723a0e8f592f655ede9
+Author: https://sketchfab.com/giimann
+
+Vertices: 1230567
+Polygons: 2363618
+Animations: 0
+
+Download Date: 14/10/2026
+Download Format: GLTF
+Download Path: C:\Users\Admin\Downloads\3d_Ripper_Pro_v109\Downloads\Giimann\02- Warehouse\
+Download File: 4de2a92a40d74723a0e8f592f655ede9.gltf
+
+Textures: 11
+#1: 013cb60213a044309c0235cb6f280d46_RGB_card4.jpeg
+#2: 1e08fd50979d42ecaecec7b4124a503f_RGB_card3.jpeg
+#3: 4d8d852d11e749e49f69f3c7eb818d24_RGB_cardboard2_5.jpeg
+#4: 903b976cab034c498301153acf4e1580_RGB_cardboard2_3.jpeg
+#5: 9d9ca1edb22944b8b0656a7a20c506e9_RGB_102008.jpeg
+#6: 9ecdfb5823da471cad1b56692c208fa2_RGB_cardboard2_1.jpeg
+#7: b586708e37ab49cb853c5e54939ee1c9_RGB_forklift.jpeg
+#8: b5ef67888dca41d589317cb5975d4e78_RGB_card2.jpeg
+#9: b8ddcf96943743a897cb24edee764bd3_RGB_particle board.jpeg
+#10: e12fe26547564ce2ad52d447d8d65c30_RGB_card1.jpeg
+#11: e5290a8d2fa34df8854d9c46927b04f0_RGB_fire_exit_forward.jpeg
