@@ -30,13 +30,17 @@ class ControllerApiValidation(unittest.TestCase):
         with urllib.request.urlopen(request) as response:
             return json.load(response)
 
-    def test_paused_empty_start_and_no_demo_reset(self):
+    def test_paused_source_stock_start_and_reset(self):
         state = self.get("/api/state")
         self.assertTrue(state["paused"])
         self.assertEqual(state["time"],0)
         self.assertEqual(state["tasks"],[])
+        self.assertEqual(state["source_initial_count"], 858)
+        self.assertEqual(sum(s["source_units"] for s in state["slots"]), 858)
         self.post("reset",{"demo":True})
-        self.assertEqual(self.get("/api/state")["packages"],[])
+        reset = self.get("/api/state")
+        self.assertEqual(reset["tasks"], [])
+        self.assertEqual(sum(s["source_units"] for s in reset["slots"]), 858)
 
     def test_operator_workflow_and_measured_report(self):
         created = self.post("batch",{"prefix":"API-RUN","count":5,"retrieve":True})
@@ -47,7 +51,25 @@ class ControllerApiValidation(unittest.TestCase):
         self.assertEqual(report["time"],.1)
         self.assertEqual(len(report["history"]),1)
         self.assertEqual(report["metrics"]["completed"],0)
-        self.assertFalse(any(s["sku"] for s in report["slots"]))
+        self.assertFalse(any(s["sku"] for s in report["slots"] if s["validated_vacant"]))
+        self.assertEqual(sum(s["source_units"] for s in report["slots"]), 858)
+
+    def test_delivery_can_start_from_source_model_stock(self):
+        created = self.post("manual-job", {"kind":"OUTBOUND", "robot_id":"AMR-01",
+                                           "slot_id":"AR1-SRC", "conveyor":"CONV_1"})
+        self.assertEqual(created["task_id"], "TASK-0001")
+        for _ in range(4000):
+            with self.runtime.lock:
+                self.runtime.warehouse.step()
+                task = self.runtime.warehouse.tasks[created["task_id"]]
+                if task.state == "COMPLETED":
+                    break
+        self.assertEqual(task.state, "COMPLETED")
+        state = self.get("/api/state")
+        self.assertEqual(sum(s["source_units"] for s in state["slots"]), 857)
+        source_slot = next(s for s in state["slots"] if s["id"] == "AR1-SRC")
+        self.assertEqual(source_slot["source_units"], 80)
+        self.assertEqual(source_slot["package_id"], "SRC-AR1-002")
 
     def test_manual_job_preserves_operator_choices(self):
         created = self.post("manual-job", {"kind": "INBOUND", "robot_id": "AMR-01",

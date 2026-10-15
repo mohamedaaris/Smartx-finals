@@ -14,7 +14,9 @@ From the project directory in PowerShell:
 ```
 
 Or run `python app.py`. Open [http://127.0.0.1:8765](http://127.0.0.1:8765).
-Startup is **paused, with no requests, tracked stock or performance history**.
+Startup is **paused, with no requests or performance history**. The source model's
+858 visible cartons are counted as starting stock across the 12 rack rows, so
+delivery can be planned immediately.
 Five original AMRs start at separate positions in the extended charging depot.
 Initial charge defaults to 100% and is explicitly a simulation input. The depot
 has eight shared charging slots. **Add robot** places one new AMR in an available
@@ -31,6 +33,10 @@ served locally, with no CDN dependency. If port 8765 is occupied, stop the exist
 project server before starting another one. Windows uses exclusive port binding.
 
 ## Assign and run an operator-planned job
+
+The delivery shelf dropdown lists occupied, available slots. Source stock is
+available from the `-SRC` shelf groups at startup. If a group is depleted or
+reserved, the dropdown explains that no stored package is available.
 
 1. In **Assign a job to an AMR**, choose **Store a new package**, **Deliver a stored
    package**, or **Move robot only**. The available-AMR dropdown shows current status
@@ -60,6 +66,59 @@ project server before starting another one. Windows uses exclusive port binding.
 7. The controller pauses after work, charging and parking settle. **Export** saves
    the measured run, events and traces as JSON. Queued jobs can be cancelled.
 
+## Automated order route
+
+Use **Automation** on the existing site, or open
+`http://127.0.0.1:8765/automation`. This route reuses the original Blender
+warehouse renderer and shows API-driven robot movement, routes, package transfers,
+and shelf selection in 3D. Its robots, inventory, orders, and clock are isolated
+from the manual route. The controller runs automatically after it receives work.
+
+Edit `automation_catalog.json` before startup to define product shelf groups. The
+initial mapping gives the 12 requested products one shelf, two vacant pilot
+slots, and the source cartons measured in that shelf. The page shows stock and
+assignments for every product. Source boxes have no product labels in Blender;
+the catalog defines their product identity by shelf group.
+
+POST an order to `/api/automation/orders` using JSON such as:
+
+```json
+{"orderid":"ORD-1001","productname":"TV","ordertime":"2026-10-15T12:30:00+05:30","operation":"STORE","quantity":1}
+```
+
+Use `DELIVER` to retrieve stored stock. The optional `productid` must match the
+product name. An identical order ID retry is deduplicated; changed data under
+the same ID is rejected. GET `/api/automation/orders/{orderid}` or
+`/api/automation/state` to check progress. Storage waits when its product shelf
+is full; delivery waits when that product has no stock.
+
+The automated route polls `http://192.168.56.1:5000/api/orders` every five seconds
+by default. This source only feeds `/automation`; the manual dashboard does not
+import its orders. The current company response has an `orders` array with
+`orderid`, `product`, and `time`. Each record defaults to `DELIVER` because this
+feed does not include an operation. A future record with `operation: "STORE"` or
+`"DELIVER"` uses its explicit value. The source can also be changed or polled
+immediately in the **Order API source** panel. An identical order ID is imported
+only once.
+
+To see the live feed, start the order API service, run `.\run.cmd` from this folder,
+and open `http://127.0.0.1:8765/automation`. Let the 3D model finish loading,
+then send a new order to the company API or use the test-order form. The 3D view
+shows the assigned AMR moving through its operation; click its order row to select
+its robot and shelf, then choose **Follow AMR** if desired. The source panel shows
+its last poll and any error. **Incoming orders** shows each ID, operation, assigned
+robot, shelf slot, and progress. **Product shelf groups** shows remaining stock.
+If the server
+was already running when this source was configured, restart it to load the new
+default. The feed is a read-only GET and must be reachable from the machine running
+`app.py`.
+
+The feed may return one order, an array, or `{"orders":[...]}`; an optional bearer
+token can be entered in the source panel.
+This is still a simulation: source settings, orders and stock are in memory, and
+real product dimensions, inbound API authentication and robot hardware control
+must be addressed before deployment.
+
 Use **Full screen** above the 3D view for an expanded warehouse view; Escape exits.
 The **Controller decision log** shows route choices, assignments, charging stops,
 collision holds, reroutes and completions. The full event stream remains available
@@ -69,16 +128,18 @@ Clicking an occupied inventory slot prepares a delivery job for that exact slot.
 Selecting a slot in the inventory grid or 2D map now opens a shared slot inspector;
 the 3D view also provides shelf-slot pick regions. An available empty slot can prefill
 a putaway job, and an occupied slot can prefill a retrieval job. The 24 mapped
-pilot slots each hold one simulated 0.64 × 0.64 × 0.48 m package. Their physical
-weight limits have not been verified.
+vacant pilot slots each hold one simulated 0.64 × 0.64 × 0.48 m package. Another
+12 source-stock pick faces represent the original cartons by shelf row. Their
+physical weight limits have not been verified.
 Setup changes motion, the charge trigger (30–40%), recharge target, packing and
 conveyor duration while paused. Legacy single-request and batch API endpoints remain
 available for existing integrations; the site uses the manual-job endpoint.
 
 ## Data and visual behavior
 
-- No preloaded SKUs, generated completion counts, invented KPI history or default demo
-  requests appear in normal startup. Stock is created by executed inbound storage.
+- No generated completion counts, invented KPI history or default demo requests
+  appear at startup. Existing source cartons are initial stock; new pilot stock
+  is created only by executed inbound storage.
 - Outbound orders for missing stock remain queued. Slot, shelf, conveyor, junction,
   waiting-position and charging locks have actual owners.
 - Packages have pickup, storage, retrieval, packing, deposit and delivery timestamps.
@@ -87,10 +148,13 @@ available for existing integrations; the site uses the manual-job endpoint.
   Intake display boxes appear only for inbound requests created by the operator. Their
   display stays unchanged during pickup; inventory accounting begins with collected
   and stored package records. At most 24 intake display boxes are shown.
-- Original boxes on the model's racks remain reference assets. The tracked pilot
-  inventory uses **24 logical slots**, each mapped to a verified vacant shelf surface.
-  Calibration inspected 672 boards and found 294 vacant board centres; it checks
-  source carton bounds and neighboring mesh surfaces without relocating original stock.
+- The Blender export contains 3,304 source box meshes. Grouping their component
+  meshes yields **858 cartons**: 81/82/82/41 in rows 1–4 of each rack column.
+  Startup stock counts these cartons and exposes one pick face per shelf row;
+  retrieval advances that row to its next source carton. The 24 separate pilot
+  slots remain vacant for putaway. Calibration inspected 672 boards and found
+  294 vacant board centres. The original static source boxes stay visible after
+  virtual retrieval in the browser; source inventory movement is simulated.
 - Both 3D displays consume the same package transfer positions, robot poses, routes
   and resource state. Camera movement is a viewing control; robot paths come from A*.
 - Travel, waiting time, clearance, throughput and battery traces are measured during
@@ -171,13 +235,14 @@ python -m unittest discover -s tests -v
 npm run check
 ```
 
-The **34 tests** cover prompt scenarios A–L, manual robot/slot/conveyor assignment,
+The tests cover prompt scenarios A–L, manual robot/slot/conveyor assignment,
 battery interruption/resume, 0% immobilization, sensing, center-first routing,
-empty startup, real inventory creation,
+source-stock startup, real inventory creation,
 packing/delivery completion, obstacles between waypoints, five-robot charging congestion,
 original model identity, API behavior, oriented corner contact, orphaned reservations,
 orders arriving during charging, and automatic pause after the fleet settles.
-Seeded fixtures are confined to explicitly selected automated validation scenarios.
+Source cartons are present in the normal app runtime. Empty warehouse fixtures
+remain available to controller unit tests.
 
 Executed browser runs are saved in `validation/workflow-run.json` and
 `validation/charging-run.json`. Continuation decisions and validation are in

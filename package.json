@@ -3,5 +3,5 @@
   "private": true,
   "type": "module",
   "dependencies": { "three": "0.180.0" },
-  "scripts": { "check": "node --check web/main.js && node --check web/scene.js" }
+  "scripts": { "check": "node --check web/main.js && node --check web/scene.js && node --check web/automation.js" }
 }

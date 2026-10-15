@@ -31,8 +31,9 @@ function inspectScene(hit){
     if(nearby)action={label:`Inspect slot ${nearby.id}`,run:()=>selectSlot(nearby.id)};
   }else if(hit.kind==='source-box'){
     type='SOURCE BOX';name=hit.source.split('_')[0];
-    detail=[['Source part (bounds match)',hit.source],['Shelf',hit.rack||'Outside mapped racks'],['Position',coords],['Inventory','Reference model box; no tracked SKU']];
-    if(nearby)action={label:`Inspect nearby slot ${nearby.id}`,run:()=>selectSlot(nearby.id)};
+    const sourceSlot=state?.slots.find(s=>s.shelf===hit.rack&&s.source_backed);
+    detail=[['Source part (bounds match)',hit.source],['Shelf',hit.rack||'Outside mapped racks'],['Position',coords],['Inventory',sourceSlot?`${sourceSlot.source_units} source cartons · ${sourceSlot.sku||'depleted'}`:'No mapped stock group']];
+    if(sourceSlot)action={label:`Inspect ${sourceSlot.id}`,run:()=>selectSlot(sourceSlot.id)};
   }else if(hit.kind==='slot'){
     type='STORAGE SLOT';name=hit.name;
     detail=[['Shelf / aisle',slot?`${slot.shelf} / ${slot.shelf[0]}`:'Unknown'],['Contents',slot?.sku||'Empty'],['Reservation',slot?.reserved_by||'None'],['Position',coords]];
@@ -106,7 +107,9 @@ function drawMap(){
 }
 function renderMetrics(){
   const robots=state.robots,tasks=state.tasks,m=state.metrics,active=robots.filter(r=>r.status!=='IDLE').length,queued=tasks.filter(t=>t.state==='QUEUED').length;
-  const values=[['Fleet online',robots.length,`${active} active · ${robots.filter(r=>r.status==='IDLE').length} idle`,'◉'],['Active jobs',tasks.filter(t=>['ASSIGNED','IN_PROGRESS','IN_TRANSIT'].includes(t.state)).length,`${queued} waiting in queue`,'↗'],['Stored packages',state.slots.filter(s=>s.package_id).length,`${state.slots.filter(s=>!s.sku&&!s.reserved_by).length} available slots`,'▤'],['Completed',m.completed,'Executed jobs','✓'],['Delivered',m.delivered,'Confirmed at conveyor exit','⇥'],['Fleet travel',m.distance_m.toFixed(1)+'<small>m</small>','Measured movement','⌁']];
+  const stored=state.slots.reduce((total,s)=>total+(s.source_backed?s.source_units:Number(!!s.package_id)),0);
+  const free=state.slots.filter(s=>s.validated_vacant&&!s.sku&&!s.reserved_by).length;
+  const values=[['Fleet online',robots.length,`${active} active · ${robots.filter(r=>r.status==='IDLE').length} idle`,'◉'],['Active jobs',tasks.filter(t=>['ASSIGNED','IN_PROGRESS','IN_TRANSIT'].includes(t.state)).length,`${queued} waiting in queue`,'↗'],['Stored packages',stored,`${free} available pilot slots`,'▤'],['Completed',m.completed,'Executed jobs','✓'],['Delivered',m.delivered,'Confirmed at conveyor exit','⇥'],['Fleet travel',m.distance_m.toFixed(1)+'<small>m</small>','Measured movement','⌁']];
   $('#metrics').innerHTML=values.map(([label,value,hint,icon])=>`<div class="metric"><span class="metric-icon">${icon}</span><div class="metric-label">${label}</div><div class="metric-value">${value}</div><div class="metric-hint">${hint}</div></div>`).join('');
 }
 function renderFleet(){
@@ -138,9 +141,10 @@ function renderWorkflow(){
 function renderRecords(){
   $('#task-count').textContent=state.tasks.length;$('#tasks-empty').hidden=!!state.tasks.length;
   $('#task-rows').innerHTML=state.tasks.slice().reverse().map(t=>`<tr class="task-row ${t.id===selectedTask?'selected':''}" data-task="${t.id}"><td><strong>${t.id}</strong><small>Created ${time(t.created)}</small></td><td>${t.kind==='INBOUND'?'Store package':t.kind==='OUTBOUND'?'Deliver package':'Move robot'}<small>${esc(t.sku)}</small></td><td>${esc(t.requested_robot||t.robot||'Unassigned')}</td><td>${esc(t.destination||t.requested_slot||t.slot||'—')}${t.requested_conveyor||t.conveyor?`<small>via ${esc(t.requested_conveyor||t.conveyor)}</small>`:''}</td><td><span class="status ${t.state}">${human(t.state)}</span>${t.reason?`<small>${esc(t.reason)}</small>`:''}</td><td>${time((t.completed??state.time)-t.created)}</td><td>${t.state==='QUEUED'?`<button class="text-button" data-cancel="${t.id}">Cancel</button>`:''}</td></tr>`).join('');renderWorkflow();
-  const occupied=state.slots.filter(s=>s.sku).length,reserved=state.slots.filter(s=>s.reserved_by).length;$('#stock-count').textContent=occupied;
-  $('#inventory-stats').innerHTML=`<span><b>${occupied}</b>occupied</span><span><b>${state.slots.length-occupied-state.slots.filter(s=>!s.sku&&s.reserved_by).length}</b>available</span><span><b>${reserved}</b>reserved</span>`;
-  $('#slot-grid').innerHTML=state.slots.map(s=>`<button class="slot ${s.reserved_by?'reserved':s.sku?'occupied':''} ${s.id===selectedSlot?'selected':''}" data-slot="${s.id}" title="${esc(s.reserved_by||s.package_id||'Free slot')}"><strong>${s.id}</strong>${esc(s.sku||s.reserved_by||'Available')}</button>`).join('');
+  const occupied=state.slots.reduce((total,s)=>total+(s.source_backed?s.source_units:Number(!!s.sku)),0),reserved=state.slots.filter(s=>s.reserved_by).length;$('#stock-count').textContent=occupied;
+  const free=state.slots.filter(s=>s.validated_vacant&&!s.sku&&!s.reserved_by).length;
+  $('#inventory-stats').innerHTML=`<span><b>${occupied}</b>packages</span><span><b>${free}</b>pilot slots free</span><span><b>${reserved}</b>reserved</span>`;
+  $('#slot-grid').innerHTML=state.slots.map(s=>`<button class="slot ${s.reserved_by?'reserved':s.sku?'occupied':''} ${s.id===selectedSlot?'selected':''}" data-slot="${s.id}" title="${esc(s.reserved_by||s.package_id||'Free slot')}"><strong>${s.id}</strong>${s.source_backed?`${s.source_units} × `:''}${esc(s.sku||s.reserved_by||'Available')}</button>`).join('');
   const locks=['shelves','conveyors','charging','waiting'].flatMap(kind=>Object.entries(state.locks[kind]).map(([id,owner])=>`<span>${esc(id)} <b>${esc(owner)}</b></span>`));$('#lock-list').innerHTML=`<b>Resource reservations</b>${locks.join('')||'<span>No active reservations</span>'}`;
   $('#packages-empty').hidden=!!state.packages.length;$('#package-rows').innerHTML=state.packages.map(p=>`<tr><td><strong>${esc(p.id)}</strong></td><td>${esc(p.sku)}</td><td><span class="status ${p.stage}">${human(p.stage)}</span></td><td>${esc(p.stage==='DELIVERED'?'Delivery region':p.robot||p.slot||p.lane||'—')}</td><td>${time(p.stored)}</td><td>${time(p.packed)}</td><td>${time(p.delivered)}</td></tr>`).join('');
   $('#events').innerHTML=state.events.slice().reverse().map(e=>`<div class="event ${e.level}"><span class="event-time">${time(e.time)}</span><span>${esc(e.message)}</span></div>`).join('');
@@ -153,12 +157,12 @@ function renderSlotInspector(){
   $('#slot-inspector-name').textContent=`${slot.id} · rack ${slot.shelf}`;
   $('#slot-inspector-state').textContent=status;
   $('#slot-inspector-state').className=`status ${slot.reserved_by?'reserved':slot.sku?'occupied':'available'}`;
-  const details=[['Rack / access aisle',`${slot.shelf} · ${slot.shelf[0]}`],['Position',slot.position?slot.position.map(v=>v.toFixed(2)).join(', ')+' m':'Not measured'],['Contents',slot.sku?`${slot.sku} · ${slot.package_id}`:'Empty'],['Reservation',slot.reserved_by?`${slot.reserved_by}${owner?.robot?' · '+owner.robot:''}`:queued?`${queued.id} queued`:'None'],['Capacity',`${slot.capacity_units} prototype package · ${slot.package_dimensions?.join(' × ')||'unknown'} m`],['Source surface',slot.source_board||'Unmapped'],['Weight limit','Not verified'],['Placement check',slot.validated_vacant?'Vacant source surface verified':'Unavailable']];
+  const details=[['Rack / access aisle',`${slot.shelf} · ${slot.shelf[0]}`],['Position',slot.position?slot.position.map(v=>v.toFixed(2)).join(', ')+' m':'Not measured'],['Contents',slot.source_backed?`${slot.source_units} source-model cartons · ${slot.sku||'depleted'}`:slot.sku?`${slot.sku} · ${slot.package_id}`:'Empty'],['Reservation',slot.reserved_by?`${slot.reserved_by}${owner?.robot?' · '+owner.robot:''}`:queued?`${queued.id} queued`:'None'],['Capacity',slot.source_backed?`${slot.capacity_units} cartons measured in source model`:`${slot.capacity_units} prototype package · ${slot.package_dimensions?.join(' × ')||'unknown'} m`],['Source surface',slot.source_board||'Unmapped'],['Weight limit','Not verified'],['Placement check',slot.source_backed?'Existing source-model stock':slot.validated_vacant?'Vacant source surface verified':'Unavailable']];
   $('#slot-inspector-detail').innerHTML=details.map(([label,value])=>`<div><div class="detail-label">${esc(label)}</div><div class="detail-value">${esc(value)}</div></div>`).join('');
-  const canAct=slot.validated_vacant&&!slot.reserved_by&&!queued;
+  const canAct=(slot.sku||slot.validated_vacant)&&!slot.reserved_by&&!queued;
   $('#slot-inspector-action').hidden=!canAct;
   $('#slot-inspector-action').textContent=slot.sku?'Create retrieval job':'Create putaway job';
-  $('#slot-inspector-help').textContent=!slot.validated_vacant?'This source surface is not validated for package placement.':slot.reserved_by?`Locked by ${slot.reserved_by}; wait for the protected operation to clear.`:queued?`${queued.id} already requests this slot.`:slot.sku?'Select an available AMR and conveyor for this package.':'Select an available AMR and enter a SKU for the measured prototype package.';
+  $('#slot-inspector-help').textContent=slot.source_backed&&!slot.sku?'Source stock depleted.':!slot.validated_vacant&&!slot.sku?'This source surface is not validated for package placement.':slot.reserved_by?`Locked by ${slot.reserved_by}; wait for the protected operation to clear.`:queued?`${queued.id} already requests this slot.`:slot.sku?'Select an available AMR and conveyor for this package.':'Select an available AMR and enter a SKU for the measured prototype package.';
 }
 function plot(canvas,series,maxY){const c=canvasContext(canvas);if(!c)return;const {ctx,w,h}=c,left=35,right=w-20,top=16,bottom=h-27;ctx.clearRect(0,0,w,h);ctx.font='8px Segoe UI';ctx.textAlign='right';for(let i=0;i<5;i++){const y=top+(bottom-top)*i/4;line(ctx,[[left,y],[right,y]],'#edf2f4');ctx.fillStyle='#afbcc3';ctx.fillText(String(Math.round(maxY*(1-i/4))),left-8,y+3)}if(state.history.length<2)return;
   const start=state.history[0].time,end=state.history.at(-1).time,span=Math.max(1,end-start);ctx.textAlign='center';for(let i=0;i<4;i++){const x=left+(right-left)*i/3;ctx.fillStyle='#adb9c1';ctx.fillText(time(start+span*i/3),x,h-8)}
@@ -173,7 +177,11 @@ function renderDispatch(){
   $('#job-origin').textContent=robot?`Current position: ${robot.node} (${robot.x.toFixed(1)}, ${robot.y.toFixed(1)} m) · Battery ${robot.battery.toFixed(0)}%`:'No AMR is available. Wait for a job or charging cycle to finish.';
   $('#job-slot-field').hidden=kind==='MOVE';$('#job-sku-field').hidden=kind!=='INBOUND';$('#job-conveyor-field').hidden=kind!=='OUTBOUND';$('#job-destination-field').hidden=kind!=='MOVE';
   const slots=state.slots.filter(s=>!s.reserved_by&&!reserved.has(s.id)&&(kind==='INBOUND'?!s.sku:!!s.sku));
-  updateSelect('#job-slot',slots.map(s=>[s.id,`${s.id} · ${kind==='OUTBOUND'?s.sku:'empty'} · aisle ${s.shelf[0]}`,false]));
+  const slotOptions=kind==='OUTBOUND'
+    ? (slots.length?slots.map(s=>[s.id,`${s.id} · ${s.sku} · aisle ${s.shelf[0]}`,false])
+      : [['','No available stored packages — store one or wait for a reservation',false]])
+    : slots.map(s=>[s.id,`${s.id} · empty · aisle ${s.shelf[0]}`,false]);
+  updateSelect('#job-slot',slotOptions);
   updateSelect('#job-conveyor',[1,2,3].map(i=>{const id=`CONV_${i}`;return [id,`Conveyor ${i}${state.locks.conveyors[id]?' · currently reserved':''}`,false]}));
   const shelfNodes=[...new Set(state.slots.map(s=>s.shelf))];
   updateSelect('#job-destination',[...['PICKUP','PACKING','DELIVERY'].map(n=>[n,n,false]),...shelfNodes.map(n=>[n,`${n} · aisle ${n[0]}`,!!state.locks.shelves[n]])]);
@@ -209,7 +217,7 @@ async function refresh(){if(refreshing)return;refreshing=true;try{const response
 $('#robots').onclick=e=>{const card=e.target.closest('[data-robot]');if(card)selectRobot(card.dataset.robot)};
 $('#task-rows').onclick=e=>{const cancel=e.target.closest('[data-cancel]');if(cancel){action(async()=>{await post('cancel',{task_id:cancel.dataset.cancel});notice('Queued request cancelled')});return}const row=e.target.closest('[data-task]');if(row){selectedTask=row.dataset.task;const task=state.tasks.find(t=>t.id===selectedTask);if(task.robot)selected=task.robot;render();scene?.update(state,selected,selectedSlot)}};
 $('#slot-grid').onclick=e=>{const slot=e.target.closest('[data-slot]');if(slot)selectSlot(slot.dataset.slot)};
-$('#slot-inspector-action').onclick=()=>{const slot=state.slots.find(s=>s.id===selectedSlot);if(!slot||slot.reserved_by||!slot.validated_vacant)return;$('#job-kind').value=slot.sku?'OUTBOUND':'INBOUND';renderDispatch();$('#job-slot').value=slot.id;renderDispatch();$('#dispatch').scrollIntoView({block:'center'})};
+$('#slot-inspector-action').onclick=()=>{const slot=state.slots.find(s=>s.id===selectedSlot);if(!slot||slot.reserved_by||(!slot.sku&&!slot.validated_vacant))return;$('#job-kind').value=slot.sku?'OUTBOUND':'INBOUND';renderDispatch();$('#job-slot').value=slot.id;renderDispatch();$('#dispatch').scrollIntoView({block:'center'})};
 $('#incidents').onclick=e=>{const b=e.target.closest('[data-remove-obstacle]');if(b)action(async()=>{await post('obstacle',{remove:b.dataset.removeObstacle});notice('Obstacle cleared; controller will recalculate routes')})};
 $('#manual-job-form').onsubmit=e=>{e.preventDefault();action(async()=>{const kind=$('#job-kind').value,robot_id=$('#job-robot').value,slot_id=$('#job-slot').value,destination=$('#job-destination').value,conveyor=$('#job-conveyor').value,sku=$('#job-sku').value.trim();const result=await post('manual-job',{kind,robot_id,slot_id,destination,conveyor,sku});selectedTask=result.task_id;$('#job-message').textContent=`${result.task_id} assigned to ${robot_id}`;notice(`${result.task_id} planned for ${robot_id}. ${state.paused?'Click Start run or Resume to execute it.':'Controller is executing it.'}`)})};
 $('#job-kind').onchange=renderDispatch;$('#job-robot').onchange=renderDispatch;$('#job-slot').onchange=renderDispatch;$('#job-conveyor').onchange=renderDispatch;$('#job-destination').onchange=renderDispatch;

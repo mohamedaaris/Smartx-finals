@@ -60,7 +60,7 @@ export class WarehouseView {
       this.walls=(this.manifest.walls||[]).map(w=>find(w.node)).filter(Boolean);
       this.walls.forEach(w=>w.visible=false);
       this.onStatus(`Original model loaded · ${this.manifest.source_objects.toLocaleString()} source meshes`);
-      this.ready=true;if(this.state)this.update(this.state,this.selected);
+      this.ready=true;if(this.state)this.update(this.state,this.selected,this.selectedSlot);
     }catch(e){this.error=e.message;this.onStatus(`3D asset error: ${e.message}`,true)}
   }
   addRobotVisual(id,obj,source,index,generated){
@@ -224,7 +224,7 @@ export class WarehouseView {
   }
   updatePackages(state){
     const active=new Set();
-    for(const pkg of state.packages){const position=this.packagePosition(pkg,state);if(!position)continue;active.add(pkg.id);const mesh=this.packageMeshes.get(pkg.id)||this.createPackage(pkg.id);mesh.visible=true;mesh.position.copy(position);mesh.material.color.set(pkg.stage==='PACKING'?'#8bbbc8':pkg.stage==='PACKED'?'#80c7b6':'#d5a363')}
+    for(const pkg of state.packages){if(pkg.source_backed&&pkg.stage==='STORED')continue;const position=this.packagePosition(pkg,state);if(!position)continue;active.add(pkg.id);const mesh=this.packageMeshes.get(pkg.id)||this.createPackage(pkg.id);mesh.visible=true;mesh.position.copy(position);mesh.material.color.set(pkg.stage==='PACKING'?'#8bbbc8':pkg.stage==='PACKED'?'#80c7b6':'#d5a363')}
     for(const [id,obj] of this.packageMeshes)if(!active.has(id)){this.overlay.remove(obj);obj.geometry.dispose();obj.material.dispose();this.packageMeshes.delete(id)}
   }
   updateObstacles(state){

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vinland · Automated warehouse operations</title><link rel="icon" href="data:,">
+<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/automation.css">
+<script type="importmap">{"imports":{"three":"/vendor/build/three.module.js","three/addons/":"/vendor/examples/jsm/"}}</script>
+<script type="module" src="/automation.js"></script>
+</head><body class="automation-page">
+<header class="topbar"><a class="brand" href="/"><span class="brand-logo">V</span><span>VINLAND<small>WAREHOUSE SIMULATION LAB</small></span></a><div class="top-divider"></div><span class="project-name">Intelligent AMR fleet <span class="version">AUTOMATED ROUTE</span></span><div class="session"><i id="connection-dot"></i><span id="connection">Connecting</span><span id="sim-time" class="session-time">00:00</span></div></header>
+<div class="shell"><nav class="rail" aria-label="Workspace navigation">
+  <a class="nav-item" href="/"><span>▦</span>Manual</a>
+  <a class="nav-item active" href="/automation" aria-current="page"><span>◇</span>Auto</a>
+  <a class="nav-item" href="#orders-panel"><span>≡</span>Orders</a>
+  <a class="nav-item" href="#products-panel"><span>▤</span>Stock</a>
+  <a class="nav-item" href="#source-panel"><span>⌁</span>Source</a>
+  <div class="rail-bottom"><span class="rail-caption">5 AMRs<br>auto controller</span></div>
+</nav><main>
+  <div class="page-heading"><div><div class="eyebrow">AUTOMATED OPERATIONS WORKSPACE</div><h1>Warehouse operations</h1><p>API orders drive this route’s robots in the original 3D warehouse.</p></div><div class="run-controls"><a class="secondary" href="/">Open manual route ↗</a></div></div>
+  <div id="notice" class="notice" role="status" hidden></div>
+  <section id="metrics" class="metrics automation-metrics" aria-label="Live order metrics"></section>
+  <section class="workbench" id="operations">
+    <div class="visual card" id="visual">
+      <div class="visual-heading"><div class="view-tabs"><button class="active">3D warehouse</button></div><div class="asset-badge"><i></i><span>warehouse1.blend</span><button id="fullscreen-3d" class="text-button" aria-pressed="false">⛶ Full screen</button></div></div>
+      <div class="views only-3d" id="views"><div class="viewport scene-viewport">
+        <canvas id="scene" aria-label="Live automated operations in the supplied Blender warehouse"></canvas><div id="world-labels"></div>
+        <div class="model-loading" id="model-loading"><span class="spinner"></span><strong>Loading your Blender model</strong><span id="model-progress">Preparing original warehouse assets…</span></div>
+        <div class="scene-caption"><i class="model-dot"></i> ORIGINAL BLENDER ASSETS <span>Orbit · drag / zoom · select a robot or shelf</span></div>
+        <div id="scene-hud" class="scene-hud"></div>
+        <div id="scene-info" class="scene-info" hidden><button id="scene-info-close" class="scene-info-close" aria-label="Close object information">×</button><span id="scene-info-type" class="eyebrow"></span><strong id="scene-info-name"></strong><div id="scene-info-detail"></div></div>
+        <div class="camera-tools" role="group" aria-label="Camera presets"><button data-camera="overview" class="active">Overview</button><button data-camera="top">Top</button><button data-camera="stations">Stations</button><button data-camera="charging">Charging</button><button data-camera="follow">Follow AMR</button></div>
+      </div></div>
+      <div class="view-footer"><div class="layer-controls"><label><input type="checkbox" data-layer="routes" checked> Routes</label><label><input type="checkbox" data-layer="sensors"> Sensing</label><label><input type="checkbox" data-layer="labels" checked> Labels</label><label><input type="checkbox" data-layer="walls"> Walls</label></div><span id="model-status">Loading warehouse model…</span></div>
+    </div>
+    <aside class="fleet card"><div class="card-heading"><div><h2>Robot assignments</h2><p>Select a robot to follow its API order in 3D.</p></div><span id="robot-count" class="count-badge">5</span></div><div id="robots" class="robot-list"></div></aside>
+  </section>
+  <section class="automation-controls">
+    <div class="card" id="source-panel"><div class="card-heading"><div><h2>Order API source</h2><p>Your company feed is polled every five seconds. Each order ID is imported once.</p></div></div><div class="panel-body"><form id="source-form"><label>API URL<input id="source-url" type="url" placeholder="http://192.168.56.1:5000/api/orders"></label><div class="form-row"><label>Poll every (seconds)<input id="source-interval" type="number" min="2" max="300" value="5"></label><label>Bearer token (optional)<input id="source-token" type="password" placeholder="Blank retains current token"></label></div><div class="form-actions"><button type="submit" class="primary">Save source</button><button type="button" id="poll-now" class="secondary">Poll now</button></div></form><div id="source-detail" class="source-detail"></div></div></div>
+    <div class="card"><div class="card-heading"><div><h2>Submit a test order</h2><p>Add a storage or delivery order to this automated route.</p></div></div><div class="panel-body"><form id="order-form"><div class="form-row"><label>Order ID<input id="order-id" maxlength="100" required></label><label>Order time<input id="order-time" type="datetime-local" required></label></div><div class="form-row"><label>Operation<select id="order-operation"><option value="STORE">Store incoming product</option><option value="DELIVER">Deliver stored product</option></select></label><label>Product<select id="order-product"></select></label></div><label>Quantity<input id="order-quantity" type="number" min="1" max="24" value="1" required></label><div class="form-actions"><button type="submit" class="primary">Send order →</button></div></form></div></div>
+  </section>
+  <section class="card automation-stock" id="products-panel"><div class="card-heading"><div><h2>Product shelf groups</h2><p>Click a group to highlight its shelf in the 3D warehouse.</p></div></div><div id="products" class="products"></div></section>
+  <section class="card automation-orders" id="orders-panel"><div class="card-heading"><div><h2>Incoming orders</h2><p>Click an order to select its robot and shelf in the 3D warehouse.</p></div></div><div class="table-wrap"><table><thead><tr><th>Order</th><th>Product</th><th>Operation</th><th>Progress</th><th>Robot / slot</th><th>Status</th></tr></thead><tbody id="orders"><tr><td colspan="6">Waiting for orders.</td></tr></tbody></table></div></section>
+</main></div>
+</body></html>

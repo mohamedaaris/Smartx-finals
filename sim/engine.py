@@ -11,6 +11,7 @@ from .models import Slot, Task, Robot
 from .inventory import create_slots, eligible_slots
 from .battery import estimate_task_energy
 from .sensors import obstructed_nodes, obstructed_edges, footprints_overlap
+from scripts.inspect_source_stock import source_cartons
 
 from .geometry import (DETECTION_RADIUS, MIN_SEPARATION, ZONES, NavigationGraph,
                        ROBOT_LENGTH, ROBOT_WIDTH)
@@ -44,6 +45,8 @@ class Warehouse:
         self.events: list[dict[str, Any]] = []
         self.tasks: dict[str, Task] = {}
         self.slots: dict[str, Slot] = {}
+        self.source_stock: dict[str, list[dict]] = {}
+        self.source_initial_count = 0
         self.shelf_locks: dict[str, str] = {}
         self.conveyor_locks: dict[str, str] = {}
         self.charge_locks: dict[str, str] = {}
@@ -131,6 +134,47 @@ class Warehouse:
 
     def request_outbound(self, sku: str) -> str:
         return self._new_task("OUTBOUND", sku).id
+
+    def seed_source_stock(self, sku_by_shelf: dict[str, str]) -> int:
+        """Expose cartons already in the Blender model as one pick face per shelf.
+
+        The source meshes stay in the static model. Remaining cartons in each
+        shelf group become the next pickable unit after a retrieval.
+        """
+        if self.source_initial_count or self.tasks:
+            raise ValueError("Source stock can only be seeded into a fresh warehouse")
+        groups: dict[str, list[dict]] = {}
+        for carton in source_cartons():
+            if carton["shelf"]:
+                groups.setdefault(carton["shelf"], []).append(carton)
+        for shelf, cartons in sorted(groups.items()):
+            sku = sku_by_shelf.get(shelf)
+            if not sku:
+                raise ValueError(f"No product configured for source shelf {shelf}")
+            cartons.sort(key=lambda carton: (carton["position"][2], carton["source_id"]))
+            self.source_initial_count += len(cartons)
+            self.source_stock[shelf] = cartons
+            self.slots[f"{shelf}-SRC"] = Slot(f"{shelf}-SRC", shelf,
+                validated_vacant=False, source_backed=True, capacity_units=len(cartons))
+            self._promote_source_stock(self.slots[f"{shelf}-SRC"], sku)
+        self.log(f"Loaded {self.source_initial_count} source-model cartons across {len(groups)} shelf groups")
+        return self.source_initial_count
+
+    def _promote_source_stock(self, slot: Slot, sku: str) -> None:
+        remaining = self.source_stock.get(slot.shelf, [])
+        if not remaining:
+            slot.source_units = 0
+            return
+        carton = remaining.pop(0)
+        number = slot.capacity_units - len(remaining)
+        package_id = f"SRC-{slot.shelf}-{number:03d}"
+        slot.sku, slot.package_id = sku, package_id
+        slot.position = carton["position"]
+        slot.source_board = carton["source_id"]
+        slot.source_units = len(remaining) + 1
+        self.packages[package_id] = {"id": package_id, "sku": sku,
+            "stage": "STORED", "slot": slot.id, "source_backed": True,
+            "source_object": carton["source_id"], "created": 0.0, "stored": 0.0}
 
     def request_manual(self, kind: str, robot_id: str, slot_id: str | None = None,
                        sku: str = "", conveyor: str | None = None,
@@ -937,6 +981,8 @@ class Warehouse:
             task.package_id = slot.package_id
             self.packages.setdefault(task.package_id, {"id": task.package_id, "sku": task.sku}).update(stage="CARRIED", robot=robot.id, slot=None, task=task.id, retrieved=round(self.time, 3))
             slot.sku = slot.package_id = None
+            if slot.source_backed:
+                self._promote_source_stock(slot, task.sku)
             robot.shelf_to_release = slot.shelf
             self.log(f"{robot.id} retrieved {task.package_id} from {slot.id}")
             self._request_conveyor(robot, task)
@@ -1166,6 +1212,7 @@ class Warehouse:
                 "metrics": self.telemetry.metrics(self), "history": history,
                 "events": self.events[-120:],
                 "charging_capacity": len(self.depot_ids),
+                "source_initial_count": self.source_initial_count,
                 "available_charging_slots": self._free_depots(),
                 "config": {"robot_width": ROBOT_WIDTH, "robot_length": ROBOT_LENGTH,
                            "detection_radius": DETECTION_RADIUS,

@@ -11,10 +11,16 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
+from automation import AutomationRuntime
 from sim.engine import TICK, Warehouse
 
 ROOT = Path(__file__).parent.resolve()
 WEB = ROOT / "web"
+
+
+def source_product_map():
+    catalog = json.loads((ROOT / "automation_catalog.json").read_text(encoding="utf-8"))
+    return {product["shelf"]: product["id"] for product in catalog["products"]}
 
 
 class SimulationServer(ThreadingHTTPServer):
@@ -30,6 +36,8 @@ class Runtime:
     def __init__(self, demo: bool, speed: float):
         self.lock = threading.RLock()
         self.warehouse = Warehouse(demo)
+        if not demo:
+            self.warehouse.seed_source_stock(source_product_map())
         self.paused = True
         self.speed = speed
         self.running = True
@@ -60,6 +68,7 @@ class Runtime:
 
 class Handler(SimpleHTTPRequestHandler):
     runtime: Runtime
+    automation: AutomationRuntime | None = None
 
     def log_message(self, format, *args):
         if self.path != "/api/state":
@@ -69,6 +78,8 @@ class Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(WEB), **kwargs)
 
     def translate_path(self, path):
+        if urlparse(path).path == "/automation":
+            return super().translate_path("/automation.html")
         if urlparse(path).path.startswith("/vendor/"):
             base = (ROOT / "node_modules" / "three").resolve()
             resolved = (base / urlparse(path).path.removeprefix("/vendor/")).resolve()
@@ -87,12 +98,21 @@ class Handler(SimpleHTTPRequestHandler):
         self.wfile.write(data)
 
     def do_GET(self):
-        if urlparse(self.path).path in ("/api/state", "/api/report"):
+        route = urlparse(self.path).path
+        if route == "/api/automation/state":
+            self._json(self.automation.snapshot())
+        elif route.startswith("/api/automation/orders/"):
+            order_id = route.removeprefix("/api/automation/orders/")
+            with self.automation.lock:
+                order = self.automation.orders.get(order_id)
+                self._json(order.copy() if order else {"error":"Order not found"},
+                           200 if order else 404)
+        elif route in ("/api/state", "/api/report"):
             with self.runtime.lock:
                 state = self.runtime.warehouse.snapshot()
                 state["paused"] = self.runtime.paused
                 state["speed"] = self.runtime.speed
-                if urlparse(self.path).path == "/api/report":
+                if route == "/api/report":
                     state["events"] = self.runtime.warehouse.events
                     state["history"] = self.runtime.warehouse.telemetry.samples
             self._json(state)
@@ -109,6 +129,23 @@ class Handler(SimpleHTTPRequestHandler):
                 raise ValueError("Request too large")
             body = json.loads(self.rfile.read(size) or b"{}")
             action = urlparse(self.path).path.removeprefix("/api/")
+            if not isinstance(body, dict):
+                raise ValueError("Request body must be a JSON object")
+            if action.startswith("automation/"):
+                if self.automation is None:
+                    raise ValueError("Automation runtime is unavailable")
+                if action == "automation/orders":
+                    result = self.automation.ingest(body)
+                elif action == "automation/source":
+                    result = self.automation.set_source(body.get("url", ""),
+                        body.get("interval_seconds", 5), body.get("bearer_token"))
+                elif action == "automation/source/poll":
+                    result = self.automation.poll_once()
+                else:
+                    self._json({"error":"Not found"}, 404)
+                    return
+                self._json(result, 200 if result.get("duplicate") else 202 if action == "automation/orders" else 200)
+                return
             with self.runtime.lock:
                 w = self.runtime.warehouse
                 if action == "task":
@@ -200,7 +237,9 @@ class Handler(SimpleHTTPRequestHandler):
                     battery = float(body.get("initial_battery", 100))
                     if not 15 <= battery <= 100:
                         raise ValueError("Initial charge must be 15–100 percent to retain enough energy for the boundary charging route")
-                    self.runtime.warehouse = Warehouse(initial_battery=battery)
+                    fresh = Warehouse(initial_battery=battery)
+                    fresh.seed_source_stock(source_product_map())
+                    self.runtime.warehouse = fresh
                     self.runtime.paused = True
                     self.runtime.had_activity = False
                     result = {"reset": True}
@@ -218,15 +257,19 @@ def main():
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--speed", type=float, default=1.0,
                         help="Simulation seconds per wall-clock second")
-    parser.add_argument("--empty", action="store_true", help="Compatibility flag; startup is always empty")
+    parser.add_argument("--empty", action="store_true", help="Compatibility flag; source-model stock is always loaded")
     args = parser.parse_args()
     runtime = Runtime(False, args.speed)
+    automation = AutomationRuntime(speed=args.speed)
     Handler.runtime = runtime
+    Handler.automation = automation
     try:
         server = SimulationServer((args.host, args.port), Handler)
     except OSError as exc:
         raise SystemExit(f"Cannot start on port {args.port}: {exc}. Stop the existing warehouse server before restarting.") from exc
     threading.Thread(target=runtime.loop, daemon=True).start()
+    threading.Thread(target=automation.loop, daemon=True).start()
+    threading.Thread(target=automation.poll_loop, daemon=True).start()
     print(f"Warehouse dashboard: http://{args.host}:{args.port}", flush=True)
     try:
         server.serve_forever()
@@ -234,6 +277,7 @@ def main():
         pass
     finally:
         runtime.running = False
+        automation.running = False
         server.server_close()
 
 

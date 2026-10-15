@@ -20,7 +20,8 @@ class Telemetry:
             "active": sum(bool(r.task_id) for r in robots),
             "blocked": sum(bool(r.block_reason) for r in robots),
             "completed": sum(t.state == "COMPLETED" for t in warehouse.tasks.values()),
-            "stored": sum(bool(s.package_id) for s in warehouse.slots.values()),
+            "stored": sum(s.source_units if s.source_backed else bool(s.package_id)
+                          for s in warehouse.slots.values()),
             "distance": round(sum(r.distance_m for r in robots), 2),
             "battery": [round(r.battery, 2) for r in robots]})
         self.samples = self.samples[-3600:]

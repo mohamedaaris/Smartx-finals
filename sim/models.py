@@ -15,6 +15,8 @@ class Slot:
     capacity_units: int = 1
     package_dimensions: list[float] | None = None
     max_weight_kg: float | None = None
+    source_backed: bool = False
+    source_units: int = 0
 
 
 @dataclass

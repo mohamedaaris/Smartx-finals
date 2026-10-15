@@ -168,7 +168,7 @@ def vinland_sync_tick():
                 visible(obj,False)
         active = set()
         for package in state["packages"]:
-            if not package.get("position"):
+            if not package.get("position") or (package.get("source_backed") and package["stage"] == "STORED"):
                 continue
             name = "AMR Tracked " + package["id"]
             obj = cube(name)

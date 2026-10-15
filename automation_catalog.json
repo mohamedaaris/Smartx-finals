@@ -1,0 +1,16 @@
+{
+  "products": [
+    {"id":"washing-machine","name":"Washing machine","shelf":"AR1"},
+    {"id":"tv","name":"TV","shelf":"AR2"},
+    {"id":"stabiliser","name":"Stabiliser","shelf":"AR3"},
+    {"id":"ac","name":"AC","shelf":"AR4"},
+    {"id":"sofa","name":"Sofa","shelf":"BR1"},
+    {"id":"table","name":"Table","shelf":"BR2"},
+    {"id":"oven","name":"Oven","shelf":"BR3"},
+    {"id":"table-fan","name":"Table fan","shelf":"BR4"},
+    {"id":"cycle","name":"Cycle","shelf":"CR1"},
+    {"id":"chair","name":"Chair","shelf":"CR2"},
+    {"id":"cooker","name":"Cooker","shelf":"CR3"},
+    {"id":"drone","name":"Drone","shelf":"CR4"}
+  ]
+}
