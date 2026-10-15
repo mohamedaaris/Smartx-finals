@@ -15,17 +15,22 @@ SIDE_CLEARANCE = 0.15
 DETECTION_RADIUS = 5.0
 MIN_SEPARATION = 2.35
 
-# Shelf blocks were measured from the existing rack planes and individual shelf bases.
-RACK_X = [(-14.48, -9.79), (-6.99, -2.30), (0.48, 5.17)]
+# Rack meshes and their stock were measured in the source scene. The former
+# wider boxes came from end/overhead structures and understated floor clearance.
+RACK_X = [(-13.99, -12.08), (-5.77, -3.56), (3.10, 5.02)]
 RACK_Y = [(-39.96, -33.76), (-27.07, -20.87), (-14.73, -8.52), (-2.56, 3.65)]
 RACKS = [(xa, ya, xb, yb) for xa, xb in RACK_X for ya, yb in RACK_Y]
 ZONES = {
     "pickup": (-18.14, 8.02, -10.94, 13.86),
     "delivery": (1.10, 8.02, 9.00, 13.86),
-    "charging": (-18.14, -49.40, -10.94, -43.57),
+    # Plane.003 in the current Blender scene spans the charging/depot floor.
+    "charging": (-18.18, -49.40, 9.01, -43.57),
 }
 CONVEYORS = [(-10.79, 12.82, -5.02, 13.80), (-4.71, 12.82, 1.06, 13.80)]
-AISLES = {"west": (-9.79, -6.99), "middle": (-2.30, 0.48), "east": (5.17, 9.04)}
+# Conservative rack-to-rack gaps across all four shelf rows. The east aisle
+# ends at the source scene's inner wall line. Straight width alone does not
+# validate operational passing, turns, or station approaches.
+AISLES = {"west": (-12.08, -5.77), "middle": (-3.56, 3.10), "east": (5.02, 9.04)}
 LANE_CLEARANCES = {
     k: round(b - a - ROBOT_WIDTH - 2 * SIDE_CLEARANCE, 2)
     for k, (a, b) in AISLES.items()
@@ -130,6 +135,26 @@ class NavigationGraph:
         ]:
             self.add(name, x, y, "parking")
             self.connect(name, parent)
+        # Five separated charge/depot positions have straight individual
+        # approaches from the south cross aisle, avoiding diagonal crossings
+        # through another parked AMR's footprint.
+        depot_xs = (-7.6, -4.1, -0.6, 2.9, 6.4)
+        self.edges["AS"].pop("BS")
+        self.edges["BS"].pop("AS")
+        self.edges["BS"].pop("CS")
+        self.edges["CS"].pop("BS")
+        south_chain = ["AS"]
+        for i, x in enumerate(depot_xs, 1):
+            if i == 3:
+                south_chain.append("BS")
+            entry = f"DEPOT_ENTRY_{i}"
+            self.add(entry, x, -42.20)
+            south_chain.append(entry)
+            self.add(f"DEPOT_{i}", x, -47.80, "depot")
+            self.connect(entry, f"DEPOT_{i}")
+        south_chain.append("CS")
+        for a, b in zip(south_chain, south_chain[1:]):
+            self.connect(a, b)
         # The source AMR-03 starts beside bay 2. Its short docking connection
         # avoids an unnecessary trip through the common charging entrance.
         self.connect("PARK_D", "CHARGE_2")

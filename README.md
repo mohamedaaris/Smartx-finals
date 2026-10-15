@@ -59,6 +59,11 @@ project server before starting another one. Windows uses exclusive port binding.
    the measured run, events and traces as JSON. Queued jobs can be cancelled.
 
 Clicking an occupied inventory slot prepares a delivery job for that exact slot.
+Selecting a slot in the inventory grid or 2D map now opens a shared slot inspector;
+the 3D view also provides shelf-slot pick regions. An available empty slot can prefill
+a putaway job, and an occupied slot can prefill a retrieval job. The 24 mapped
+pilot slots each hold one simulated 0.64 × 0.64 × 0.48 m package. Their physical
+weight limits have not been verified.
 Setup changes motion, the charge trigger (30–40%), recharge target, packing and
 conveyor duration while paused. Legacy single-request and batch API endpoints remain
 available for existing integrations; the site uses the manual-job endpoint.
@@ -112,11 +117,13 @@ surface is at `z=1.825 m`. The AMR footprint is about `1.33 × 2.01 m`.
 
 | Aisle | Usable width | Width needed for three passages |
 | --- | ---: | ---: |
-| West | 2.80 m | 4.89 m |
-| Middle | 2.78 m | 4.89 m |
-| East | 3.87 m | 4.89 m |
+| West, between rack columns A/B | 6.31 m | 4.89 m |
+| Middle, between rack columns B/C | 6.66 m | 4.89 m |
+| East, rack C to boundary | 4.02 m | 4.89 m |
 
-The source geometry does not support three robots abreast inside one aisle. The
+The two inter-rack straight gaps have enough rack-to-rack width for three nominal
+lanes, but turns, fixed equipment and passing have not been validated. The east
+gap does not meet the straight-width requirement. The
 operator-requested center-first policy uses aisle B as the main travel corridor and
 branches to shelf aisles A and C at the corresponding cross aisle. Each aisle remains
 a protected single passage, with junction/waiting reservations and measured boundary

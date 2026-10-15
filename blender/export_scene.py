@@ -27,6 +27,9 @@ def export():
     active = bpy.context.view_layer.objects.active
     objects = [o for o in source.objects if o.type == "MESH" and len(o.data.vertices)
                and not o.name.startswith("AMR ") and not o.hide_get()]
+    source_parts = [[o.name, *[round(v, 3) for v in bounds(o)]] for o in objects
+                    if o.name.lower().startswith(("box", "shelving"))]
+    (OUT / "source_objects.json").write_text(json.dumps(source_parts, separators=(",", ":")), encoding="utf-8")
     manifest = {"source": bpy.data.filepath, "source_objects": len(objects),
                 "floor_z": bounds(bpy.data.objects["Rectangle001_floor_0"])[5],
                 "robots": {}, "slots": {}, "walls": [], "export": "warehouse.glb"}

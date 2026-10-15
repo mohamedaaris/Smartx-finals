@@ -62,7 +62,9 @@ class WarehouseScenarios(unittest.TestCase):
 
     def test_e_measured_three_lanes_do_not_fit(self):
         self.assertFalse(THREE_LANE_FEASIBLE)
-        self.assertLess(AISLES["west"][1] - AISLES["west"][0],
+        self.assertGreaterEqual(AISLES["west"][1] - AISLES["west"][0],
+                                THREE_LANE_REQUIRED_WIDTH)
+        self.assertLess(AISLES["east"][1] - AISLES["east"][0],
                         THREE_LANE_REQUIRED_WIDTH)
 
     def test_f_conveyor_lanes_exclusive(self):
@@ -133,28 +135,29 @@ class WarehouseScenarios(unittest.TestCase):
         w.remove_obstacle(oid)
         self.assertNotIn("AN", w._obstructed_nodes())
 
-    def test_i_low_battery_routes_to_boundary_charger(self):
+    def test_i_low_battery_routes_to_own_depot_charger(self):
         w = Warehouse(fixture=True)
         r = w.robots["AMR-01"]
         r.battery = 20
         w.step()
         self.assertEqual(r.status, "MOVING_TO_CHARGER")
-        self.assertIn("L1", r.path)
+        self.assertEqual(r.target, "DEPOT_1")
         self.assertEqual(w.tasks, {})
         w.run(180)
         self.assertEqual(r.status, "IDLE")
-        self.assertTrue(r.node.startswith("PARK_"))
+        self.assertEqual(r.node, "DEPOT_1")
         self.assertGreater(r.battery, 25)
         self.assertEqual(w.charge_locks, {})
 
-    def test_j_charging_congestion_waits_upstream(self):
+    def test_j_extended_depot_charging_is_independent(self):
         w = Warehouse(fixture=True)
         w.charge_locks = {"CHARGE_1": "AMR-01", "CHARGE_2": "AMR-02"}
         r = w.robots["AMR-03"]
         r.battery = 20
         w.step()
-        self.assertIn(r.status, ("MOVING_TO_CHARGE_WAIT", "WAITING_FOR_CHARGER"))
-        self.assertEqual(r.target, "CHARGE_WAIT")
+        self.assertEqual(r.status, "MOVING_TO_CHARGER")
+        self.assertEqual(r.target, "DEPOT_3")
+        self.assertEqual(w.charge_locks["DEPOT_3"], r.id)
 
     def test_k_queue_order_after_resource_unlock(self):
         w = Warehouse(fixture=True)
@@ -235,19 +238,20 @@ class WarehouseScenarios(unittest.TestCase):
         self.assertEqual(w.tasks[outbound].state, "COMPLETED")
         self.assertEqual(w.packages[w.tasks[outbound].package_id]["stage"], "DELIVERED")
 
-    def test_all_five_low_battery_robots_recharge_with_two_bays(self):
+    def test_all_five_low_battery_robots_recharge_at_their_depots(self):
         w = Warehouse(initial_battery=20)
         charged = set()
         for _ in range(6000):
             w.step()
-            charged.update(r.id for r in w.robots.values() if r.status == "CHARGING")
-            self.assertLessEqual(len(w.charge_locks), 2)
+            charged.update(r.id for r in w.robots.values() if w._actively_charging(r))
+            self.assertLessEqual(len(w.charge_locks), 5)
             self.assertTrue(all(r.battery > 0 for r in w.robots.values()))
             if len(charged) == 5 and all(r.status == "IDLE" for r in w.robots.values()):
                 break
         self.assertEqual(len(charged), 5)
         self.assertTrue(all(r.battery > 25 for r in w.robots.values()))
         self.assertTrue(all(r.status == "IDLE" for r in w.robots.values()))
+        self.assertTrue(all(w._in_charging_area(r) for r in w.robots.values()))
         self.assertGreaterEqual(w.telemetry.minimum_clearance, MIN_SEPARATION-.01)
         self.assertEqual(w.charge_locks, {})
 
@@ -288,7 +292,89 @@ class WarehouseScenarios(unittest.TestCase):
         owner.node = "PARK_C"
         owner.x,owner.y = w.graph.nodes["PARK_C"].x,w.graph.nodes["PARK_C"].y
         w.step()
-        self.assertNotIn(key,w.edge_locks)
+        self.assertNotEqual(w.edge_locks.get(key), owner.id)
+
+    def test_depot_bound_robot_accepts_new_work_above_thirty_percent(self):
+        w = Warehouse()
+        w.step()
+        robot = w.robots["AMR-01"]
+        self.assertEqual(robot.status, "MOVING_TO_DEPOT")
+        robot.battery = 31
+        task = w.request_manual("MOVE", robot.id, destination="PICKUP")
+        w.step()
+        self.assertEqual(w.tasks[task].state, "ASSIGNED")
+        self.assertEqual(robot.status, "MOVING_TO_DESTINATION")
+        self.assertEqual(robot.target, "PICKUP")
+        w.run(180)
+        self.assertEqual(w.tasks[task].state, "COMPLETED")
+        self.assertEqual(robot.node, "DEPOT_1")
+
+    def test_depot_bound_robot_at_thirty_percent_charges_first(self):
+        w = Warehouse()
+        w.step()
+        robot = w.robots["AMR-01"]
+        robot.battery = 30
+        with self.assertRaises(ValueError):
+            w.request_manual("MOVE", robot.id, destination="PICKUP")
+        w.step()
+        self.assertEqual(robot.target, "DEPOT_1")
+        self.assertEqual(robot.status, "MOVING_TO_CHARGER")
+
+    def test_idle_robot_charges_anywhere_in_extended_area(self):
+        w = Warehouse()
+        robot = w.robots["AMR-01"]
+        robot.x, robot.y, robot.battery = -10, -48, 50
+        self.assertTrue(w._in_charging_area(robot))
+        w.step()
+        self.assertGreater(robot.battery, 50)
+        self.assertEqual(robot.status, "IDLE")
+        self.assertIsNone(robot.target)
+        w.run(33)
+        self.assertEqual(robot.battery, 100)
+        self.assertEqual((robot.x, robot.y), (-10, -48))
+
+    def test_idle_depot_robot_keeps_charging_and_remains_available(self):
+        w = Warehouse()
+        w.run(160)
+        robot = w.robots["AMR-01"]
+        self.assertEqual(robot.node, "DEPOT_1")
+        robot.battery = 60
+        w.run(10)
+        self.assertEqual(robot.status, "IDLE")
+        self.assertGreater(robot.battery, 60)
+        self.assertTrue(w.snapshot()["robots"][0]["charging"])
+        w.run(20)
+        self.assertEqual(robot.battery, 100)
+        self.assertFalse(w.snapshot()["robots"][0]["charging"])
+
+    def test_runtime_waits_for_idle_depot_top_up_before_auto_pause(self):
+        from app import Runtime
+        runtime = Runtime(False, 1)
+        runtime.warehouse.run(160)
+        robot = runtime.warehouse.robots["AMR-01"]
+        robot.battery = 80
+        runtime.paused = False
+        runtime.had_activity = True
+        for _ in range(200):
+            runtime.advance()
+            if runtime.paused:
+                break
+        self.assertEqual(robot.battery, 100)
+        self.assertTrue(runtime.paused)
+
+    def test_runtime_returns_last_completed_job_robot_before_pausing(self):
+        from app import Runtime
+        runtime = Runtime(False, 1)
+        task = runtime.warehouse.request_manual("MOVE", "AMR-01", destination="PICKUP")
+        runtime.paused = False
+        for _ in range(4000):
+            runtime.advance()
+            if runtime.paused:
+                break
+        robot = runtime.warehouse.robots["AMR-01"]
+        self.assertEqual(runtime.warehouse.tasks[task].state, "COMPLETED")
+        self.assertTrue(runtime.warehouse._in_charging_area(robot))
+        self.assertTrue(runtime.paused)
 
 
 if __name__ == "__main__":

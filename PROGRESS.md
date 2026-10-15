@@ -41,17 +41,21 @@ complex problems. Verify Blender availability before continuing.
   routing and telemetry into named modules for continuation.
 - Browser validation executed a real five-package cycle from empty inventory:
   10 requests completed, 5 packages delivered, minimum observed separation 2.350 m.
-  All five robots also completed a separate run from 20% initial charge with two bays.
+  The original validation run used two bays; the current controller uses five
+  dedicated charging/depot positions in the extended Blender zone.
 - Verified live Blender's timer and all five tracked package records. Updated the
   sync script for routes, transfers, intake, obstacle/lock graphics and charging.
 - Automated validation: **23/26 tests passed**. JavaScript syntax checks passed.
 
 ## Geometry decision
 
-The clear aisles measure 2.80 / 2.78 / 3.87 m. Three physical AMR lanes would require
-4.89 m with the supplied footprint and clearance. The prompt allows a safe alternative;
-the controller uses exclusive aisle passages, clear cross aisles and boundary routes.
-Do not present these as three validated parallel lanes.
+The earlier 2.80 / 2.78 / 3.87 m figures came from broad end/overhead object bounds,
+not rack-to-rack clearance at robot height. Reinspection of the live source scene
+measured conservative straight gaps of 6.31 / 6.66 / 4.02 m. Three nominal lanes
+require 4.89 m with the supplied footprint and clearance. West and middle pass that
+straight-width check; east fails. Turns, passing, fixed equipment and station
+approaches remain unvalidated. The controller still uses exclusive passages and
+must not be presented as three operational parallel lanes.
 
 ## Evidence and startup
 
@@ -88,8 +92,64 @@ before claiming vehicle dynamics or production-grade fleet reliability.
   peers and obstacles.
 - Default charge trigger is 30%, and Setup cannot lower it. Active work suspends at
   that threshold and resumes on the same AMR after charging. Movement at 0% is
-  stopped. Charger selection avoids the occupied bay-2 access point at PARK_D.
-- All 34 automated tests pass, including manual choices, center-first routing,
+  stopped. Each robot now charges at its own depot position in the extended area.
+- All 36 automated tests pass, including manual choices, center-first routing,
   charging interruption/resume, 0% immobilization and sensing. Browser verification
   on the separate test server completed one selected-slot storage job and its
   matching selected-conveyor delivery job.
+
+## 2026-10-15 master brief continuation
+
+- Audited the existing application in `IMPLEMENTATION_AUDIT.md` and documented a
+  source-scene geometry proposal in `GEOMETRY_PLAN.md` before moving any objects.
+- Reconnected live Blender 5.2.2 and measured 12 rack groups and five source robots
+  with `blender/audit_geometry.py`. Source measurements and the generated PASS/FAIL
+  report are in `validation/source-geometry.json` and `validation/geometry-report.md`.
+- Corrected the previous aisle widths, which used end/overhead structure bounds.
+  The source rack-to-rack straight gaps are 6.31 / 6.66 / 4.02 m at their narrowest;
+  three nominal lanes need 4.89 m. The east corridor fails. The graph and controller
+  still operate with exclusive passages; no three-lane claim is made.
+- Added source-board, vacancy validation and package-capacity metadata to the
+  authoritative slot records. Unvalidated slots are rejected for putaway.
+- Added a shared selected-slot inspector and contextual putaway/retrieval planning.
+  The 2D map and 3D view use the same slot IDs as the backend. Browser checks
+  confirmed 2D selection and empty-slot putaway prefill; 3D picking still needs
+  an interaction check from a visible shelf angle.
+- The complete 34-test Python suite and JavaScript syntax check pass. No original
+  Blender asset was moved or saved; swept turns, fixed equipment, stock hierarchy,
+  and real three-lane traffic behavior remain to be validated before geometry edits.
+
+## Extended charging and depot area
+
+- Measured the user's updated `Plane.003` in live Blender: X −18.18 to 9.01 m,
+  Y −49.40 to −43.57 m. The controller and dashboard now treat that complete
+  footprint as the combined charging and depot area.
+- Five separated `DEPOT_1` through `DEPOT_5` positions are each charging-capable.
+  Straight entry branches connect them to the south cross aisle; an idle AMR
+  outside the marked area returns to its own depot position after queued jobs
+  have had a chance to claim it. An AMR already docked at a clear point inside
+  the area may stay there and charge.
+- A depot-bound AMR with more than 30% battery can take a newly assigned order
+  immediately. At or below 30%, it heads to its depot charger. Task energy
+  estimates now include the return to that robot's depot.
+- All 36 Python tests pass with localhost access, including depot diversion and
+  simultaneous five-AMR charging. The minimum separation in a separate five-AMR
+  charging run was 2.40 m.
+
+## Charging across the full green area
+
+- Charging is triggered by being stationary and unassigned anywhere within the
+  measured green charging area, rather than by occupying one named pad. The
+  five depot positions remain the controller's separated, safe return stops;
+  a stop that obstructs a depot approach is moved to a clear position.
+- Idle AMRs continue topping up at the depot from 85% to 100% and remain
+  available for new work above 30%. Automatic run pause waits until this idle
+  top-up finishes. The dashboard reports idle charging separately from travel.
+- The 3D view now marks all five depot stops with visible green pads and
+  `CHARGE 1` through `CHARGE 5` labels. Clicking a pad shows its occupancy and
+  charging state; the 2D map labels the same stops `C1` through `C5`.
+- Fixed automatic pause after the final job: the controller now keeps running
+  while an unassigned AMR is outside the charging area, so it returns to the
+  depot instead of remaining near pickup or delivery.
+- The full 40-test Python suite and JavaScript syntax check pass. Browser
+  inspection confirmed all five charge labels and pads in the live 3D view.

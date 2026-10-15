@@ -1,14 +1,16 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { sourceAt, rackAt, floorArea } from './scene_metadata.js';
 
 export const fleetColors = ['#25bfa5','#5e91f4','#eba83e','#dc7182','#aa83e8'];
 const vector = (x,y,z) => new THREE.Vector3(x,z,-y);
 
 export class WarehouseView {
-  constructor(canvas, labels, onSelect, onStatus) {
-    this.canvas=canvas; this.labels=labels; this.onSelect=onSelect; this.onStatus=onStatus;
+  constructor(canvas, labels, onSelect, onSelectSlot, onStatus, onInspect) {
+    this.canvas=canvas; this.labels=labels; this.onSelect=onSelect; this.onSelectSlot=onSelectSlot; this.onStatus=onStatus;this.onInspect=onInspect;
     this.robotMeshes=new Map(); this.packageMeshes=new Map(); this.obstacleMeshes=new Map();
+    this.slotMeshes=new Map();this.depotMeshes=new Map();
     this.intakeMeshes=new Map();
     this.robotLabels=new Map(); this.paths=new Map(); this.rings=new Map(); this.locks=new Map();
     this.stationLabels=[];
@@ -38,6 +40,7 @@ export class WarehouseView {
   async load(){
     try{
       this.manifest=await fetch('/assets/model_manifest.json').then(r=>r.json());
+      this.sourceObjects=await fetch('/assets/source_objects.json').then(r=>r.ok?r.json():[]).catch(()=>[]);
       this.floor=this.manifest.floor_z;
       const loader=new GLTFLoader();
       const gltf=await loader.loadAsync('/assets/warehouse.glb',e=>this.onStatus(`Loading supplied Blender model · ${e.total?Math.round(e.loaded/e.total*100)+'%':Math.round(e.loaded/1048576)+' MB'}`));
@@ -51,6 +54,13 @@ export class WarehouseView {
         const ring=new THREE.Mesh(new THREE.RingGeometry(.95,1.08,48),new THREE.MeshBasicMaterial({color:fleetColors[i],side:THREE.DoubleSide,transparent:true,opacity:.95,depthWrite:false}));
         ring.rotation.x=-Math.PI/2;this.overlay.add(ring);this.rings.set(id,ring);
       }
+      for(const [id,source] of Object.entries(this.manifest.slots||{})){
+        const proxy=new THREE.Mesh(new THREE.BoxGeometry(.78,.58,.78),new THREE.MeshBasicMaterial({color:0x74c4a5,transparent:true,opacity:.1,depthWrite:false,side:THREE.DoubleSide}));
+        proxy.position.copy(vector(...source.position));proxy.userData.slotId=id;
+        const outline=new THREE.LineSegments(new THREE.EdgesGeometry(proxy.geometry),new THREE.LineBasicMaterial({color:0xffd36a,depthTest:false}));
+        outline.visible=false;outline.renderOrder=5;outline.userData.slotId=id;proxy.add(outline);proxy.userData.outline=outline;
+        this.overlay.add(proxy);this.slotMeshes.set(id,proxy);
+      }
       this.walls=(this.manifest.walls||[]).map(w=>find(w.node)).filter(Boolean);
       this.walls.forEach(w=>w.visible=false);
       this.onStatus(`Original model loaded · ${this.manifest.source_objects.toLocaleString()} source meshes`);
@@ -60,8 +70,18 @@ export class WarehouseView {
   pick(e){
     if(!this.ready||!this.pointerStart||Math.hypot(e.clientX-this.pointerStart[0],e.clientY-this.pointerStart[1])>5)return;
     const rect=this.canvas.getBoundingClientRect();this.raycaster.setFromCamera(new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),this.camera);
-    const hit=this.raycaster.intersectObjects([...this.robotMeshes.values()].map(r=>r.obj),true)[0];
-    if(hit?.object.userData.robotId)this.onSelect(hit.object.userData.robotId);
+    const hit=this.raycaster.intersectObjects([this.model,...this.slotMeshes.values(),...this.depotMeshes.values(),...this.packageMeshes.values()],true)[0];
+    if(!hit){this.onInspect(null);return}
+    let obj=hit.object;while(obj&&!obj.userData.robotId&&!obj.userData.slotId&&!obj.userData.depotId&&!obj.userData.packageId)obj=obj.parent;
+    if(obj?.userData.robotId){this.onSelect(obj.userData.robotId);this.onInspect({kind:'robot',name:obj.userData.robotId,point:hit.point,event:e});return}
+    if(obj?.userData.slotId){this.onSelectSlot(obj.userData.slotId);this.onInspect({kind:'slot',name:obj.userData.slotId,point:hit.point,event:e});return}
+    if(obj?.userData.depotId){this.onInspect({kind:'depot',name:obj.userData.depotId,point:hit.point,event:e});return}
+    if(obj?.userData.packageId){this.onInspect({kind:'package',name:obj.userData.packageId,point:hit.point,event:e});return}
+    const point={x:hit.point.x,y:-hit.point.z,z:hit.point.y};
+    const source=sourceAt(point,this.sourceObjects||[]);
+    const rack=rackAt(point.x,point.y);
+    const kind=source?.toLowerCase().startsWith('box')?'source-box':source?.toLowerCase().startsWith('shelving')?'shelf':'space';
+    this.onInspect({kind,name:source,source,rack,area:floorArea(point.x,point.y),point:hit.point,event:e});
   }
   cameraPreset(name){
     this.preset=name;
@@ -84,8 +104,8 @@ export class WarehouseView {
     if(line.userData.hash!==hash){line.geometry.dispose();line.geometry=new THREE.BufferGeometry().setFromPoints(points.map(p=>vector(...p)));line.userData.hash=hash}
     line.material.color.set(color);return line;
   }
-  update(state,selected){
-    this.state=state;this.selected=selected;if(!this.ready)return;
+  update(state,selected,selectedSlot=null){
+    this.state=state;this.selected=selected;this.selectedSlot=selectedSlot;if(!this.ready)return;
     const floor=this.floor+.04;
     if(!this.zoneGroup){
       this.zoneGroup=new THREE.Group();this.overlay.add(this.zoneGroup);
@@ -94,11 +114,21 @@ export class WarehouseView {
         const plane=new THREE.Mesh(new THREE.PlaneGeometry(b[2]-b[0],b[3]-b[1]),new THREE.MeshBasicMaterial({color:zoneColors[name],transparent:true,opacity:.15,side:THREE.DoubleSide,depthWrite:false}));
         plane.rotation.x=-Math.PI/2;plane.position.copy(vector((b[0]+b[2])/2,(b[1]+b[3])/2,this.floor+.018));this.zoneGroup.add(plane);
       }
-      for(const [name,nodeId] of [['PICKUP','PICKUP'],['PACKING','PACKING'],['DELIVERY','DELIVERY'],['CHARGING','CHARGE_1']]){
+      for(const [name,nodeId] of [['PICKUP','PICKUP'],['PACKING','PACKING'],['DELIVERY','DELIVERY']]){
         const n=state.geometry.nodes.find(p=>p.id===nodeId),el=document.createElement('div');el.className='station-label';el.textContent=name;this.labels.append(el);this.stationLabels.push({el,position:vector(n.x,n.y+.9,this.floor+1)});
+      }
+      for(const n of state.geometry.nodes.filter(p=>p.kind==='depot')){
+        const pad=new THREE.Mesh(new THREE.PlaneGeometry(2.2,2.6),new THREE.MeshBasicMaterial({color:'#60c996',transparent:true,opacity:.32,side:THREE.DoubleSide,depthTest:false,depthWrite:false}));
+        pad.rotation.x=-Math.PI/2;pad.position.copy(vector(n.x,n.y,this.floor+.075));pad.renderOrder=4;pad.userData.depotId=n.id;
+        const edge=new THREE.LineSegments(new THREE.EdgesGeometry(pad.geometry),new THREE.LineBasicMaterial({color:'#18a76f',depthTest:false}));
+        edge.renderOrder=5;pad.add(edge);this.zoneGroup.add(pad);this.depotMeshes.set(n.id,pad);
+        const el=document.createElement('div');el.className='station-label depot-label';el.textContent=`CHARGE ${n.id.split('_')[1]}`;this.labels.append(el);
+        this.stationLabels.push({el,position:vector(n.x,n.y+1.3,this.floor+.8)});
       }
     }
     const nodes=new Map(state.geometry.nodes.map(n=>[n.id,n]));
+    for(const [id,pad] of this.depotMeshes){const n=nodes.get(id),occupant=state.robots.find(r=>r.docked&&Math.hypot(r.x-n.x,r.y-n.y)<1.3);pad.material.color.set(occupant?.charging?'#2caf7e':'#60c996');pad.material.opacity=occupant?.charging ? .42 : .28}
+    for(const slot of state.slots){const proxy=this.slotMeshes.get(slot.id);if(!proxy)continue;proxy.material.color.set(slot.reserved_by?'#e4ae59':slot.sku?'#55bd89':'#75bca8');proxy.userData.outline.visible=slot.id===selectedSlot;proxy.material.opacity=slot.id===selectedSlot ? .28 : .1}
     for(const [i,r] of state.robots.entries()){
       const data=this.robotMeshes.get(r.id);if(!data)continue;
       const source=data.source;
@@ -107,8 +137,8 @@ export class WarehouseView {
       if(this.lastRun!==state.run_id)data.obj.position.copy(data.target);
       const yaw=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),-(r.heading-Math.PI/2-source.rotation_z));
       data.obj.quaternion.copy(yaw.multiply(data.base));
-      const ring=this.rings.get(r.id);ring.position.copy(vector(r.x,r.y,floor));ring.scale.setScalar((r.id===selected?1.35:1)*(r.status==='CHARGING'?1+.06*Math.sin(state.time*2):1));
-      ring.material.color.set(r.block_reason?'#f17149':r.status==='CHARGING'?'#34c477':fleetColors[i]);
+      const ring=this.rings.get(r.id);ring.position.copy(vector(r.x,r.y,floor));ring.scale.setScalar((r.id===selected?1.35:1)*(r.charging?1+.06*Math.sin(state.time*2):1));
+      ring.material.color.set(r.block_reason?'#f17149':r.charging?'#34c477':fleetColors[i]);
       const points=[[r.x,r.y,floor+.02],...r.route.map(id=>nodes.get(id)).filter(Boolean).map(n=>[n.x,n.y,floor+.02])];
       this.line(r.id,points.length>1?points:[points[0],points[0]],fleetColors[i]).visible=this.showRoutes;
       const el=this.robotLabels.get(r.id);el.classList.toggle('selected',r.id===selected);el.textContent=`${r.id} · ${Math.round(r.battery)}%`;
@@ -138,6 +168,7 @@ export class WarehouseView {
   createPackage(id){
     const mat=new THREE.MeshStandardMaterial({color:0xd5a363,roughness:.75,metalness:0});
     const mesh=new THREE.Mesh(new THREE.BoxGeometry(.64,.48,.64),mat);
+    mesh.userData.packageId=id;
     const edge=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),new THREE.LineBasicMaterial({color:0x68462f}));mesh.add(edge);
     const tape=new THREE.Mesh(new THREE.BoxGeometry(.12,.012,.65),new THREE.MeshStandardMaterial({color:0xf2dcb4}));tape.position.y=.246;mesh.add(tape);
     this.overlay.add(mesh);this.packageMeshes.set(id,mesh);return mesh;

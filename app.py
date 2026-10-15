@@ -40,7 +40,9 @@ class Runtime:
             if self.paused:
                 return
             self.warehouse.step(TICK)
-            active = any(r.status != "IDLE" for r in self.warehouse.robots.values())
+            active = any(r.status != "IDLE" or self.warehouse._actively_charging(r)
+                         or not self.warehouse._in_charging_area(r)
+                         for r in self.warehouse.robots.values())
             pending = any(t.state not in ("COMPLETED","CANCELLED","FAILED") for t in self.warehouse.tasks.values())
             self.had_activity |= active or pending
             if self.had_activity and not active and not pending:

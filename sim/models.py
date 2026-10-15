@@ -10,6 +10,11 @@ class Slot:
     package_id: str | None = None
     reserved_by: str | None = None
     position: list[float] | None = None
+    source_board: str | None = None
+    validated_vacant: bool = False
+    capacity_units: int = 1
+    package_dimensions: list[float] | None = None
+    max_weight_kg: float | None = None
 
 
 @dataclass

@@ -36,10 +36,11 @@ See `PROGRESS.md` for fixes and the remaining physical-validation limits.
 
 ## Geometry constraint
 
-Measured aisle widths are 2.80 / 2.78 / 3.87 m. Three parallel passages require
-4.89 m for the current AMR footprint and clearance. The prompt expressly permits
-the safest feasible routing when geometry cannot support three separate lanes.
-Keep the measured single passage layout and expose this limitation in the UI.
+Source rack-to-rack straight gaps are conservatively 6.31 / 6.66 / 4.02 m.
+Three parallel passages require at least 4.89 m for the current AMR footprint
+and clearance. The first two gaps pass only the straight-width check; the east
+gap fails. Keep the exclusive-passage controller until the source scene, turns,
+passing and station approaches are validated for operational lanes.
 
 ## Model policy
 
