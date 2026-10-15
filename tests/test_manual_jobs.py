@@ -56,7 +56,7 @@ class ManualJobValidation(unittest.TestCase):
         robot.battery = 30
         w.step()
         self.assertEqual(robot.task_id, task_id)
-        self.assertEqual(robot.status, "MOVING_TO_CHARGER")
+        self.assertIn(robot.status, ("MOVING_TO_CHARGER", "CHARGING"))
         self.assertEqual(robot.charge_resume_status, "MOVING_TO_PICKUP")
         for _ in range(6000):
             w.step()

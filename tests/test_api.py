@@ -1,6 +1,7 @@
 import json
 import threading
 import unittest
+import urllib.error
 import urllib.request
 
 from app import Handler, Runtime, SimulationServer
@@ -61,6 +62,16 @@ class ControllerApiValidation(unittest.TestCase):
         with urllib.request.urlopen(self.base+"/vendor/build/three.module.js") as response:
             self.assertEqual(response.status,200)
             self.assertIn("javascript",response.headers["Content-Type"])
+
+    def test_add_robot_respects_charging_capacity(self):
+        added = [self.post("add-robot", {}) for _ in range(3)]
+        self.assertEqual([r["robot_id"] for r in added], ["AMR-06", "AMR-07", "AMR-08"])
+        state = self.get("/api/state")
+        self.assertEqual(state["charging_capacity"], 8)
+        self.assertEqual(len({r["node"] for r in state["robots"]}), 8)
+        with self.assertRaises(urllib.error.HTTPError) as error:
+            self.post("add-robot", {})
+        self.assertEqual(error.exception.code, 400)
 
 
 class RunLifecycleValidation(unittest.TestCase):

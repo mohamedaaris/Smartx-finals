@@ -135,17 +135,17 @@ class NavigationGraph:
         ]:
             self.add(name, x, y, "parking")
             self.connect(name, parent)
-        # Five separated charge/depot positions have straight individual
-        # approaches from the south cross aisle, avoiding diagonal crossings
-        # through another parked AMR's footprint.
-        depot_xs = (-7.6, -4.1, -0.6, 2.9, 6.4)
-        self.edges["AS"].pop("BS")
-        self.edges["BS"].pop("AS")
-        self.edges["BS"].pop("CS")
-        self.edges["CS"].pop("BS")
-        south_chain = ["AS"]
+        # Eight separated stops fill the extended charging floor. Each has a
+        # straight approach from the south aisle and room for one AMR.
+        depot_xs = (-16.4, -13.1, -9.8, -6.5, -3.2, 0.1, 3.4, 6.7)
+        for a, b in (("LS", "AS"), ("AS", "BS"), ("BS", "CS")):
+            self.edges[a].pop(b)
+            self.edges[b].pop(a)
+        south_chain = ["LS"]
         for i, x in enumerate(depot_xs, 1):
-            if i == 3:
+            if i == 4:
+                south_chain.append("AS")
+            if i == 6:
                 south_chain.append("BS")
             entry = f"DEPOT_ENTRY_{i}"
             self.add(entry, x, -42.20)

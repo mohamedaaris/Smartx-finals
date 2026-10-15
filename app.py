@@ -122,6 +122,10 @@ class Handler(SimpleHTTPRequestHandler):
                         result = {"task_id": w.request_outbound(sku)}
                     else:
                         raise ValueError("kind must be INBOUND or OUTBOUND")
+                elif action == "add-robot":
+                    robot = w.add_robot()
+                    result = {"robot_id": robot.id, "charging_slot": robot.depot_slot,
+                              "fleet_size": len(w.robots), "capacity": len(w.depot_ids)}
                 elif action == "manual-job":
                     result = {"task_id": w.request_manual(
                         str(body.get("kind", "")).upper(),

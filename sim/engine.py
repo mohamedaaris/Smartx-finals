@@ -1,4 +1,4 @@
-"""Deterministic five-AMR warehouse simulation and inventory controller."""
+"""Deterministic warehouse simulation with a capacity-limited AMR fleet."""
 
 from __future__ import annotations
 
@@ -29,6 +29,7 @@ JUNCTION_RADIUS = 3.4         # acquire before entering the shared conflict area
 class Warehouse:
     def __init__(self, demo: bool = False, fixture: bool = False, initial_battery: float = 100):
         self.graph = NavigationGraph()
+        self.depot_ids = [name for name, point in self.graph.nodes.items() if point.kind == "depot"]
         self.time = 0.0
         self.run_id = str(uuid4())
         self.telemetry = Telemetry()
@@ -55,15 +56,15 @@ class Warehouse:
         self.conveyor_packages: list[dict] = []
         self.robots: dict[str, Robot] = {}
         starts = [
-            ("AMR-01", "robot1", "PARK_A2", initial_battery),
-            ("AMR-02", "robot2", "PARK_A", initial_battery),
-            ("AMR-03", "robot3", "PARK_D", initial_battery),
-            ("AMR-04", "robot4", "PARK_E", initial_battery),
-            ("AMR-05", "robot2.001", "PARK_B", initial_battery),
+            ("AMR-01", "robot1", "DEPOT_1", initial_battery),
+            ("AMR-02", "robot2", "DEPOT_2", initial_battery),
+            ("AMR-03", "robot3", "DEPOT_3", initial_battery),
+            ("AMR-04", "robot4", "DEPOT_4", initial_battery),
+            ("AMR-05", "robot2.001", "DEPOT_5", initial_battery),
         ]
         for rid, source, node, battery in starts:
             p = self.graph.nodes[node]
-            self.robots[rid] = Robot(rid, source, node, p.x, p.y, battery)
+            self.robots[rid] = Robot(rid, source, node, p.x, p.y, battery, depot_slot=node)
         self.slots = create_slots(self.graph)
         # Explicit fixtures are for automated scenario tests, never normal startup.
         if fixture or demo:
@@ -76,7 +77,7 @@ class Warehouse:
             for r, node, battery in zip(self.robots.values(), ["AR1", "BR2", "L2", "C3", "AR2"], [91,85,76,70,62]):
                 p = self.graph.nodes[node]
                 r.node, r.x, r.y, r.battery = node, p.x, p.y, battery
-        self.log("Simulation ready: five existing AMRs and measured warehouse layout")
+        self.log(f"Simulation ready: five AMRs docked in the depot; {len(self.depot_ids)} charging slots available")
         if demo:
             self.request_inbound("SKU-NEW-1")
             self.request_inbound("SKU-NEW-2")
@@ -88,6 +89,35 @@ class Warehouse:
     def log(self, message: str, level: str = "info") -> None:
         self.events.append({"time": round(self.time, 1), "message": message, "level": level})
         self.events = self.events[-2000:]
+
+    def _free_depots(self, robot: Robot | None = None) -> list[str]:
+        free = []
+        for slot in self.depot_ids:
+            point = self.graph.nodes[slot]
+            if self.charge_locks.get(slot) not in (None, robot.id if robot else None):
+                continue
+            if any(other is not robot and
+                   (other.target == slot or
+                    dist((other.x, other.y), (point.x, point.y)) < MIN_SEPARATION)
+                   for other in self.robots.values()):
+                continue
+            free.append(slot)
+        return free
+
+    def add_robot(self) -> Robot:
+        if len(self.robots) >= len(self.depot_ids):
+            raise ValueError(f"Fleet is full: {len(self.depot_ids)} robots for {len(self.depot_ids)} charging slots")
+        free = self._free_depots()
+        if not free:
+            raise ValueError("No free charging slot is available for a new robot")
+        slot = free[0]
+        point = self.graph.nodes[slot]
+        index = max(int(rid.split("-")[-1]) for rid in self.robots) + 1
+        robot = Robot(f"AMR-{index:02d}", "robot1", slot, point.x, point.y,
+                      self.config["initial_battery"], depot_slot=slot)
+        self.robots[robot.id] = robot
+        self.log(f"{robot.id} added at free charging slot {slot}; fleet {len(self.robots)}/{len(self.depot_ids)}")
+        return robot
 
     def _new_task(self, kind: str, sku: str) -> Task:
         self.sequence += 1
@@ -203,10 +233,10 @@ class Warehouse:
         if not self._docked(robot):
             return False
         # Keep an arbitrary resting point only when it does not obstruct one
-        # of the five straight docking approaches or another AMR's footprint.
-        for i in range(1, 6):
-            entry = self.graph.nodes[f"DEPOT_ENTRY_{i}"]
-            dock = self.graph.nodes[f"DEPOT_{i}"]
+        # of the straight docking approaches or another AMR's footprint.
+        for slot in self.depot_ids:
+            entry = self.graph.nodes[slot.replace("DEPOT_", "DEPOT_ENTRY_")]
+            dock = self.graph.nodes[slot]
             nearest_y = max(dock.y, min(entry.y, robot.y))
             if dist((robot.x, robot.y), (dock.x, nearest_y)) < MIN_SEPARATION:
                 return False
@@ -238,14 +268,17 @@ class Warehouse:
             if task.kind == "MOVE":
                 robot = self.robots[task.requested_robot]
                 path = self.graph.path(robot.node, task.destination)
-                charge_path = self.graph.path(task.destination, f"DEPOT_{int(robot.id[-2:])}", charge_route=True)
+                return_paths = [self.graph.path(task.destination, slot, charge_route=True)
+                                for slot in self.depot_ids]
+                charge_paths = [path for path in return_paths if path]
                 needed = (sum(self.graph.edges[a][b] for a,b in zip(path,path[1:]))
-                          + sum(self.graph.edges[a][b] for a,b in zip(charge_path,charge_path[1:]))) * ENERGY_PER_METRE + self.config["charge_trigger"]
+                          + max((sum(self.graph.edges[a][b] for a,b in zip(return_path,return_path[1:]))
+                                 for return_path in charge_paths), default=float("inf"))) * ENERGY_PER_METRE + self.config["charge_trigger"]
                 needed += dist((robot.x, robot.y), (self.graph.nodes[robot.node].x,
                                                self.graph.nodes[robot.node].y)) * ENERGY_PER_METRE
                 if (not self._available_for_job(robot) or robot.task_id
                         or (robot.status != "MOVING_TO_DEPOT" and robot.battery < needed)
-                        or robot.battery <= self.config["charge_trigger"] or not path or not charge_path):
+                        or robot.battery <= self.config["charge_trigger"] or not path or not charge_paths):
                     task.reason = "Selected AMR unavailable, route blocked, or battery reserve insufficient"
                     continue
                 task.robot, task.assigned, task.state, task.reason = robot.id, round(self.time, 3), "ASSIGNED", ""
@@ -286,6 +319,7 @@ class Warehouse:
         return obstructed_edges(self.graph,self.obstacles)
 
     def _route(self, robot: Robot, target: str, avoid: set[str] | None = None) -> bool:
+        previous_target, previous_path = robot.target, robot.path
         robot.target = target
         if robot.edge:
             origin = self.graph.nodes[robot.node]
@@ -330,10 +364,13 @@ class Warehouse:
             path = self.graph.path(robot.node, target, blocked,
                                    charge_route=charge_route, blocked_edges=obstructed_edges)
         if not path:
-            robot.block_reason = f"No safe route to {target}"
+            self._set_wait(robot, f"No safe route to {target}")
             return False
         robot.target, robot.path, robot.route_index = target, path, 1
         self._clear_wait(robot)
+        if target != previous_target or path != previous_path:
+            self.log(f"{robot.id} route decision: {robot.node} → {target} via "
+                     f"{' → '.join(path[1:]) or 'current position'}")
         return True
 
     @staticmethod
@@ -495,8 +532,8 @@ class Warehouse:
                 if other.status == "IDLE":
                     self._yield_idle(other, robot)
             winner = min([robot] + others, key=self._priority)
-            self._set_wait(robot, f"Yielding to {winner.id}" if winner.id != robot.id
-                           else f"Waiting for {others[0].id} to clear")
+            names = ", ".join(other.id for other in others)
+            self._set_wait(robot, f"Imminent collision with {names}; holding while a safe reroute is evaluated")
             if winner.id != robot.id and robot.edge:
                 robot.yield_junction = others[0].node
                 self._retreat_to_node(robot, dt)
@@ -662,10 +699,16 @@ class Warehouse:
                     and dist((r.x, r.y), (self.graph.nodes[r.node].x,
                                         self.graph.nodes[r.node].y)) < 0.4}
         old_status = robot.status
+        old_path = robot.path[:]
+        cause = robot.block_reason
         if self._route(robot, robot.target, occupied):
             robot.status = old_status
             robot.blocked_since = self.time
-            self.log(f"{robot.id} recalculated route around blocked passage")
+            if cause.startswith("Imminent collision with") and robot.path != old_path:
+                self.log(f"{robot.id}: {cause.split(';')[0]}; rerouting via "
+                         f"{' → '.join(robot.path[1:])}", "warning")
+            elif not cause.startswith("Imminent collision with"):
+                self.log(f"{robot.id} recalculated route around blocked passage")
         else:
             robot.status = old_status
             robot.blocked_since = self.time
@@ -761,6 +804,8 @@ class Warehouse:
             robot.velocity = 0
             if self.top_owner == robot.id:
                 self.top_owner = None
+            if self.charge_owner == robot.id:
+                self.charge_owner = None
 
     def _release_shelf(self, robot: Robot) -> None:
         if not robot.shelf_to_release:
@@ -804,43 +849,62 @@ class Warehouse:
         # The idle pass below sends it home only if no eligible order exists.
 
     def _dispatch_park(self, robot: Robot) -> None:
-        home = f"DEPOT_{int(robot.id[-2:])}"
-        if robot.node == home or self._safe_current_dock(robot):
+        if robot.node in self.depot_ids or self._safe_current_dock(robot):
             return
-        occupied = {r.target for r in self.robots.values() if r.id != robot.id}
-        occupied |= {r.node for r in self.robots.values() if r.id != robot.id}
         blocked = self._obstructed_nodes() | set(self.shelf_locks)
-        point = self.graph.nodes[home]
-        if home in occupied or home in blocked:
+        candidates = []
+        for slot in self._free_depots(robot):
+            path = self.graph.path(robot.node, slot, blocked,
+                                   blocked_edges=self._obstructed_edges())
+            if path:
+                length = sum(self.graph.edges[a][b] for a, b in zip(path, path[1:]))
+                candidates.append((length, slot))
+        if not candidates:
+            self._set_wait(robot, "No free reachable charging slot; waiting for a depot opening")
             return
-        if any(dist((point.x, point.y), (r.x, r.y)) < MIN_SEPARATION
-               for r in self.robots.values() if r.id != robot.id):
-            return
-        path = self.graph.path(robot.node, home, blocked, blocked_edges=self._obstructed_edges())
-        if path:
-            robot.status = "MOVING_TO_DEPOT"
-            self._route(robot, home)
-            self.log(f"{robot.id} returning to its depot position {home}")
+        _, slot = min(candidates)
+        robot.status = "MOVING_TO_DEPOT"
+        if self._route(robot, slot):
+            robot.depot_slot = slot
+            self.log(f"{robot.id} selected free charging slot {slot} and is returning to the depot")
+        else:
+            robot.status = "IDLE"
 
     def _dispatch_charger(self, robot: Robot) -> None:
         if robot.status not in ("IDLE", "WAITING_FOR_CHARGER"):
             return
-        home = f"DEPOT_{int(robot.id[-2:])}"
-        if any(other.id != robot.id and (other.node == home or other.target == home)
-               for other in self.robots.values()):
+        free = self._free_depots(robot)
+        if not free:
             robot.status = "WAITING_FOR_CHARGER"
+            self._set_wait(robot, "No free charging slot; waiting for a depot opening")
             return
-        self.charge_locks[home] = robot.id
-        robot.charge_bay = home
-        if robot.node == home:
+        blocked = self._obstructed_nodes() | set(self.shelf_locks)
+        candidates = []
+        for slot in free:
+            path = self.graph.path(robot.node, slot, blocked, charge_route=True,
+                                   blocked_edges=self._obstructed_edges())
+            if path:
+                length = sum(self.graph.edges[a][b] for a, b in zip(path, path[1:]))
+                candidates.append((length, slot))
+        if not candidates:
+            robot.status = "WAITING_FOR_CHARGER"
+            self._set_wait(robot, "No reachable charging slot; waiting for a clear route")
+            return
+        _, slot = min(candidates)
+        self.charge_locks[slot] = robot.id
+        robot.charge_bay = slot
+        robot.depot_slot = slot
+        if robot.node == slot:
             robot.status = "CHARGING"
             robot.velocity = 0
+            self._clear_wait(robot)
+            self.log(f"{robot.id} began charging at {slot}")
             return
         robot.status = "MOVING_TO_CHARGER"
-        if self._route(robot, home):
-            self.log(f"{robot.id} routed to its charging/depot position {home}")
+        if self._route(robot, slot):
+            self.log(f"{robot.id} selected free charging slot {slot} for low battery")
         else:
-            self.charge_locks.pop(home, None)
+            self.charge_locks.pop(slot, None)
             robot.charge_bay = None
             robot.status = "WAITING_FOR_CHARGER"
 
@@ -957,8 +1021,8 @@ class Warehouse:
                 robot.status = "IDLE"
                 self._dispatch_charger(robot)
         for robot in sorted(self.robots.values(), key=lambda r: dist((r.x,r.y),
-                (self.graph.nodes[f"DEPOT_{int(r.id[-2:])}"].x,
-                 self.graph.nodes[f"DEPOT_{int(r.id[-2:])}"].y))):
+                (self.graph.nodes[r.depot_slot or self.depot_ids[0]].x,
+                 self.graph.nodes[r.depot_slot or self.depot_ids[0]].y))):
             robot.velocity = 0
             if robot.block_reason or robot.status.startswith("WAITING"):
                 robot.waiting_seconds += dt
@@ -974,12 +1038,12 @@ class Warehouse:
                 if robot.battery >= self.config["recharge_target"]:
                     if robot.charge_resume_status:
                         robot.status = "MOVING_FROM_CHARGER"
-                        self._route(robot, f"DEPOT_ENTRY_{int(robot.id[-2:])}")
+                        self._route(robot, robot.charge_bay.replace("DEPOT_", "DEPOT_ENTRY_"))
                     else:
                         self.charge_locks.pop(robot.charge_bay, None)
                         robot.charge_bay = None
                         robot.status = "IDLE"
-                    self.log(f"{robot.id} charged to {robot.battery:.0f}% at its depot position")
+                    self.log(f"{robot.id} charged to {robot.battery:.0f}% at {robot.depot_slot}")
             elif robot.status == "IDLE" and self._actively_charging(robot):
                 robot.battery = min(100, robot.battery + CHARGE_RATE * dt)
             elif robot.status == "IDLE" and robot.battery <= self.config["charge_trigger"]:
@@ -1033,7 +1097,8 @@ class Warehouse:
                     "route": r.path[r.route_index:] if r.path else [],
                     "block_reason": r.block_reason, "near_robots": near,
                     "detected_obstacles": seen, "reservation": list(r.edge) if r.edge else None,
-                    "charge_bay": r.charge_bay, "docked": self._docked(r),
+                    "charge_bay": r.charge_bay, "depot_slot": r.depot_slot,
+                    "docked": self._docked(r),
                     "charging": self._actively_charging(r)}
         def enriched_robot(r):
             data = robot_data(r)
@@ -1099,7 +1164,9 @@ class Warehouse:
                 "conveyor_packages": [p.copy() for p in self.conveyor_packages],
                 "packages": packages,
                 "metrics": self.telemetry.metrics(self), "history": history,
-                "events": self.events[-60:],
+                "events": self.events[-120:],
+                "charging_capacity": len(self.depot_ids),
+                "available_charging_slots": self._free_depots(),
                 "config": {"robot_width": ROBOT_WIDTH, "robot_length": ROBOT_LENGTH,
                            "detection_radius": DETECTION_RADIUS,
                            "minimum_separation": MIN_SEPARATION,

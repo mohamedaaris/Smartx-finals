@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { sourceAt, rackAt, floorArea } from './scene_metadata.js';
 
-export const fleetColors = ['#25bfa5','#5e91f4','#eba83e','#dc7182','#aa83e8'];
+export const fleetColors = ['#25bfa5','#5e91f4','#eba83e','#dc7182','#aa83e8','#62a8d9','#da9a50','#77b96a'];
 const vector = (x,y,z) => new THREE.Vector3(x,z,-y);
 
 export class WarehouseView {
@@ -48,11 +48,7 @@ export class WarehouseView {
       const find=name=>{let result;this.model.traverse(o=>{if(o.name===name||o.userData.name===name)result=o});return result};
       for(const [i,[id,source]] of Object.entries(this.manifest.robots).entries()){
         const obj=find(source.node);if(!obj)throw Error(`Original robot mesh missing: ${source.source_object}`);
-        obj.userData.robotId=id;obj.traverse(o=>{o.userData.robotId=id});
-        this.robotMeshes.set(id,{obj,base:obj.quaternion.clone(),source,position:obj.position.clone(),target:obj.position.clone()});
-        const el=document.createElement('button');el.className='world-label';el.style.setProperty('--robot-color',fleetColors[i]);el.textContent=id;el.onclick=()=>this.onSelect(id);this.labels.append(el);this.robotLabels.set(id,el);
-        const ring=new THREE.Mesh(new THREE.RingGeometry(.95,1.08,48),new THREE.MeshBasicMaterial({color:fleetColors[i],side:THREE.DoubleSide,transparent:true,opacity:.95,depthWrite:false}));
-        ring.rotation.x=-Math.PI/2;this.overlay.add(ring);this.rings.set(id,ring);
+        this.addRobotVisual(id,obj,source,i,false);
       }
       for(const [id,source] of Object.entries(this.manifest.slots||{})){
         const proxy=new THREE.Mesh(new THREE.BoxGeometry(.78,.58,.78),new THREE.MeshBasicMaterial({color:0x74c4a5,transparent:true,opacity:.1,depthWrite:false,side:THREE.DoubleSide}));
@@ -66,6 +62,32 @@ export class WarehouseView {
       this.onStatus(`Original model loaded · ${this.manifest.source_objects.toLocaleString()} source meshes`);
       this.ready=true;if(this.state)this.update(this.state,this.selected);
     }catch(e){this.error=e.message;this.onStatus(`3D asset error: ${e.message}`,true)}
+  }
+  addRobotVisual(id,obj,source,index,generated){
+    obj.userData.robotId=id;obj.traverse(o=>{o.userData.robotId=id});
+    this.robotMeshes.set(id,{obj,base:obj.quaternion.clone(),source,target:obj.position.clone(),generated,newlyCreated:generated});
+    const el=document.createElement('button');el.className='world-label';el.style.setProperty('--robot-color',fleetColors[index%fleetColors.length]);el.textContent=id;el.onclick=()=>this.onSelect(id);this.labels.append(el);this.robotLabels.set(id,el);
+    const ring=new THREE.Mesh(new THREE.RingGeometry(.95,1.08,48),new THREE.MeshBasicMaterial({color:fleetColors[index%fleetColors.length],side:THREE.DoubleSide,transparent:true,opacity:.95,depthWrite:false}));
+    ring.rotation.x=-Math.PI/2;this.overlay.add(ring);this.rings.set(id,ring);
+  }
+  syncRobotVisuals(robots){
+    const present=new Set(robots.map(r=>r.id));
+    for(const [id,data] of this.robotMeshes){
+      if(!data.generated||present.has(id))continue;
+      data.obj.parent?.remove(data.obj);this.robotMeshes.delete(id);
+      const ring=this.rings.get(id);ring?.removeFromParent();ring?.geometry.dispose();ring?.material.dispose();this.rings.delete(id);
+      for(const [key,store] of [[id,this.paths],['sensor-'+id,this.locks]]){
+        const line=store.get(key);line?.removeFromParent();line?.geometry.dispose();line?.material.dispose();store.delete(key);
+      }
+      this.robotLabels.get(id)?.remove();this.robotLabels.delete(id);
+    }
+    const template=this.robotMeshes.get('AMR-01');
+    for(const [index,robot] of robots.entries()){
+      if(this.robotMeshes.has(robot.id))continue;
+      const clone=template.obj.clone(true);clone.name=`SIM_ASSET_${robot.id}`;
+      template.obj.parent.add(clone);
+      this.addRobotVisual(robot.id,clone,template.source,index,true);
+    }
   }
   pick(e){
     if(!this.ready||!this.pointerStart||Math.hypot(e.clientX-this.pointerStart[0],e.clientY-this.pointerStart[1])>5)return;
@@ -106,6 +128,7 @@ export class WarehouseView {
   }
   update(state,selected,selectedSlot=null){
     this.state=state;this.selected=selected;this.selectedSlot=selectedSlot;if(!this.ready)return;
+    this.syncRobotVisuals(state.robots);
     const floor=this.floor+.04;
     if(!this.zoneGroup){
       this.zoneGroup=new THREE.Group();this.overlay.add(this.zoneGroup);
@@ -134,20 +157,21 @@ export class WarehouseView {
       const source=data.source;
       const z=this.floor+source.position[2]-source.bounds[2]+.015;
       data.target.copy(vector(r.x,r.y,z));
-      if(this.lastRun!==state.run_id)data.obj.position.copy(data.target);
+      if(this.lastRun!==state.run_id||data.newlyCreated)data.obj.position.copy(data.target);
+      data.newlyCreated=false;
       const yaw=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),-(r.heading-Math.PI/2-source.rotation_z));
       data.obj.quaternion.copy(yaw.multiply(data.base));
       const ring=this.rings.get(r.id);ring.position.copy(vector(r.x,r.y,floor));ring.scale.setScalar((r.id===selected?1.35:1)*(r.charging?1+.06*Math.sin(state.time*2):1));
-      ring.material.color.set(r.block_reason?'#f17149':r.charging?'#34c477':fleetColors[i]);
+      ring.material.color.set(r.block_reason?'#f17149':r.charging?'#34c477':fleetColors[i%fleetColors.length]);
       const points=[[r.x,r.y,floor+.02],...r.route.map(id=>nodes.get(id)).filter(Boolean).map(n=>[n.x,n.y,floor+.02])];
-      this.line(r.id,points.length>1?points:[points[0],points[0]],fleetColors[i]).visible=this.showRoutes;
+      this.line(r.id,points.length>1?points:[points[0],points[0]],fleetColors[i%fleetColors.length]).visible=this.showRoutes;
       const el=this.robotLabels.get(r.id);el.classList.toggle('selected',r.id===selected);el.textContent=`${r.id} · ${Math.round(r.battery)}%`;
       let sensor=this.locks.get('sensor-'+r.id);
-      if(!sensor){const pts=Array.from({length:65},(_,j)=>[r.x+5*Math.cos(j/64*Math.PI*2),r.y+5*Math.sin(j/64*Math.PI*2),floor]);sensor=this.line('sensor-'+r.id,pts,fleetColors[i],'lock')}
+      if(!sensor){const pts=Array.from({length:65},(_,j)=>[r.x+5*Math.cos(j/64*Math.PI*2),r.y+5*Math.sin(j/64*Math.PI*2),floor]);sensor=this.line('sensor-'+r.id,pts,fleetColors[i%fleetColors.length],'lock')}
       sensor.position.copy(vector(r.x,r.y,0));
       // Sensor geometry is relative to its own robot.
       if(!sensor.userData.relative){sensor.geometry.dispose();sensor.geometry=new THREE.BufferGeometry().setFromPoints(Array.from({length:65},(_,j)=>vector(5*Math.cos(j/64*Math.PI*2),5*Math.sin(j/64*Math.PI*2),floor)));sensor.userData.relative=true}
-      sensor.material.color.set(r.detected_obstacles.length||r.near_robots.length?'#ef875e':fleetColors[i]);
+      sensor.material.color.set(r.detected_obstacles.length||r.near_robots.length?'#ef875e':fleetColors[i%fleetColors.length]);
       sensor.visible=this.showSensors;
     }
     this.lastRun=state.run_id;

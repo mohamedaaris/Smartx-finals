@@ -1,6 +1,6 @@
 # Vinland warehouse simulation lab
 
-A functioning five-AMR controller and operations dashboard built around the supplied
+A capacity-limited AMR controller and operations dashboard built around the supplied
 `3d warehouse model/warehouse1.blend`. The browser loads the original warehouse and
 robot assets from a Blender export. The connected Blender scene can display the same
 controller state. The source blend file is never saved or replaced by the scripts.
@@ -15,8 +15,10 @@ From the project directory in PowerShell:
 
 Or run `python app.py`. Open [http://127.0.0.1:8765](http://127.0.0.1:8765).
 Startup is **paused, with no requests, tracked stock or performance history**.
-The five robot poses are configured from the supplied model; initial charge defaults
-to 100% and is explicitly a simulation input.
+Five original AMRs start at separate positions in the extended charging depot.
+Initial charge defaults to 100% and is explicitly a simulation input. The depot
+has eight shared charging slots. **Add robot** places one new AMR in an available
+slot, up to eight robots total. Any AMR may use any free slot on return.
 
 On a fresh checkout, install the local rendering dependency once:
 
@@ -49,7 +51,7 @@ project server before starting another one. Windows uses exclusive port binding.
    cross aisle to A or C. Obstructions may require a safe detour. Reservations,
    waits, yields and reroutes are visible with explanations.
 5. Use **Place obstacle** in 2D to add an operator-specified human, debris, equipment
-   or unknown object. The sensing toggle draws all five 5 m sensing circles, and
+   or unknown object. The sensing toggle draws every AMR's 5 m sensing circle, and
    the monitor lists what the selected robot detects. Clear obstacles in the
    Obstacles tab.
 6. Set **New run** initial charge to 20% to exercise charging. Below the 30% charge
@@ -57,6 +59,11 @@ project server before starting another one. Windows uses exclusive port binding.
    stops rather than moving. The minimum setup charge remains 15%.
 7. The controller pauses after work, charging and parking settle. **Export** saves
    the measured run, events and traces as JSON. Queued jobs can be cancelled.
+
+Use **Full screen** above the 3D view for an expanded warehouse view; Escape exits.
+The **Controller decision log** shows route choices, assignments, charging stops,
+collision holds, reroutes and completions. The full event stream remains available
+under the Jobs and inventory records.
 
 Clicking an occupied inventory slot prepares a delivery job for that exact slot.
 Selecting a slot in the inventory grid or 2D map now opens a shared slot inspector;
@@ -94,7 +101,8 @@ available for existing integrations; the site uses the manual-job endpoint.
 
 Keep the supplied `warehouse1.blend` open and run `blender/live_sync.py` in Blender's
 Scripting workspace after the server starts. It moves the existing `robot1`, `robot2`,
-`robot3`, `robot4`, and `robot2.001` meshes, aligns their bases to the measured floor,
+`robot3`, `robot4`, and `robot2.001` meshes, creates temporary copies for added
+AMRs, aligns their bases to the measured floor,
 and places runtime graphics in **AMR Simulation Overlay**. It shows package transfers,
 conveyor motion, routes, lock outlines, station labels, obstacles and charging rings.
 Re-running the script replaces its previous timer.

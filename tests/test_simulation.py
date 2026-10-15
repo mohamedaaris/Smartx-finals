@@ -12,8 +12,8 @@ class WarehouseScenarios(unittest.TestCase):
         first = w.slots["AR1-1"].package_id
         least_clearance = float("inf")
         # Packing, proximity speed reduction and conveyor transport are timed
-        # operations; the complete workflow has a 250 s simulation deadline.
-        for _ in range(2500):
+        # operations; the shared-depot workflow has a 350 s deadline.
+        for _ in range(3500):
             w.step()
             robots = list(w.robots.values())
             for i, robot in enumerate(robots):
@@ -141,11 +141,11 @@ class WarehouseScenarios(unittest.TestCase):
         r.battery = 20
         w.step()
         self.assertEqual(r.status, "MOVING_TO_CHARGER")
-        self.assertEqual(r.target, "DEPOT_1")
+        self.assertIn(r.target, w.depot_ids)
         self.assertEqual(w.tasks, {})
         w.run(180)
         self.assertEqual(r.status, "IDLE")
-        self.assertEqual(r.node, "DEPOT_1")
+        self.assertIn(r.node, w.depot_ids)
         self.assertGreater(r.battery, 25)
         self.assertEqual(w.charge_locks, {})
 
@@ -156,8 +156,8 @@ class WarehouseScenarios(unittest.TestCase):
         r.battery = 20
         w.step()
         self.assertEqual(r.status, "MOVING_TO_CHARGER")
-        self.assertEqual(r.target, "DEPOT_3")
-        self.assertEqual(w.charge_locks["DEPOT_3"], r.id)
+        self.assertIn(r.target, w.depot_ids)
+        self.assertEqual(w.charge_locks[r.target], r.id)
 
     def test_k_queue_order_after_resource_unlock(self):
         w = Warehouse(fixture=True)
@@ -246,7 +246,8 @@ class WarehouseScenarios(unittest.TestCase):
             charged.update(r.id for r in w.robots.values() if w._actively_charging(r))
             self.assertLessEqual(len(w.charge_locks), 5)
             self.assertTrue(all(r.battery > 0 for r in w.robots.values()))
-            if len(charged) == 5 and all(r.status == "IDLE" for r in w.robots.values()):
+            if len(charged) == 5 and all(r.status == "IDLE" and r.battery >= 100
+                                         for r in w.robots.values()):
                 break
         self.assertEqual(len(charged), 5)
         self.assertTrue(all(r.battery > 25 for r in w.robots.values()))
@@ -296,8 +297,10 @@ class WarehouseScenarios(unittest.TestCase):
 
     def test_depot_bound_robot_accepts_new_work_above_thirty_percent(self):
         w = Warehouse()
-        w.step()
         robot = w.robots["AMR-01"]
+        start = w.graph.nodes["PARK_A2"]
+        robot.node, robot.x, robot.y = start.id, start.x, start.y
+        w.step()
         self.assertEqual(robot.status, "MOVING_TO_DEPOT")
         robot.battery = 31
         task = w.request_manual("MOVE", robot.id, destination="PICKUP")
@@ -307,17 +310,19 @@ class WarehouseScenarios(unittest.TestCase):
         self.assertEqual(robot.target, "PICKUP")
         w.run(180)
         self.assertEqual(w.tasks[task].state, "COMPLETED")
-        self.assertEqual(robot.node, "DEPOT_1")
+        self.assertIn(robot.node, w.depot_ids)
 
     def test_depot_bound_robot_at_thirty_percent_charges_first(self):
         w = Warehouse()
-        w.step()
         robot = w.robots["AMR-01"]
+        start = w.graph.nodes["PARK_A2"]
+        robot.node, robot.x, robot.y = start.id, start.x, start.y
+        w.step()
         robot.battery = 30
         with self.assertRaises(ValueError):
             w.request_manual("MOVE", robot.id, destination="PICKUP")
         w.step()
-        self.assertEqual(robot.target, "DEPOT_1")
+        self.assertIn(robot.target, w.depot_ids)
         self.assertEqual(robot.status, "MOVING_TO_CHARGER")
 
     def test_idle_robot_charges_anywhere_in_extended_area(self):
@@ -375,6 +380,37 @@ class WarehouseScenarios(unittest.TestCase):
         self.assertEqual(runtime.warehouse.tasks[task].state, "COMPLETED")
         self.assertTrue(runtime.warehouse._in_charging_area(robot))
         self.assertTrue(runtime.paused)
+
+    def test_eight_unique_charging_slots_limit_fleet(self):
+        w = Warehouse()
+        self.assertEqual(len(w.depot_ids), 8)
+        self.assertTrue(all(w._in_charging_area(r) and r.node in w.depot_ids
+                            for r in w.robots.values()))
+        added = [w.add_robot() for _ in range(3)]
+        self.assertEqual([r.id for r in added], ["AMR-06", "AMR-07", "AMR-08"])
+        self.assertEqual(len({r.node for r in w.robots.values()}), 8)
+        self.assertEqual(w.snapshot()["available_charging_slots"], [])
+        with self.assertRaisesRegex(ValueError, "Fleet is full"):
+            w.add_robot()
+
+    def test_robot_can_use_another_robots_free_slot(self):
+        w = Warehouse()
+        robot = w.robots["AMR-01"]
+        point = w.graph.nodes["PICKUP"]
+        robot.node, robot.x, robot.y = point.id, point.x, point.y
+        newcomer = w.add_robot()
+        self.assertEqual(newcomer.node, "DEPOT_1")
+        w.run(160)
+        self.assertIn(robot.node, w.depot_ids)
+        self.assertNotEqual(robot.node, newcomer.node)
+        self.assertEqual(len({r.node for r in w.robots.values()}), len(w.robots))
+
+    def test_imminent_robot_conflict_records_decision(self):
+        w = Warehouse(fixture=True)
+        robot = w.robots["AMR-01"]
+        w._set_wait(robot, "Imminent collision with AMR-02; holding while a safe reroute is evaluated")
+        self.assertTrue(any("Imminent collision with AMR-02" in e["message"]
+                            for e in w.snapshot()["events"]))
 
 
 if __name__ == "__main__":

@@ -153,3 +153,18 @@ before claiming vehicle dynamics or production-grade fleet reliability.
   depot instead of remaining near pickup or delivery.
 - The full 40-test Python suite and JavaScript syntax check pass. Browser
   inspection confirmed all five charge labels and pads in the live 3D view.
+
+## Shared depot capacity, fleet growth and decision log
+
+- Extended the measured charging floor to eight non-overlapping, individually
+  approached depot slots. The original five AMRs now start on slots 1–5.
+- Added an `Add robot` control and API. New AMRs spawn only on a free slot and
+  the fleet is capped at eight. Idle and low-battery AMRs choose an available
+  slot instead of relying on a fixed robot-number assignment.
+- Added dynamic 3D robot copies for AMRs 6–8, and temporary copies in the
+  optional Blender live sync. The 3D view has a full screen control.
+- Added a visible controller decision log and route-choice messages. Predicted
+  robot conflicts identify the other AMR and explain the safety hold/reroute.
+- Verified eight browser-visible charge labels, adding AMRs 6–8, the disabled
+  ninth-add control, and full screen. All 44 Python tests and JavaScript syntax
+  checks pass.

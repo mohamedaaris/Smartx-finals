@@ -1,7 +1,7 @@
 """Mirror executed controller state into the original open warehouse scene.
 
 Run this in Blender after starting app.py. Source assets remain in place except
-for the five robot transforms. Runtime graphics use a separate overlay collection.
+for the original robot transforms. Runtime graphics use a separate overlay collection.
 No blend file is saved. Stop with:
 bpy.app.timers.unregister(bpy.app.driver_namespace['vinland_sync'])
 """
@@ -17,7 +17,7 @@ ROOT = Path(r"C:\Users\ASUS\Documents\Smartx Vinland")
 STATE_URL = "http://127.0.0.1:8765/api/state"
 MANIFEST = json.loads((ROOT / "web/assets/model_manifest.json").read_text())
 COLLECTION = "AMR Simulation Overlay"
-COLORS = [(0.04,.65,.48,1),(.18,.40,.83,1),(.85,.48,.08,1),(.75,.24,.32,1),(.52,.31,.78,1)]
+COLORS = [(0.04,.65,.48,1),(.18,.40,.83,1),(.85,.48,.08,1),(.75,.24,.32,1),(.52,.31,.78,1),(.23,.56,.76,1),(.83,.49,.18,1),(.35,.66,.26,1)]
 
 # Remove previous registered versions, including the earlier connector session.
 for function in gc.get_objects():
@@ -118,10 +118,34 @@ def vinland_sync_tick():
             color = {"pickup":(.15,.44,.8,1),"delivery":(.8,.2,.25,1),"charging":(.05,.7,.4,1)}[name]
             route("AMR Zone " + name,[(x0,y0,floor+.06),(x1,y0,floor+.06),(x1,y1,floor+.06),(x0,y1,floor+.06),(x0,y0,floor+.06)],color)
             label("AMR Zone Label " + name,name.upper(),((x0+x1)/2-1,(y0+y1)/2,floor+.1),color)
+        for node in state["geometry"]["nodes"]:
+            if node["kind"] != "depot":
+                continue
+            x,y = node["x"],node["y"]
+            route("AMR Depot Stop " + node["id"],
+                  [(x-1.1,y-1.3,floor+.08),(x+1.1,y-1.3,floor+.08),
+                   (x+1.1,y+1.3,floor+.08),(x-1.1,y+1.3,floor+.08),
+                   (x-1.1,y-1.3,floor+.08)],(.05,.75,.42,1))
+            label("AMR Depot Label " + node["id"],
+                  "CHARGE " + node["id"].split("_")[-1],(x-.7,y+1.35,floor+.1))
+        active_robots = set()
         for i,item in enumerate(state["robots"]):
             rid = item["id"]
-            source = MANIFEST["robots"][rid]
-            obj = bpy.data.objects.get(source["source_object"])
+            source = MANIFEST["robots"].get(rid,MANIFEST["robots"]["AMR-01"])
+            if rid in MANIFEST["robots"]:
+                obj = bpy.data.objects.get(source["source_object"])
+            else:
+                name = "AMR Spawn " + rid
+                obj = bpy.data.objects.get(name)
+                if obj is None:
+                    template = bpy.data.objects.get(source["source_object"])
+                    if template is None:
+                        raise RuntimeError("Original AMR mesh missing: " + source["source_object"])
+                    obj = template.copy()
+                    obj.name = name
+                    collection.objects.link(obj)
+                visible(obj)
+                active_robots.add(name)
             if obj is None:
                 raise RuntimeError("Original AMR mesh missing: " + source["source_object"])
             obj.location.x, obj.location.y = item["x"],item["y"]
@@ -131,7 +155,7 @@ def vinland_sync_tick():
             label("AMR Label " + rid, f"{rid}  {item['battery']:.0f}%\n{status}",
                   (item["x"]-.65,item["y"]+.9,floor+1.3))
             points = [(item["x"],item["y"],floor+.07)] + [(nodes[n]["x"],nodes[n]["y"],floor+.07) for n in item["route"]]
-            route("AMR Route " + rid, points, COLORS[i])
+            route("AMR Route " + rid, points, COLORS[i % len(COLORS)])
             if item["status"] == "CHARGING":
                 phase = state["time"]*2
                 radius = 1.25+.08*math.sin(phase)
@@ -139,6 +163,9 @@ def vinland_sync_tick():
             else:
                 charging = bpy.data.objects.get("AMR Charging " + rid)
                 if charging: visible(charging,False)
+        for obj in collection.objects:
+            if obj.name.startswith("AMR Spawn ") and obj.name not in active_robots:
+                visible(obj,False)
         active = set()
         for package in state["packages"]:
             if not package.get("position"):

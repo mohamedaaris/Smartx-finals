@@ -49,6 +49,7 @@ class Robot:
     x: float
     y: float
     battery: float
+    depot_slot: str | None = None
     heading: float = 0.0
     status: str = "IDLE"
     task_id: str | None = None
