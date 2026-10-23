@@ -11,6 +11,11 @@ import socket
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
+from urllib.request import urlopen
+
+GLB_URL = os.environ.get(
+    "WAREHOUSE_GLB_URL",
+    "https://github.com/mohamedaaris/Smartx-finals/releases/download/V1.0.0/warehouse.glb")
 
 from automation import AutomationRuntime
 from sim.engine import TICK, Warehouse
@@ -258,6 +263,25 @@ class Handler(SimpleHTTPRequestHandler):
             self._json({"error": str(exc)}, 400)
 
 
+def ensure_model_asset():
+    target = WEB / "assets" / "warehouse.glb"
+    if target.exists() and target.stat().st_size > 50_000_000:
+        print(f"warehouse.glb present ({target.stat().st_size} bytes)", flush=True)
+        return
+    target.parent.mkdir(parents=True, exist_ok=True)
+    print(f"Downloading warehouse.glb from {GLB_URL}", flush=True)
+    try:
+        with urlopen(GLB_URL, timeout=300) as response:
+            data = response.read()
+        if len(data) < 50_000_000:
+            raise ValueError(f"unexpected size {len(data)} bytes")
+        (WEB / "assets" / "warehouse.glb.part").write_bytes(data)
+        (WEB / "assets" / "warehouse.glb.part").replace(target)
+        print(f"warehouse.glb saved ({len(data)} bytes)", flush=True)
+    except Exception as exc:
+        print(f"WARNING: warehouse.glb download failed: {exc}", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description="AMR warehouse simulation")
     parser.add_argument("--host", default=os.environ.get("HOST", "0.0.0.0"))
@@ -266,6 +290,7 @@ def main():
                         help="Simulation seconds per wall-clock second")
     parser.add_argument("--empty", action="store_true", help="Compatibility flag; source-model stock is always loaded")
     args = parser.parse_args()
+    ensure_model_asset()
     runtime = Runtime(False, args.speed)
     automation = AutomationRuntime(speed=args.speed)
     Handler.runtime = runtime
