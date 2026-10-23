@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import threading
 import time
 import socket
@@ -81,6 +82,10 @@ class Handler(SimpleHTTPRequestHandler):
         if urlparse(path).path == "/automation":
             return super().translate_path("/automation.html")
         if urlparse(path).path.startswith("/vendor/"):
+            vendored = (WEB / "vendor").resolve()
+            resolved = (vendored / urlparse(path).path.removeprefix("/vendor/")).resolve()
+            if resolved.is_relative_to(vendored) and resolved.is_file():
+                return str(resolved)
             base = (ROOT / "node_modules" / "three").resolve()
             resolved = (base / urlparse(path).path.removeprefix("/vendor/")).resolve()
             if resolved.is_relative_to(base):
@@ -253,8 +258,8 @@ class Handler(SimpleHTTPRequestHandler):
 
 def main():
     parser = argparse.ArgumentParser(description="AMR warehouse simulation")
-    parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--host", default=os.environ.get("HOST", "0.0.0.0"))
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8765")))
     parser.add_argument("--speed", type=float, default=1.0,
                         help="Simulation seconds per wall-clock second")
     parser.add_argument("--empty", action="store_true", help="Compatibility flag; source-model stock is always loaded")

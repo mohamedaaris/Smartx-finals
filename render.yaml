@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: smartx-vinland
+    runtime: python
+    plan: free
+    branch: main
+    healthCheckPath: /
+    buildCommand: mkdir -p web/assets && if [ ! -f web/assets/warehouse.glb ]; then curl -fL "$WAREHOUSE_GLB_URL" -o web/assets/warehouse.glb; fi
+    startCommand: python app.py
+    envVars:
+      - key: WAREHOUSE_GLB_URL
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.9
