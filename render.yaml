@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     branch: main
-    healthCheckPath: /
+    healthCheckPath: /ping
     buildCommand: mkdir -p web/assets && if [ ! -f web/assets/warehouse.glb ]; then curl -fL "$WAREHOUSE_GLB_URL" -o web/assets/warehouse.glb; fi
     startCommand: python app.py
     envVars:

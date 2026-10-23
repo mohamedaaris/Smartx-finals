@@ -104,7 +104,9 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         route = urlparse(self.path).path
-        if route == "/api/automation/state":
+        if route in ("/ping", "/health", "/healthz"):
+            self._json({"status": "ok", "uptime_check": True})
+        elif route == "/api/automation/state":
             self._json(self.automation.snapshot())
         elif route.startswith("/api/automation/orders/"):
             order_id = route.removeprefix("/api/automation/orders/")
