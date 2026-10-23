@@ -115,6 +115,17 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
+    def do_HEAD(self):
+        route = urlparse(self.path).path
+        if route in ("/ping", "/health", "/healthz", "/"):
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+        else:
+            super().do_HEAD()
+
     def do_GET(self):
         route = urlparse(self.path).path
         if route in ("/ping", "/health", "/healthz"):
