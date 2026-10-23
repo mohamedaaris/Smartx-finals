@@ -98,6 +98,14 @@ class Handler(SimpleHTTPRequestHandler):
             return str(WEB / "missing")
         return super().translate_path(path)
 
+    def end_headers(self):
+        route = urlparse(getattr(self, "path", "")).path
+        if route.startswith("/assets/") and route.endswith(".glb"):
+            self.send_header("Cache-Control", "public, max-age=2592000, immutable")
+        elif route.startswith("/vendor/"):
+            self.send_header("Cache-Control", "public, max-age=604800")
+        super().end_headers()
+
     def _json(self, value, status=200):
         data = json.dumps(value, separators=(",", ":")).encode("utf-8")
         self.send_response(status)
